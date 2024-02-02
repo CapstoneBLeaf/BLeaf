@@ -10,10 +10,10 @@ const dropTables = async () => {
     console.log("Starting to drop tables...");
     await client.query(`
     DROP TABLE IF EXISTS plants;
-    DROP TABLE IF EXISTS journals;
-    DROP TABLE IF EXISTS goals;
-    DROP TABLE IF EXISTS habits;
     DROP TABLE IF EXISTS users;
+    DROP TABLE IF EXISTS habits;
+    DROP TABLE IF EXISTS goals;
+    DROP TABLE IF EXISTS journals;
     `);
     console.log("Table Dropped!");
   } catch (error) {
@@ -48,18 +48,18 @@ const createTable = async () => {
       "checkIn" BOOLEAN
     );
     CREATE TABLE goals (
-        id SERIAL PRIMARY KEY,
-        name TEXT NOT NULL,
-        frequency VARCHAR(50) NOT NULL,
-        achivements TEXT NOT NULL,
-        "habitId" INTEGER REFERENCES habits(id) NOT NULL,
-    );
-    CREATE TABLE journals (
-        id SERIAL PRIMARY KEY,
-        entry TEXT NOT NULL,
-        date DATE,
-        "userId" INTEGER REFERENCES users(id) NOT NULL
-    );
+      id SERIAL PRIMARY KEY,
+      name TEXT NOT NULL,
+      frequency VARCHAR(50) NOT NULL,
+      achivements TEXT NOT NULL,
+      "habitId" INTEGER REFERENCES habits(id) NOT NULL
+  );
+  CREATE TABLE journals (
+      id SERIAL PRIMARY KEY,
+      entry TEXT NOT NULL,
+      date DATE,
+      "userId" INTEGER REFERENCES users(id) NOT NULL
+  );
     `);
     console.log("Table Created!");
   } catch (error) {
