@@ -10,10 +10,10 @@ const dropTables = async () => {
     console.log("Starting to drop tables...");
     await client.query(`
     DROP TABLE IF EXISTS plants;
-    DROP TABLE IF EXISTS users;
-    DROP TABLE IF EXISTS habits;
-    DROP TABLE IF EXISTS goals;
     DROP TABLE IF EXISTS journals;
+    DROP TABLE IF EXISTS goals;
+    DROP TABLE IF EXISTS habits;
+    DROP TABLE IF EXISTS users;
     `);
     console.log("Table Dropped!");
   } catch (error) {
