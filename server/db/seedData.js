@@ -63,33 +63,30 @@ const plants = [
 const habits = [
   {
     name: "hydrate",
-    description: {
-      desc1:
+    description: [
         "Similar to flowers and plants, water helps us grow. Have you watered yourself today?",
-      desc2:
         "Cacti are more hydrated than the soil they grow in.Absorb tiny sponges!",
-      desc3:
         "Warer is essential to all living organisms on earth.Even you, tiny human",
-    },
-    image: {
-      img1: "https://t3.ftcdn.net/jpg/04/46/09/68/360_F_446096863_mbuNBq46AZQETaTY0V8nLH2DcpxNFW9M.jpg",
-      img2: "https://img.freepik.com/free-vector/hand-drawn-cactus-cartoon-illustration_52683-126695.jpg",
-      img3: "https://cdn.pixabay.com/photo/2022/01/10/08/30/orange-juice-6927663_1280.png",
-    },
+    ],
+    image: [
+      "https://t3.ftcdn.net/jpg/04/46/09/68/360_F_446096863_mbuNBq46AZQETaTY0V8nLH2DcpxNFW9M.jpg",
+      "https://img.freepik.com/free-vector/hand-drawn-cactus-cartoon-illustration_52683-126695.jpg",
+      "https://cdn.pixabay.com/photo/2022/01/10/08/30/orange-juice-6927663_1280.png",
+    ],
     checkIn: true,
   },
   {
     name: "breathe",
-    description: {
-      desc1: "Breathe in for 4.",
-      desc2: "Just Breathe",
-      desc3: "What's activity that helps you stay present?",
-    },
-    image: {
-      img1: "https://t3.ftcdn.net/jpg/04/46/09/68/360_F_446096863_mbuNBq46AZQETaTY0V8nLH2DcpxNFW9M.jpg",
-      img2: "https://img.freepik.com/free-vector/hand-drawn-cactus-cartoon-illustration_52683-126695.jpg",
-      img3: "https://cdn.pixabay.com/photo/2022/01/10/08/30/orange-juice-6927663_1280.png",
-    },
+    description: [
+      "Breathe in for 4.",
+      "Just Breathe",
+      "What's activity that helps you stay present?",
+    ],
+    image: [
+      "https://t3.ftcdn.net/jpg/04/46/09/68/360_F_446096863_mbuNBq46AZQETaTY0V8nLH2DcpxNFW9M.jpg",
+      "https://img.freepik.com/free-vector/hand-drawn-cactus-cartoon-illustration_52683-126695.jpg",
+      "https://cdn.pixabay.com/photo/2022/01/10/08/30/orange-juice-6927663_1280.png",
+    ],
     checkIn: false,
   },
 ];
