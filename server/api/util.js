@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const { JWT_SECRET } = require('../secrets')
-const { getUserByUsername } = require('../db/sqlHelperFunctions/users') // this can change  asde on user get 
+const { getUserById } = require('../db/sqlHelperFunctions/users')
 
 const authRequired = (req, res, next) => {
   let token = null
@@ -37,7 +37,7 @@ function getUserFromRequest(req) {
   console.log(token)
   decoded = jwt.verify(token, JWT_SECRET)
   console.log(decoded)
-  const user = getUserByUsername(decoded.username);
+  const user = getUserById(decoded.id);
   return user;
 }
 

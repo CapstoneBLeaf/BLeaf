@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { authRequired } = require('./util');
-const { getAllJournals, getJournalById, createJournal, deleteJournal} = require('../db/sqlHelperFunctions/journals');
+const { getAllJournals, getJournalsById, createJournals, updateJournals, deleteJournals} = require('../db/sqlHelperFunctions/journals');
 
 router.get('/', async (req, res, next) => {
     try {
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-        const journal = await getJournalById(req.params.id);
+        const journal = await getJournalsById(req.params.id);
         res.send(journal);
     } catch (error) {
         next(error);
@@ -24,8 +24,17 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', authRequired, async (req, res, next) => {
     try {
-        const journal = await createJournal(req.body);
+        const journal = await createJournals(req.body);
         res.send(journal);
+    } catch (err) {
+        next(err);
+    }
+});
+
+router.put('/:id', authRequired, async (req, res, next) => {
+    try {
+        const journals = await updateJournals(req.params.id, req.body);
+        res.send(journals);
     } catch (err) {
         next(err);
     }
@@ -33,7 +42,7 @@ router.post('/', authRequired, async (req, res, next) => {
 
 router.delete('/:id', authRequired, async (req, res, next) => {
     try {
-        const journal = await deleteJournal(req.params.id);
+        const journal = await deleteJournals(req.params.id);
         res.send(journal);
     } catch (err) {
         next(err);

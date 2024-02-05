@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { authRequired } = require('./util');
-const { getAllGoals, getGoalById, createGoal, deleteGoal} = require('../db/sqlHelperFunctions/goals');
+const { getAllGoals, getGoalsById, updateGoal, createGoals, deleteGoal} = require('../db/sqlHelperFunctions/goals');
 
 router.get('/', async (req, res, next) => {
     try {
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-        const goal = await getGoalById(req.params.id);
+        const goal = await getGoalsById(req.params.id);
         res.send(goal);
     } catch (error) {
         next(error);
@@ -24,7 +24,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', authRequired, async (req, res, next) => {
     try {
-        const goal = await createGoal(req.body);
+        const goal = await createGoals(req.body);
         res.send(goal);
     } catch (err) {
         next(err);
@@ -34,6 +34,15 @@ router.post('/', authRequired, async (req, res, next) => {
 router.delete('/:id', authRequired, async (req, res, next) => {
     try {
         const goal = await deleteGoal(req.params.id);
+        res.send(goal);
+    } catch (err) {
+        next(err);
+    }
+});
+
+router.put('/:id', authRequired, async (req, res, next) => {
+    try {
+        const goal = await updateGoal(req.params.id, req.body);
         res.send(goal);
     } catch (err) {
         next(err);

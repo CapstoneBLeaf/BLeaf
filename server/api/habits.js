@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { authRequired } = require('./util');
-const { getAllHabits, getHabitById, createHabit, deleteHabit} = require('../db/sqlHelperFunctions/habits');
+const { getAllHabits, getHabitsById, createHabits, deleteHabits, updateHabits} = require('../db/sqlHelperFunctions/habits');
 
 router.get('/', async (req, res, next) => {
     try {
@@ -12,9 +12,10 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+
 router.get('/:id', async (req, res, next) => {
     try {
-        const habit = await getHabitById(req.params.id);
+        const habit = await getHabitsById(req.params.id);
         res.send(habit);
     } catch (error) {
         next(error);
@@ -24,7 +25,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', authRequired, async (req, res, next) => {
     try {
-        const habit = await createHabit(req.body);
+        const habit = await createHabits(req.body);
         res.send(habit);
     } catch (err) {
         next(err);
@@ -33,7 +34,16 @@ router.post('/', authRequired, async (req, res, next) => {
 
 router.delete('/:id', authRequired, async (req, res, next) => {
     try {
-        const habit = await deleteHabit(req.params.id);
+        const habit = await deleteHabits(req.params.id);
+        res.send(habit);
+    } catch (err) {
+        next(err);
+    }
+});
+
+router.put('/:id', authRequired, async (req, res, next) => {
+    try {
+        const habit = await updateHabits(req.params.id, req.body);
         res.send(habit);
     } catch (err) {
         next(err);
@@ -41,3 +51,4 @@ router.delete('/:id', authRequired, async (req, res, next) => {
 });
 
 module.exports = router;
+

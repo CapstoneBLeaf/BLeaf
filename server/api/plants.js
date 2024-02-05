@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { authRequired } = require('./util');
-const { getAllPlants, getPlantsById, createPlants, deletePlants} = require('../db/sqlHelperFunctions/plants');
+const { getAllPlants, getPlantsById, createPlants, updatePlants, deletePlants} = require('../db/sqlHelperFunctions/plants');
 
 router.get('/', async (req, res, next) => {
     try {
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-        const plant = await getPlantById(req.params.id);
+        const plant = await getPlantsById(req.params.id);
         res.send(plant);
     } catch (error) {
         next(error);
@@ -24,8 +24,17 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', authRequired, async (req, res, next) => {
     try {
-        const plant = await createPlant(req.body);
+        const plant = await createPlants(req.body);
         res.send(plant);
+    } catch (err) {
+        next(err);
+    }
+});
+
+router.put('/:id', authRequired, async (req, res, next) => {
+    try {
+        const plants = await updatePlants(req.params.id, req.body);
+        res.send(plants);
     } catch (err) {
         next(err);
     }
@@ -33,7 +42,7 @@ router.post('/', authRequired, async (req, res, next) => {
 
 router.delete('/:id', authRequired, async (req, res, next) => {
     try {
-        const plant = await deletePlant(req.params.id);
+        const plant = await deletePlants(req.params.id);
         res.send(plant);
     } catch (err) {
         next(err);

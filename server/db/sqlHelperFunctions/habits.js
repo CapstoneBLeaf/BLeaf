@@ -1,5 +1,17 @@
 const client = require("../client");
 
+async function getAllHabits() {
+  try {
+    const { rows } = await client.query(`
+                SELECT * FROM habits;
+            `);
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
+
 const createHabits = async ({ description, image, checkIn }) => {
   try {
     const {
@@ -66,4 +78,4 @@ const deleteHabits = async (habitId) => {
   }
 };
 
-module.exports = { createHabits, getHabitsById, updateHabits, deleteHabits };
+module.exports = { getAllHabits, createHabits, getHabitsById, updateHabits, deleteHabits };
