@@ -43,8 +43,8 @@ const createTable = async () => {
     );
     CREATE TABLE habits (
       id SERIAL PRIMARY KEY,
-      description TEXT [] NOT NULL,
-      image TEXT [] NOT NULL,
+      description TEXT NOT NULL,
+      image TEXT NOT NULL,
       "checkIn" BOOLEAN
     );
     CREATE TABLE goals (
