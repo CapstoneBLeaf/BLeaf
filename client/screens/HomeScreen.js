@@ -10,7 +10,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { removeItem } from "../utils/asyncStorage";
 import LottieView from "lottie-react-native";
-import Button from "../components/Button";
+import Button from "./components/Button";
 export default function HomeScreen() {
   const navigation = useNavigation();
   const handleReset = async () => {
