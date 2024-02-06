@@ -52,6 +52,15 @@ const getUsersById = async (id) => {
   return users;
 };
 
+const getUsersByUsername = async (username) => {
+  const {
+    rows: [users],
+  } = await client.query(`
+    SELECT * FROM users WHERE users.username = '${username}';
+    `);
+  return users;
+};
+
 async function deleteUser(id) {
   try {
       const { rows: [user] } = await client.query(`
@@ -65,5 +74,9 @@ async function deleteUser(id) {
   }
 }
 
+growth_states = `SELECT * from growth_states where id=0`
+growth_states // url1
 
-module.exports = { getAllUsers, createUsers, getUsersById, deleteUser, loginUser };
+
+
+module.exports = { getAllUsers, createUsers, getUsersById, deleteUser, loginUser , getUsersByUsername};

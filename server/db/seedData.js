@@ -60,6 +60,21 @@ const plants = [
   },
 ];
 
+growth_level = [
+  { img_url: "/path/to/file",
+    key: 0,
+  },
+  { imag_url: "/path/to/second_file",
+    key: 1,
+  },
+  { imag_url: "/path/to/second_file",
+  key: 1,
+  },
+{ imag_url: "/path/to/second_file",
+key: 1,
+},
+]
+
 const habits = [
   {
     name: "hydrate",
