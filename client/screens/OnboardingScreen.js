@@ -3,7 +3,7 @@ import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import Onboarding from "react-native-onboarding-swiper";
 import { setItem } from "../utils/asyncStorage";
-
+import LottieView from "lottie-react-native";
 export default function OnboardingScreen() {
   const navigation = useNavigation();
   const handleDone = () => {
@@ -29,7 +29,11 @@ export default function OnboardingScreen() {
             backgroundColor: "#44564A",
             image: (
               <View style={styles.img}>
-                <Image source={require("../assets/animations/habit.jpg")} />
+                <LottieView
+                  style={styles.meditation}
+                  source={require("../assets/animations/meditation.json")}
+                  autoPlay
+                ></LottieView>
               </View>
             ),
             title: "Let's Get started",
@@ -39,7 +43,11 @@ export default function OnboardingScreen() {
             backgroundColor: "#BF5335",
             image: (
               <View style={styles.img}>
-                <Image source={require("../assets/animations/habit.jpg")} />
+                <LottieView
+                  style={styles.meditation}
+                  source={require("../assets/animations/meditation.json")}
+                  autoPlay
+                ></LottieView>
               </View>
             ),
             title: "Choose Habits",
@@ -49,7 +57,11 @@ export default function OnboardingScreen() {
             backgroundColor: "#412E32",
             image: (
               <View style={styles.img}>
-                <Image source={require("../assets/animations/habit.jpg")} />
+                <LottieView
+                  style={styles.meditation}
+                  source={require("../assets/animations/meditation.json")}
+                  autoPlay
+                ></LottieView>
               </View>
             ),
             title: "Set Goals with timer",
@@ -59,7 +71,11 @@ export default function OnboardingScreen() {
             backgroundColor: "#6D7448",
             image: (
               <View style={styles.img}>
-                <Image source={require("../assets/animations/habit.jpg")} />
+                <LottieView
+                  style={styles.meditation}
+                  source={require("../assets/animations/meditation.json")}
+                  autoPlay
+                ></LottieView>
               </View>
             ),
             title: "Make a journal",
@@ -81,5 +97,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     borderTopLeftRadius: "100%",
     borderBottomLeftRadius: "100%",
+  },
+  meditation: {
+    width: 300,
+    height: 300,
   },
 });
