@@ -1,9 +1,11 @@
 const client = require("../client");
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../../secrets");
 
-async function getAllGoals() {
+async function getAllUsers() {
   try {
     const { rows } = await client.query(`
-                SELECT * FROM goals;
+                SELECT * FROM users;
             `);
     return rows;
   } catch (error) {
@@ -11,87 +13,80 @@ async function getAllGoals() {
   }
 }
 
-const createGoals = async ({ name, frequency, achivements, habitId }) => {
+const createUsers = async ({
+  username,
+  firstname,
+  lastname,
+  email,
+  password,
+}) => {
   try {
     const {
-      rows: [goals],
+      rows: [user],
     } = await client.query(
       `
-            INSERT INTO goals(name, frequency, achivements, "habitId")
-            VALUES($1,$2,$3,$4)
+            INSERT INTO users(username,firstname,lastname,email,password)
+            VALUES($1,$2,$3,$4,$5)
             RETURNING *;
             `,
-      [name, frequency, achivements, habitId]
+      [username, firstname, lastname, email, password]
     );
-    return goals;
+    const token = jwt.sign({ username: username }, JWT_SECRET);
+    return token;
   } catch (error) {
     throw error;
   }
 };
 
-const getGoalsById = async (goalId) => {
+const loginUser = async ({ username, password }) => {
   try {
     const {
-      rows: [goals],
-    } = await client.query('DELETE FROM goals WHERE "id"=$1 RETURNING *', [
-      goalId,
+      rows: [user],
+    } = await client.query("SELECT * FROM users WHERE users.username = $1", [
+      username,
     ]);
-    return goals;
+    if (password != user.password) {
+      console.log("wrong password");
+    } else {
+      const token = jwt.sign({ username: username }, JWT_SECRET);
+      return token;
+    }
   } catch (error) {
     throw error;
   }
 };
 
-async function updateGoal(goalId, fields = {}) {
-  const setString = Object.keys(fields)
-    .map((key, index) => `"${key}"=$${index + 1}`)
-    .join(", ");
+const getUsersById = async (id) => {
+  const {
+    rows: [users],
+  } = await client.query(`
+    SELECT * FROM users WHERE users.id = '${id}';
+    `);
+  return users;
+};
 
-  if (setString.length === 0) {
-    return;
-  }
-
+async function deleteUser(id) {
   try {
     const {
-      rows: [goal],
+      rows: [user],
     } = await client.query(
       `
-    UPDATE goals
-    SET ${setString}
-    WHERE id=${goalId}
-    RETURNING *;
-  `,
-      Object.values(fields)
-    );
-
-    return goal;
-  } catch (error) {
-    throw error;
-  }
-}
-
-async function deleteGoal(goalId) {
-  try {
-    const {
-      rows: [goal],
-    } = await client.query(
-      `
-    DELETE FROM goals
+    DELETE FROM users
     WHERE id=$1
     RETURNING *;
   `,
-      [goalId]
+      [id]
     );
-    return goal;
+    return user;
   } catch (error) {
     throw error;
   }
 }
 
 module.exports = {
-  getAllGoals,
-  createGoals,
-  getGoalsById,
-  deleteGoal,
-  updateGoal,
+  getAllUsers,
+  createUsers,
+  getUsersById,
+  deleteUser,
+  loginUser,
 };
