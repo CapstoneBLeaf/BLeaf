@@ -77,6 +77,4 @@ async function deleteUser(id) {
 growth_states = `SELECT * from growth_states where id=0`
 growth_states // url1
 
-
-
 module.exports = { getAllUsers, createUsers, getUsersById, deleteUser, loginUser , getUsersByUsername};
