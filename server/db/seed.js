@@ -1,5 +1,5 @@
 const client = require("./client");
-const { users, plants, habits, goals, journals } = require("./seedData");
+const { users, plants, habits, goals, journals, growth_levels } = require("./seedData");
 const { createUsers } = require("./sqlHelperFunctions/users");
 const { createPlants } = require("./sqlHelperFunctions/plants");
 const { createHabits } = require("./sqlHelperFunctions/habits");
@@ -14,6 +14,7 @@ const dropTables = async () => {
     DROP TABLE IF EXISTS goals;
     DROP TABLE IF EXISTS habits;
     DROP TABLE IF EXISTS users;
+    DROP TABLE IF EXISTS growth_levels;
     `);
     console.log("Table Dropped!");
   } catch (error) {
@@ -33,13 +34,20 @@ const createTable = async () => {
       email varchar(50) NOT NULL,
       password varchar(255) NOT NULL
     );
+
+    CREATE TABLE growth_levels(
+      id SERIAL PRIMARY KEY,
+      image TEXT NOT NULL
+    );
+
     CREATE TABLE plants(
       id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
       color TEXT NOT NULL,
-      growth_level INT NOT NULL,
+      growth_level INT REFERENCES growth_levels(id) NOT NULL,
       birth_date DATE NOT NULL,
       "userId" INTEGER REFERENCES users(id) NOT NULL
+      
     );
     CREATE TABLE habits (
       id SERIAL PRIMARY KEY,
@@ -120,12 +128,37 @@ const createInitialJournals = async () => {
   }
 };
 
+const createInitialGrowthLevels = async () => {
+  try {
+      await insertGrowthLevels()
+    console.log("created growth levels");
+  } catch (error) {
+    throw error;
+  }
+};
+
+const insertGrowthLevels = async () => {
+  for (const growth_level of growth_levels) {
+    const {
+      rows: [levels],
+    } = await client.query(
+      `
+            INSERT INTO growth_levels(image)
+            VALUES($1)
+            RETURNING *;
+            `,
+      [growth_level.plantImg]
+    );    
+}
+}
+
 const buildDb = async () => {
   try {
     client.connect();
     await dropTables();
     await createTable();
     await createInitialUsers();
+    await createInitialGrowthLevels();
     await createInitialPlants();
     await createInitialHabits();
     await createInitialGoals();

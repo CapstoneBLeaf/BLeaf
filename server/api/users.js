@@ -73,4 +73,8 @@ router.delete('/:id', authRequired, async (req, res, next) => {
     }
 });
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 module.exports = router;
