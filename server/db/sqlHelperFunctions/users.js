@@ -22,8 +22,7 @@ const createUsers = async ({username,firstname,lastname,email,password}) => {
             `,
       [username, firstname, lastname, email, password]
     );
-    const token = jwt.sign({username: username}, JWT_SECRET);
-    return token;
+    return user;
   } catch (error) {
     throw error;
   }
