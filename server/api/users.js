@@ -3,7 +3,9 @@ const router = express.Router();
 const { authRequired } = require('./util');
 const jwt = require('jsonwebtoken')
 const { JWT_SECRET } = require('../secrets')
-const { createUsers, getUsersById, getAllUsers, deleteUser, loginUser } = require('../db/sqlHelperFunctions/users');
+const bcrypt = require("bcrypt");
+const SALT_ROUNDS = 10;
+const { createUsers, getUsersById, getAllUsers, deleteUser, loginUser, getUsersByUsername } = require('../db/sqlHelperFunctions/users');
 
 router.get('/', async (req, res, next) => {
     try {
@@ -25,7 +27,9 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/register', async (req, res, next) => {
     try {
-        const token = await createUsers(req.body);
+        const {firstname,lastname, username, email, password} = req.body
+        const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
+        const token = await createUsers({firstname,lastname,username, email,password: hashedPassword});
         
         res.cookie("token", token, {
 		    sameSite: "strict",
@@ -38,12 +42,23 @@ router.post('/register', async (req, res, next) => {
 
 router.post('/login', async (req, res, next) => {
     try {
-        const token = await loginUser(req.body);
-        
-        res.cookie("token", token, {
-		    sameSite: "strict",
-		});
-        res.send({ token });
+        const user = await getUsersByUsername(req.body.username);
+        const validPassword = await bcrypt.compare(req.body.password, user.password)
+        if (validPassword) {
+			const token = jwt.sign(user, JWT_SECRET);
+
+			res.cookie("token", token, {
+				sameSite: "strict",
+				httpOnly: true,
+				signed: true
+			});
+
+			delete user.password
+
+			res.send({ token, user})
+		} else {
+            res.status(401).send({ error: 'Invalid password' })
+        }
     } catch (error) {
         next(error);
     }
@@ -58,7 +73,8 @@ router.delete('/:id', authRequired, async (req, res, next) => {
     }
 });
 
-// add 404 if no user and 403 wrong password 
+<<<<<<< Updated upstream
+=======
 
-
+>>>>>>> Stashed changes
 module.exports = router;
