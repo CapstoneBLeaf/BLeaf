@@ -27,9 +27,9 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/register', async (req, res, next) => {
     try {
-        const {firstname,lastname, usrname, email, password} = req.body
+        const {firstname,lastname, username, email, password} = req.body
         const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
-        const token = await createUsers({firstname,lastname,email,password: hashedPassword});
+        const token = await createUsers({firstname,lastname,username, email,password: hashedPassword});
         
         res.cookie("token", token, {
 		    sameSite: "strict",
