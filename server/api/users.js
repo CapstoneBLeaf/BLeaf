@@ -29,12 +29,17 @@ router.post('/register', async (req, res, next) => {
     try {
         const {firstname,lastname, username, email, password} = req.body
         const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
-        const token = await createUsers({firstname,lastname,username, email,password: hashedPassword});
+        const user = await createUsers({firstname,lastname,username, email,password: hashedPassword});
         
+        delete user.password
+        const token = jwt.sign(user, JWT_SECRET)
         res.cookie("token", token, {
-		    sameSite: "strict",
-		});
-        res.send({ token });
+            sameSite: "strict",
+            httpOnly: true,
+            signed: true,
+        })
+        delete user.password
+        res.send({ token, user });
     } catch (error) {
         next(error);
     }
