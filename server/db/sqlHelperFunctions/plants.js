@@ -11,7 +11,6 @@ async function getAllPlants() {
   }
 }
 
-
 const createPlants = async ({
   name,
   color,
@@ -50,37 +49,55 @@ const getPlantsById = async (plantId) => {
 };
 
 async function updatePlants(plantId, fields = {}) {
-  const setString = Object.keys(fields).map((key, index) => `"${key}"=$${index + 1}`).join(', ');
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ");
 
   if (setString.length === 0) {
-      return;
+    return;
   }
 
   try {
-      const { rows: [plant] } = await client.query(`
+    const {
+      rows: [plant],
+    } = await client.query(
+      `
     UPDATE plants
     SET ${setString}
     WHERE id=${plantId}
     RETURNING *;
-  `, Object.values(fields));
+  `,
+      Object.values(fields)
+    );
 
-      return plant;
+    return plant;
   } catch (error) {
-      throw error;
+    throw error;
   }
 }
 
 async function deletePlants(plantId) {
   try {
-      const { rows: [plant] } = await client.query(`
+    const {
+      rows: [plant],
+    } = await client.query(
+      `
     DELETE FROM plants
     WHERE id=$1
     RETURNING *;
-  `, [plantId]);
-      return plant;
+  `,
+      [plantId]
+    );
+    return plant;
   } catch (error) {
-      throw error;
+    throw error;
   }
 }
 
-module.exports = { createPlants, getPlantsById, getAllPlants, updatePlants, deletePlants };
+module.exports = {
+  createPlants,
+  getPlantsById,
+  getAllPlants,
+  updatePlants,
+  deletePlants,
+};
