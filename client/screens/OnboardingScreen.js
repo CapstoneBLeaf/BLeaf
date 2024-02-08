@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Onboarding from "react-native-onboarding-swiper";
 import { setItem } from "../utils/asyncStorage";
 import LottieView from "lottie-react-native";
@@ -29,11 +29,11 @@ export default function OnboardingScreen() {
             backgroundColor: "#44564A",
             image: (
               <View style={styles.img}>
-                <LottieView
+                {/* <LottieView
                   style={styles.meditation}
                   source={require("../assets/animations/meditation.json")}
                   autoPlay
-                ></LottieView>
+                ></LottieView> */}
               </View>
             ),
             title: "Let's Get started",
@@ -43,11 +43,11 @@ export default function OnboardingScreen() {
             backgroundColor: "#BF5335",
             image: (
               <View style={styles.img}>
-                <LottieView
+                {/* <LottieView
                   style={styles.meditation}
                   source={require("../assets/animations/meditation.json")}
                   autoPlay
-                ></LottieView>
+                ></LottieView> */}
               </View>
             ),
             title: "Choose Habits",
@@ -57,11 +57,11 @@ export default function OnboardingScreen() {
             backgroundColor: "#412E32",
             image: (
               <View style={styles.img}>
-                <LottieView
+                {/* <LottieView
                   style={styles.meditation}
                   source={require("../assets/animations/meditation.json")}
                   autoPlay
-                ></LottieView>
+                ></LottieView> */}
               </View>
             ),
             title: "Set Goals with timer",

@@ -2,34 +2,28 @@ import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import LottieView from "lottie-react-native";
 import Button from "./components/Button";
+import { useCreateUsersMutation } from "../api/bleafApi";
 const SignupScreen = () => {
   const [firstName, setFirstName] = useState("");
   const [username, setUsername] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // const [isEditing, setIsEditing] = useState(false);
-
-  // const handleEdit = () => {
-  //   setIsEditing(true);
-  // };
-
-  const handleSave = async () => {
+  const [register] = useCreateUsersMutation();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      // Save the changes to the user's profile
-      await updateUserProfile({
+      const result = await register({
         firstName,
+        username,
         lastName,
         email,
         password,
-        username,
       });
-      // Show a success message or navigate to another screen
+      console.log(result);
     } catch (error) {
-      // Show an error message or handle the error in some other way
+      console.error(error);
     }
-    setIsEditing(false);
   };
 
   return (
@@ -81,7 +75,7 @@ const SignupScreen = () => {
         onChangeText={(text) => setUsername(text)}
       />
       {/* <Button title="Edit" onPress={handleEdit} /> */}
-      <Button title="Register" onPress={handleSave} />
+      <Button title="Register" onPress={handleSubmit} />
     </View>
   );
 };
