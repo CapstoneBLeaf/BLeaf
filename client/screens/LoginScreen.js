@@ -10,22 +10,35 @@ import {
 import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/core";
 import Button from "./components/Button";
+import { useLoginUserMutation } from "../api/bleafApi";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../actions/tokenSlice";
 
 // import { makeRedirectUri, useAuthRequest } from "expo-auth-session";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loginUser] = useLoginUserMutation();
+  const dispatch = useDispatch();
 
-  const handleLogin = () => {
-    // Implement your login logic here
-    console.log("Email:", email);
-    console.log("Password:", password);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await loginUser({
+        username,
+        password,
+      }).unwrap();
+      dispatch(setCredentials(result));
+      setUsername("");
+      setPassword("");
+    } catch (error) {
+      console.error(error);
+    }
 
-    // Navigate to Home screen after successful login
-    navigation.navigate("Home");
+    navigation.navigate("User");
   };
 
   // // Configure Gmail login
@@ -76,11 +89,10 @@ const LoginScreen = () => {
 
       <TextInput
         style={styles.input}
-        placeholder="Email"
-        keyboardType="email-address"
+        placeholder="Username"
         autoCapitalize="none"
-        value={email}
-        onChangeText={(text) => setEmail(text)}
+        value={username}
+        onChangeText={(text) => setUsername(text)}
       />
 
       <TextInput
