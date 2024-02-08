@@ -11,7 +11,6 @@ async function getAllGoals() {
   }
 }
 
-
 const createGoals = async ({ name, frequency, achivements, habitId }) => {
   try {
     const {
@@ -44,37 +43,55 @@ const getGoalsById = async (goalId) => {
 };
 
 async function updateGoal(goalId, fields = {}) {
-  const setString = Object.keys(fields).map((key, index) => `"${key}"=$${index + 1}`).join(', ');
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ");
 
   if (setString.length === 0) {
-      return;
+    return;
   }
 
   try {
-      const { rows: [goal] } = await client.query(`
+    const {
+      rows: [goal],
+    } = await client.query(
+      `
     UPDATE goals
     SET ${setString}
     WHERE id=${goalId}
     RETURNING *;
-  `, Object.values(fields));
+  `,
+      Object.values(fields)
+    );
 
-      return goal;
+    return goal;
   } catch (error) {
-      throw error;
+    throw error;
   }
 }
 
 async function deleteGoal(goalId) {
   try {
-      const { rows: [goal] } = await client.query(`
+    const {
+      rows: [goal],
+    } = await client.query(
+      `
     DELETE FROM goals
     WHERE id=$1
     RETURNING *;
-  `, [goalId]);
-      return goal;
+  `,
+      [goalId]
+    );
+    return goal;
   } catch (error) {
-      throw error;
+    throw error;
   }
 }
 
-module.exports = { getAllGoals, createGoals, getGoalsById, deleteGoal, updateGoal };
+module.exports = {
+  getAllGoals,
+  createGoals,
+  getGoalsById,
+  deleteGoal,
+  updateGoal,
+};
