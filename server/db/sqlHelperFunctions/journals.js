@@ -70,38 +70,55 @@ const getJournalsById = async (journalId) => {
 // };
 
 async function updateJournals(journalId, fields = {}) {
-  const setString = Object.keys(fields).map((key, index) => `"${key}"=$${index + 1}`).join(', ');
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ");
 
   if (setString.length === 0) {
-      return;
+    return;
   }
 
   try {
-      const { rows: [journal] } = await client.query(`
+    const {
+      rows: [journal],
+    } = await client.query(
+      `
     UPDATE journals
     SET ${setString}
     WHERE id=${journalId}
     RETURNING *;
-  `, Object.values(fields));
+  `,
+      Object.values(fields)
+    );
 
-      return journal;
+    return journal;
   } catch (error) {
-      throw error;
+    throw error;
   }
 }
 
 async function deleteJournals(journalId) {
   try {
-      const { rows: [journal] } = await client.query(`
+    const {
+      rows: [journal],
+    } = await client.query(
+      `
     DELETE FROM journals
     WHERE id=$1
     RETURNING *;
-  `, [journalId]);
-      return journal;
+  `,
+      [journalId]
+    );
+    return journal;
   } catch (error) {
-      throw error;
+    throw error;
   }
 }
 
-
-module.exports = { getAllJournals, createJournals, getJournalsById, updateJournals, deleteJournals };
+module.exports = {
+  getAllJournals,
+  createJournals,
+  getJournalsById,
+  updateJournals,
+  deleteJournals,
+};

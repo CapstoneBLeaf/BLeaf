@@ -5,6 +5,14 @@ export const bleafApi = createApi({
   reducerPath: "bleafApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:8080/api",
+    prepareHeaders: (headers, { getState }) => {
+      const { token } = getState();
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+      headers.set("Content-Type", "application/json");
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     getAllHabits: builder.query({
@@ -36,11 +44,11 @@ export const bleafApi = createApi({
         headers: { Authorization: `Bearer ${token}` },
       }),
     }),
-    createUsers: builder.mutation({
+    register: builder.mutation({
       query: (body) => ({
         url: "/users/register",
         method: "POST",
-        body: body,
+        body,
       }),
     }),
     loginUser: builder.mutation({
@@ -148,7 +156,7 @@ export const {
   useDeleteHabitsMutation,
   useGetAllUsersQuery,
   useGetUsersByIdQuery,
-  useCreateUsersMutation,
+  useRegisterMutation,
   useLoginUserMutation,
   useDeleteUserMutation,
   useGetAllGoalsQuery,
