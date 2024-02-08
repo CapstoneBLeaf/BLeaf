@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet, ScrollView } from "react-native";
 import LottieView from "lottie-react-native";
 import Button from "./components/Button";
-import { useCreateUsersMutation } from "../api/bleafApi";
+import { useRegisterMutation } from "../api/bleafApi";
+import { setCredentials } from "../actions/tokenSlice";
+import { useDispatch } from "react-redux";
 const SignupScreen = () => {
   const [firstName, setFirstName] = useState("");
   const [username, setUsername] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [register] = useCreateUsersMutation();
+  const [register] = useRegisterMutation();
+  const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -19,7 +22,13 @@ const SignupScreen = () => {
         lastName,
         email,
         password,
-      });
+      }).unwrap();
+      dispatch(setCredentials(result));
+      setFirstName("");
+      setUsername("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
       console.log(result);
     } catch (error) {
       console.error(error);
@@ -27,7 +36,7 @@ const SignupScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.img}>
         <LottieView
           style={styles.login}
@@ -50,6 +59,13 @@ const SignupScreen = () => {
         onChangeText={(text) => setLastName(text)}
         value={lastName}
       />
+      <Text style={styles.label}>Username:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Username"
+        value={username}
+        onChangeText={(text) => setUsername(text)}
+      />
       <Text style={styles.label}>Email:</Text>
       <TextInput
         style={styles.input}
@@ -67,16 +83,10 @@ const SignupScreen = () => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-      <Text style={styles.label}>Username:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={(text) => setUsername(text)}
-      />
+
       {/* <Button title="Edit" onPress={handleEdit} /> */}
       <Button title="Register" onPress={handleSubmit} />
-    </View>
+    </ScrollView>
   );
 };
 
