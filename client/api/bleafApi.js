@@ -4,7 +4,7 @@ import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 export const bleafApi = createApi({
   reducerPath: "bleafApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8080/api",
+    baseUrl: "https://bleaf-backend.onrender.com/api",
     prepareHeaders: (headers, { getState }) => {
       const { token } = getState();
       if (token) {
