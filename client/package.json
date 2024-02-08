@@ -12,6 +12,8 @@
     "@react-native-async-storage/async-storage": "^1.21.0",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
+    "@tensorflow/tfjs": "^4.17.0",
+    "@tensorflow/tfjs-react-native": "^1.0.0",
     "expo": "^50.0.6",
     "expo-status-bar": "~1.11.1",
     "install": "^0.13.0",
