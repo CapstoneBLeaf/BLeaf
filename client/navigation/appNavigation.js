@@ -5,10 +5,11 @@ import OnboardingScreen from "../screens/OnboardingScreen.js";
 import HomeScreen from "../screens/HomeScreen.js";
 import SignupScreen from "../screens/SignupScreen.js";
 import LoginScreen from "../screens/LoginScreen.js";
+import SelectHabits from "../screens/SelectHabits.js";
 import { getItem } from "../utils/asyncStorage.js";
 const Stack = createNativeStackNavigator();
 
-export default function AppNavigation() {
+export default function appNavigation() {
   const [showOnboarding, setShowOnboarding] = useState(null);
   useEffect(() => {
     checkIfAlreadyOnboarded();
@@ -68,6 +69,12 @@ export default function AppNavigation() {
             options={{ headerShown: false }}
             component={LoginScreen}
           />
+            <Stack.Screen
+              name="SelectHabits"
+              options={{ headerShown: false }}
+              component={SelectHabits}
+            />
+          
         </Stack.Navigator>
       </NavigationContainer>
     );
