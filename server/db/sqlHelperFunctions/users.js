@@ -12,9 +12,9 @@ async function getAllUsers() {
 }
 
 const createUsers = async ({
-  username,
   firstname,
   lastname,
+  username,
   email,
   password,
 }) => {
@@ -23,11 +23,11 @@ const createUsers = async ({
       rows: [user],
     } = await client.query(
       `
-            INSERT INTO users(username,firstname,lastname,email,password)
+            INSERT INTO users(firstname,lastname,username,email,password)
             VALUES($1,$2,$3,$4,$5)
             RETURNING *;
             `,
-      [username, firstname, lastname, email, password]
+      [firstname, lastname, username, email, password]
     );
     return user;
   } catch (error) {
