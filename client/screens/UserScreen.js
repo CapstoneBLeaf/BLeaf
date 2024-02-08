@@ -4,7 +4,8 @@ import React from "react";
 export default function UserScreen() {
   return (
     <View>
-      <Text>UserScreen</Text>
+      <Text>UserScreen
+      </Text>
     </View>
   );
 }
