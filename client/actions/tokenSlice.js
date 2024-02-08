@@ -7,8 +7,10 @@ const tokenSlice = createSlice({
   initialState: { token: null },
   reducers: {
     setCredentials: (state, action) => {
+      console.log(action)
       const { token } = action.payload;
       state.token = token;
+      return token;
     },
     logOut: (state, action) => {
       state.token = null;

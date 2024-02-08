@@ -6,9 +6,9 @@ import { useRegisterMutation } from "../api/bleafApi";
 import { setCredentials } from "../actions/tokenSlice";
 import { useDispatch } from "react-redux";
 const SignupScreen = () => {
-  const [firstName, setFirstName] = useState("");
+  const [firstname, setFirstname] = useState("");
   const [username, setUsername] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [register] = useRegisterMutation();
@@ -17,19 +17,18 @@ const SignupScreen = () => {
     e.preventDefault();
     try {
       const result = await register({
-        firstName,
+        firstname,
         username,
-        lastName,
+        lastname,
         email,
         password,
       }).unwrap();
       dispatch(setCredentials(result));
-      setFirstName("");
+      setFirstname("");
       setUsername("");
-      setLastName("");
+      setLastname("");
       setEmail("");
       setPassword("");
-      console.log(result);
     } catch (error) {
       console.error(error);
     }
@@ -49,15 +48,16 @@ const SignupScreen = () => {
       <TextInput
         style={styles.input}
         placeholder="First Name"
-        onChangeText={(text) => setFirstName(text)}
-        value={firstName}
+        onChangeText={(text) => setFirstname(text)}
+        value={firstname}
       />
       <Text style={styles.label}>Last Name:</Text>
       <TextInput
+
         style={styles.input}
         placeholder="Last Name"
-        onChangeText={(text) => setLastName(text)}
-        value={lastName}
+        onChangeText={(text) => setLastname(text)}
+        value={lastname}
       />
       <Text style={styles.label}>Username:</Text>
       <TextInput
