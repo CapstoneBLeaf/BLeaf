@@ -35,9 +35,9 @@ const createTable = async () => {
     await client.query(`
     CREATE TABLE users(
       id SERIAL PRIMARY KEY,
-      username varchar(50) NOT NULL,
       firstname varchar(50) NOT NULL,
       lastname varchar(50) NOT NULL,
+      username varchar(50) NOT NULL,
       email varchar(50) NOT NULL,
       password varchar(255) NOT NULL
     );
