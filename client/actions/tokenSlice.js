@@ -1,41 +1,42 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { bleafApi } from "../api/bleafApi";
-import { setItem, getItem } from "../utils/asyncStorage";
-console.log(getItem("token"));
-const initialState = {
-  token: getItem("token") === null ? "" : JSON.parse(getItem("token")),
-};
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const tokenSlice = createSlice({
   name: "tokenSlice",
-  initialState,
+  initialState: { token: null },
   reducers: {
-    updateToken: (state, { payload }) => {
-      state.token = payload;
-      setItem("token", JSON.stringify(state.token));
+    setCredentials: (state, action) => {
+      const { token } = action.payload;
+      state.token = token;
+    },
+    logOut: (state, action) => {
+      state.token = null;
     },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
-      bleafApi.endpoints.createUsers.matchFulfilled,
+      bleafApi.endpoints.register.matchFulfilled,
       (state, { payload }) => {
-        state.token = payload;
+        const { token } = payload;
         // update local storage with the token
-        setItem("token", JSON.stringify(state.token));
+        AsyncStorage.setItem("token", token);
+        return token;
       }
     );
 
     builder.addMatcher(
       bleafApi.endpoints.loginUser.matchFulfilled,
       (state, { payload }) => {
-        state.token = payload;
+        const { token } = payload;
         // update local storage with the token
-        setItem("token", JSON.stringify(state.token));
+        AsyncStorage.setItem("token", token);
+        return token;
       }
     );
   },
 });
-export const { updateToken } = tokenSlice.actions;
-
-export const selectToken = (state) => state.token;
+export const { setCredentials, logOut } = tokenSlice.actions;
 
 export default tokenSlice.reducer;
+export const selectCurrentToken = (state) => state.tokenSlice.token;
