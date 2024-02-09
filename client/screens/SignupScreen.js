@@ -41,7 +41,10 @@ const SignupScreen = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      automaticallyAdjustKeyboardInsets={true}
+    >
       <View style={styles.img}>
         <LottieView
           style={styles.login}
