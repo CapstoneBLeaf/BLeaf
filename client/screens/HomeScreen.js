@@ -15,8 +15,6 @@ export default function HomeScreen() {
   const navigation = useNavigation();
   const handleReset = async () => {
     await removeItem("onboarded");
-    removeItem("token");
-    removeItem("user");
     navigation.push("Onboarding");
   };
   return (
