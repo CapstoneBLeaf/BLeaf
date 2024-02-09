@@ -1,43 +1,36 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { bleafApi } from "../api/bleafApi";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+const initialState = {
+  user:
+    AsyncStorage.getItem("user") === null ? "" : AsyncStorage.getItem("user"),
+  token:
+    AsyncStorage.getItem("token") === null ? "" : AsyncStorage.getItem("token"),
+};
 const tokenSlice = createSlice({
   name: "tokenSlice",
-  initialState: { token: null },
+  initialState,
   reducers: {
     setCredentials: (state, action) => {
+      const { user, token } = action.payload;
+      state.user = user;
+      state.token = token;
+      AsyncStorage.setItem("user", JSON.stringify(state.user));
+    },
+    setToken: (state, action) => {
       const { token } = action.payload;
       state.token = token;
-      return token;
+      sessionStorage.setItem("token", JSON.stringify(state.token));
     },
-    logOut: (state, action) => {
+    logOut: (state) => {
       state.token = null;
+      state.user = null;
+      AsyncStorage.removeItem("token");
+      AsyncStorage.removeItem("user");
     },
-  },
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      bleafApi.endpoints.register.matchFulfilled,
-      (state, { payload }) => {
-        const { token } = payload;
-        // update local storage with the token
-        AsyncStorage.setItem("token", token);
-        return token;
-      }
-    );
-
-    builder.addMatcher(
-      bleafApi.endpoints.loginUser.matchFulfilled,
-      (state, { payload }) => {
-        const { token } = payload;
-        // update local storage with the token
-        AsyncStorage.setItem("token", token);
-        return token;
-      }
-    );
   },
 });
-export const { setCredentials, logOut } = tokenSlice.actions;
+export const { setCredentials, logOut, setToken } = tokenSlice.actions;
 
 export default tokenSlice.reducer;
 export const selectCurrentToken = (state) => state.tokenSlice.token;
+export const selectCurrentUser = (state) => state.tokenSlice.user;
