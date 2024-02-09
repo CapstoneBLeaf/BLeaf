@@ -17,7 +17,7 @@ const tokenSlice = createSlice({
     setToken: (state, action) => {
       const { token } = action.payload;
       state.token = token;
-      sessionStorage.setItem("token", JSON.stringify(state.token));
+      AsyncStorage.setItem("token", JSON.stringify(state.token));
     },
     logOut: (state) => {
       state.token = null;
