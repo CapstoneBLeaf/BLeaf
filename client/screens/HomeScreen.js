@@ -15,6 +15,7 @@ export default function HomeScreen() {
   const navigation = useNavigation();
   const handleReset = async () => {
     await removeItem("onboarded");
+    removeItem("token");
     navigation.push("Onboarding");
   };
   return (
@@ -44,7 +45,7 @@ export default function HomeScreen() {
       <View style={styles.account}>
         <Text>Already have an account?</Text>
         <Pressable onPress={() => navigation.navigate("Login")}>
-          <Text>Login</Text>
+          <Text> Login</Text>
         </Pressable>
       </View>
     </SafeAreaView>

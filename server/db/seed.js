@@ -1,5 +1,12 @@
 const client = require("./client");
-const { users, plants, habits, goals, journals, growth_levels } = require("./seedData");
+const {
+  users,
+  plants,
+  habits,
+  goals,
+  journals,
+  growth_levels,
+} = require("./seedData");
 const { createUsers } = require("./sqlHelperFunctions/users");
 const { createPlants } = require("./sqlHelperFunctions/plants");
 const { createHabits } = require("./sqlHelperFunctions/habits");
@@ -28,9 +35,9 @@ const createTable = async () => {
     await client.query(`
     CREATE TABLE users(
       id SERIAL PRIMARY KEY,
-      username varchar(50) NOT NULL,
       firstname varchar(50) NOT NULL,
       lastname varchar(50) NOT NULL,
+      username varchar(50) NOT NULL,
       email varchar(50) NOT NULL,
       password varchar(255) NOT NULL
     );
@@ -130,7 +137,7 @@ const createInitialJournals = async () => {
 
 const createInitialGrowthLevels = async () => {
   try {
-      await insertGrowthLevels()
+    await insertGrowthLevels();
     console.log("created growth levels");
   } catch (error) {
     throw error;
@@ -148,9 +155,9 @@ const insertGrowthLevels = async () => {
             RETURNING *;
             `,
       [growth_level.plantImg]
-    );    
-}
-}
+    );
+  }
+};
 
 const buildDb = async () => {
   try {

@@ -15,7 +15,14 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist" : {
+        "NSAppTransportSecurity": [
+          {
+            "xml": "<dict><key>NSAllowsArbitraryLoads</key><true /></dict>"
+          }
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {
