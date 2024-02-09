@@ -14,8 +14,6 @@ import { useLoginUserMutation } from "../api/bleafApi";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../actions/tokenSlice";
 
-// import { makeRedirectUri, useAuthRequest } from "expo-auth-session";
-
 const LoginScreen = () => {
   const navigation = useNavigation();
 
@@ -23,6 +21,7 @@ const LoginScreen = () => {
   const [password, setPassword] = useState("");
   const [loginUser] = useLoginUserMutation();
   const dispatch = useDispatch();
+  const [error, setError] = useState(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -34,14 +33,13 @@ const LoginScreen = () => {
       dispatch(setCredentials(result));
       setUsername("");
       setPassword("");
+      navigation.navigate("User");
       console.log("Username:", username);
       console.log("Password:", password);
-    } catch (error) {
-      console.error(error)
+    } catch (rejected) {
+      setError(rejected.data.error)
+      console.log(`error caught: ${error}`)
     }
-
-    
-    navigation.navigate("User");
   };
 
 
@@ -107,7 +105,11 @@ const LoginScreen = () => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-
+        {error && <Text>{
+              console.log(`error displayed: ${error}`)}
+              {error}
+             </Text>
+        }
       <Button title="Login" onPress={handleLogin} />
       <Text style={styles.loginsub}>Or, login with ...</Text>
       <View style={styles.sociallogo}>
@@ -133,7 +135,7 @@ const LoginScreen = () => {
           }}
           style={styles.registerbtn}
         >
-          <Text style={styles.registertxt}>Register</Text>
+          <Text style={styles.registertxt}> Register</Text>
         </TouchableOpacity>
       </View>
     </View>

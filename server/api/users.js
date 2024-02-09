@@ -39,7 +39,7 @@ router.post("/register", async (req, res, next) => {
     const user = await createUsers({
       firstname,
       lastname,
-      username,
+      username: username.toLowerCase(),
       email,
       password: hashedPassword,
     });
@@ -60,7 +60,11 @@ router.post("/register", async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
   try {
-    const user = await getUsersByUsername(req.body.username);
+    const user = await getUsersByUsername(req.body.username.toLowerCase());
+    if (user == null) {
+      res.status(401).send({ error: "Invalid username or password" });
+      return;
+    }
     const validPassword = await bcrypt.compare(
       req.body.password,
       user.password
@@ -77,8 +81,9 @@ router.post("/login", async (req, res, next) => {
       delete user.password;
 
       res.send({ token, user });
-    } else {
-      res.status(401).send({ error: "Invalid password" });
+    }
+    else {
+      res.status(401).send({ error: "Invalid username or password" });
     }
   } catch (error) {
     next(error);
@@ -93,5 +98,22 @@ router.delete("/:id", authRequired, async (req, res, next) => {
     next(err);
   }
 });
+
+router.post("/logout", async (req, res, next) => {
+	try {
+		res.clearCookie("token", {
+			sameSite: "strict",
+			httpOnly: true,
+			signed: true,
+		});
+		res.send({
+			loggedIn: false,
+			message: "Logged Out",
+		});
+	} catch (error) {
+		next(error);
+	}
+});
+
 
 module.exports = router;
