@@ -28,7 +28,7 @@ const LoginScreen = () => {
     try {
       const result = await loginUser({
         username,
-        password,
+        password
       }).unwrap();
       dispatch(setCredentials(result));
       setUsername("");
