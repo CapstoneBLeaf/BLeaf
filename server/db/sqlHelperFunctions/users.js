@@ -59,11 +59,11 @@ const getUsersById = async (id) => {
 
 const getUsersByUsername = async (username) => {
   const {
-    rows: [users],
+    rows: [user],
   } = await client.query(`
-    SELECT * FROM users WHERE users.username = '${username}';
-    `);
-  return users;
+    SELECT * FROM users WHERE users.username = $1;
+    `, [username]);
+  return user;
 };
 
 async function deleteUser(id) {
