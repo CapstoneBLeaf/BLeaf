@@ -1,10 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const initialState = {
-  user:
-    AsyncStorage.getItem("user") === null ? "" : AsyncStorage.getItem("user"),
-  token:
-    AsyncStorage.getItem("token") === null ? "" : AsyncStorage.getItem("token"),
+  user:null,
+  token: null
 };
 const tokenSlice = createSlice({
   name: "tokenSlice",
@@ -19,7 +17,7 @@ const tokenSlice = createSlice({
     setToken: (state, action) => {
       const { token } = action.payload;
       state.token = token;
-      AsyncStorage.setItem("token", JSON.stringify(state.token));
+      sessionStorage.setItem("token", JSON.stringify(state.token));
     },
     logOut: (state) => {
       state.token = null;
