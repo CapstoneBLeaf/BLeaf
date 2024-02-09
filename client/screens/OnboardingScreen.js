@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Onboarding from "react-native-onboarding-swiper";
 import { setItem } from "../utils/asyncStorage";
 import LottieView from "lottie-react-native";

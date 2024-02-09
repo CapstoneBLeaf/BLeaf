@@ -5,6 +5,7 @@ import OnboardingScreen from "../screens/OnboardingScreen.js";
 import HomeScreen from "../screens/HomeScreen.js";
 import SignupScreen from "../screens/SignupScreen.js";
 import LoginScreen from "../screens/LoginScreen.js";
+import UserScreen from "../screens/UserScreen.js";
 import { getItem } from "../utils/asyncStorage.js";
 const Stack = createNativeStackNavigator();
 
@@ -27,49 +28,53 @@ export default function AppNavigation() {
     return null;
   }
 
-  if (showOnboarding) {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Onboarding">
-          <Stack.Screen
-            name="Onboarding"
-            options={{ headerShown: false }}
-            component={OnboardingScreen}
-          />
-          <Stack.Screen
-            name="Home"
-            options={{ headerShown: false }}
-            component={HomeScreen}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-  } else {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen
-            name="Onboarding"
-            options={{ headerShown: false }}
-            component={OnboardingScreen}
-          />
-          <Stack.Screen
-            name="Home"
-            options={{ headerShown: false }}
-            component={HomeScreen}
-          />
-          <Stack.Screen
-            name="Signup"
-            options={{ headerShown: false }}
-            component={SignupScreen}
-          />
-          <Stack.Screen
-            name="Login"
-            options={{ headerShown: false }}
-            component={LoginScreen}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-  }
+  // if (showOnboarding) {
+  //   return (
+  //     <NavigationContainer>
+  //       <Stack.Navigator initialRouteName="Onboarding">
+  //         <Stack.Screen
+  //           name="Onboarding"
+  //           options={{ headerShown: false }}
+  //           component={OnboardingScreen}
+  //         />
+  //         <Stack.Screen
+  //           name="Home"
+  //           options={{ headerShown: false }}
+  //           component={HomeScreen}
+  //         />
+  //       </Stack.Navigator>
+  //     </NavigationContainer>
+  //   );
+  // } else {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Onboarding"
+          options={{ headerShown: false }}
+          component={OnboardingScreen}
+        />
+        <Stack.Screen
+          name="Home"
+          options={{ headerShown: false }}
+          component={HomeScreen}
+        />
+        <Stack.Screen
+          name="Signup"
+          options={{ headerShown: false }}
+          component={SignupScreen}
+        />
+        <Stack.Screen
+          name="Login"
+          options={{ headerShown: false }}
+          component={LoginScreen}
+        />
+        <Stack.Screen
+          name="User"
+          options={{ headerShown: false }}
+          component={UserScreen}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }

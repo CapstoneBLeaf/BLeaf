@@ -11,7 +11,6 @@ async function getAllHabits() {
   }
 }
 
-
 const createHabits = async ({ description, image, checkIn }) => {
   try {
     const {
@@ -78,4 +77,10 @@ const deleteHabits = async (habitId) => {
   }
 };
 
-module.exports = { getAllHabits, createHabits, getHabitsById, updateHabits, deleteHabits };
+module.exports = {
+  getAllHabits,
+  createHabits,
+  getHabitsById,
+  updateHabits,
+  deleteHabits,
+};
