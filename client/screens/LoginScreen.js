@@ -37,12 +37,10 @@ const LoginScreen = () => {
       console.log("Username:", username);
       console.log("Password:", password);
     } catch (rejected) {
-      setError(rejected.data.error)
-      console.log(`error caught: ${error}`)
+      setError(rejected.data.error);
+      console.log(`error caught: ${error}`);
     }
   };
-
-
 
   // // Configure Gmail login
   // const [requestGmail, responseGmail, promptAsyncGmail] = useAuthRequest(
@@ -105,11 +103,12 @@ const LoginScreen = () => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-        {error && <Text>{
-              console.log(`error displayed: ${error}`)}
-              {error}
-             </Text>
-        }
+      {error && (
+        <Text>
+          {console.log(`error displayed: ${error}`)}
+          {error}
+        </Text>
+      )}
       <Button title="Login" onPress={handleLogin} />
       <Text style={styles.loginsub}>Or, login with ...</Text>
       <View style={styles.sociallogo}>

@@ -5,6 +5,8 @@ import Button from "./components/Button";
 import { useRegisterMutation } from "../api/bleafApi";
 import { setCredentials } from "../actions/tokenSlice";
 import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/core";
+
 const SignupScreen = () => {
   const [firstname, setFirstname] = useState("");
   const [username, setUsername] = useState("");
@@ -13,6 +15,8 @@ const SignupScreen = () => {
   const [password, setPassword] = useState("");
   const [register] = useRegisterMutation();
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -29,13 +33,18 @@ const SignupScreen = () => {
       setLastname("");
       setEmail("");
       setPassword("");
+      console.log(result);
+      navigation.navigate("Login");
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <ScrollView style={styles.container} automaticallyAdjustKeyboardInsets={true}>
+    <ScrollView
+      style={styles.container}
+      automaticallyAdjustKeyboardInsets={true}
+    >
       <View style={styles.img}>
         <LottieView
           style={styles.login}
@@ -53,7 +62,6 @@ const SignupScreen = () => {
       />
       <Text style={styles.label}>Last Name:</Text>
       <TextInput
-
         style={styles.input}
         placeholder="Last Name"
         onChangeText={(text) => setLastname(text)}
