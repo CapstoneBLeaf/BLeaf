@@ -9,9 +9,9 @@ import HomeScreen from "../screens/HomeScreen";
 import AccountScreen from "../screens/AccountScreen";
 import HabitsScreen from "../screens/HabitsScreen";
 
-// screen names
+// screen names (habits, goals, progress, profile)
 const homeName = "Home"
-const accountName = "Account"
+const accountName = "Profile"
 const habitsName = "Habits"
 
 const Tab = createBottomTabNavigator();
@@ -26,6 +26,8 @@ export default function MainContainer() {
                     let iconName;
                     let rn = route.name;
 
+
+                    //habits, goals, user
                     if (rn === homeName) {
                         iconName = focused ? "home" : "home-outline"
                     } else if (rn === accountName) {
