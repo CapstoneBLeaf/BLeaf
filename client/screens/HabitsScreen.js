@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux"; // Import connect from react-redux
 import { SafeAreaView, Text, FlatList, TouchableOpacity, View, StyleSheet, ScrollView, Button, Modal, TextInput } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { bleafApi, useGetAllHabitsQuery } from "../api/bleafApi";
 
-export default function HabitsScreen() {
+// Import any necessary action creators here
+
+function HabitsScreen(props) {
   const { data: habits, error, isLoading } = useGetAllHabitsQuery();
   const [selectedHabits, setSelectedHabits] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -49,12 +52,14 @@ export default function HabitsScreen() {
   const renderHabitItem = ({ item }) => (
     <TouchableOpacity onPress={() => toggleHabitSelection(item)}>
       <View style={[styles.habitContainer, selectedHabits.some((h) => h.id === item.id) && styles.selectedHabit]}>
-        <Text style={styles.habitName}>{item.name}</Text>
-        <Text style={styles.habitDescription}>{item.description}</Text>
+        <Text style={styles.habitDetails}>
+          <Text style={styles.habitName}>Name: {item.name}</Text>{"\n"}
+          <Text style={styles.habitDescription}>Description: {item.description}</Text>
+        </Text>
       </View>
     </TouchableOpacity>
   );
-
+  
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}>Habit Selection</Text>
@@ -70,9 +75,7 @@ export default function HabitsScreen() {
           <>
             <Button title="Clear" onPress={clearSelectedHabits} />
             <Button title="Set Goal" onPress={setGoal} />
-
-        {/*<Button title="Goals" onPress={navigateToGoalsPage} /> */}
-        
+            <Button title="Check-in" onPress={navigateToGoalsPage} />
           </>
         )}
       </View>
@@ -85,25 +88,25 @@ export default function HabitsScreen() {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-          <TextInput
-  style={[styles.input, { color: '#000', backgroundColor: '#ffffff' }]}
-  placeholder="Enter Goal Frequency"
-  placeholderTextColor="#999999" // Set placeholder text color to gray
-  onChangeText={text => setGoalFrequency(text)}
-/>
-<TextInput
-  style={[styles.input, { color: '#000', backgroundColor: '#ffffff' }]}
-  placeholder="Enter Motivating Statement"
-  placeholderTextColor="#999999" // Set placeholder text color to gray
-  onChangeText={text => setMotivatingStatement(text)}
-/>
-<TextInput
-  style={[styles.input, { color: '#000', backgroundColor: '#ffffff' }]}
-  placeholder="Enter Times Per Day"
-  placeholderTextColor="#999999" // Set placeholder text color to gray
-  onChangeText={text => setTimesPerDay(text)}
-  keyboardType="numeric"
-/>
+            <TextInput
+              style={[styles.input, { color: '#000', backgroundColor: '#ffffff' }]}
+              placeholder="Enter Goal Frequency"
+              placeholderTextColor="#999999" // Set placeholder text color to gray
+              onChangeText={text => setGoalFrequency(text)}
+            />
+            <TextInput
+              style={[styles.input, { color: '#000', backgroundColor: '#ffffff' }]}
+              placeholder="Enter Motivating Statement"
+              placeholderTextColor="#999999" // Set placeholder text color to gray
+              onChangeText={text => setMotivatingStatement(text)}
+            />
+            <TextInput
+              style={[styles.input, { color: '#000', backgroundColor: '#ffffff' }]}
+              placeholder="Enter Times Per Day"
+              placeholderTextColor="#999999" // Set placeholder text color to gray
+              onChangeText={text => setTimesPerDay(text)}
+              keyboardType="numeric"
+            />
 
             <Button title="Save Goal" onPress={saveGoal} />
           </View>
@@ -122,6 +125,9 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+  },
+  habitDetails: {
+    fontSize: 16,
   },
   habitName: {
     fontSize: 18,
@@ -173,3 +179,6 @@ const styles = StyleSheet.create({
     width: 200,
   },
 });
+
+// Connect the component to Redux store
+export default connect()(HabitsScreen);

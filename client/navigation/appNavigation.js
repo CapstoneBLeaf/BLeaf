@@ -6,12 +6,15 @@ import HomeScreen from "../screens/HomeScreen.js";
 import SignupScreen from "../screens/SignupScreen.js";
 import LoginScreen from "../screens/LoginScreen.js";
 import UserScreen from "../screens/UserScreen.js";
-import HabitsScreen from "../screens/HabitsScreen.js"; // Imported HabitsScreen component
+import HabitsScreen from "../screens/HabitsScreen.js";
+import GoalsScreen from "../screens/GoalsScreen.js"; // Import GoalsScreen component
 import { getItem } from "../utils/asyncStorage.js";
+
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigation() {
   const [showOnboarding, setShowOnboarding] = useState(null);
+
   useEffect(() => {
     checkIfAlreadyOnboarded();
   }, []);
@@ -60,7 +63,12 @@ export default function AppNavigation() {
         <Stack.Screen
           name="Habits"
           options={{ headerShown: false }}
-          component={HabitsScreen} // Added HabitsScreen component
+          component={HabitsScreen}
+        />
+        <Stack.Screen
+          name="Goals"
+          options={{ headerShown: false }}
+          component={GoalsScreen} // Added GoalsScreen component
         />
       </Stack.Navigator>
     </NavigationContainer>

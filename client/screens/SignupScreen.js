@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet, ScrollView } from "react-native";
 import LottieView from "lottie-react-native";
 import Button from "./components/Button";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native"; // Keep only one import statement for useNavigation
 
 import { useRegisterMutation } from "../api/bleafApi";
 import { setCredentials } from "../actions/tokenSlice";
 import { useDispatch } from "react-redux";
+
 const SignupScreen = () => {
   const [firstname, setFirstname] = useState("");
   const [username, setUsername] = useState("");
@@ -17,8 +18,8 @@ const SignupScreen = () => {
   const navigation = useNavigation();
 
   const dispatch = useDispatch();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+
+  const handleSubmit = async () => {
     try {
       const result = await register({
         firstname,
@@ -29,14 +30,15 @@ const SignupScreen = () => {
       }).unwrap();
       dispatch(setCredentials(result));
 
-  // Navigate to HabitsScreen after successful registration
-  navigation.navigate("Habits");
+      // Navigate to HabitsScreen after successful registration
+      navigation.navigate("Habits");
 
       setFirstname("");
       setUsername("");
       setLastname("");
       setEmail("");
       setPassword("");
+      console.log(result);
     } catch (error) {
       console.error(error);
     }
@@ -49,7 +51,7 @@ const SignupScreen = () => {
           style={styles.login}
           source={require("../assets/animations/login.json")}
           autoPlay
-        ></LottieView>
+        />
         <Text style={styles.title}>Register</Text>
       </View>
       <Text style={styles.label}>First Name:</Text>
@@ -61,7 +63,6 @@ const SignupScreen = () => {
       />
       <Text style={styles.label}>Last Name:</Text>
       <TextInput
-
         style={styles.input}
         placeholder="Last Name"
         onChangeText={(text) => setLastname(text)}
