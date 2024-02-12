@@ -51,7 +51,6 @@ const SignupScreen = () => {
           source={require("../assets/animations/login.json")}
           autoPlay
         ></LottieView>
-        <Text style={styles.title}>Register</Text>
       </View>
       <Text style={styles.label}>First Name:</Text>
       <TextInput
