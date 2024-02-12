@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, StyleSheet } from "react-native";
+import { SafeAreaView, Text, StyleSheet} from "react-native";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -19,16 +19,19 @@ export default function UserScreen() {
 
   const handleLogout = async () => {
     dispatch(logOut());
-    navigation.navigate("Home");
+    navigation.navigate("Welcome");
   };
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.name}>
-        Hello {user.firstname} {user.lastname}
-      </Text>
-      <Button title="Logout" onPress={handleLogout} />
-    </SafeAreaView>
-  );
+  if (token) {
+      return (
+        <SafeAreaView style={styles.container}>
+          <Text style={styles.name}>
+            Hello {user.firstname} {user.lastname}
+          </Text>
+          <Button title="Logout" onPress={handleLogout} />
+        </SafeAreaView>
+      );
+  } 
+    
 }
 
 const styles = StyleSheet.create({
