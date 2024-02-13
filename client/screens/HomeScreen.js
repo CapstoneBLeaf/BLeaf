@@ -44,7 +44,7 @@ export default function HomeScreen() {
       <View style={styles.account}>
         <Text>Already have an account?</Text>
         <Pressable onPress={() => navigation.navigate("Login")}>
-          <Text> Login</Text>
+          <Text style={{color: 'blue'}}> Login</Text>
         </Pressable>
       </View>
     </SafeAreaView>
