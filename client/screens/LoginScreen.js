@@ -22,9 +22,18 @@ const LoginScreen = () => {
   const [loginUser] = useLoginUserMutation();
   const dispatch = useDispatch();
   const [error, setError] = useState(null);
+  const [errors,setErrors] = useState({})
+  const validateForm = () => {
+    let errors = {}
+    if(!username) errors.username = "Username is required"
+    if(!password) errors.password = "Password is required"
+    setErrors(errors)
+    return Object.keys(errors).length === 0
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if(validateForm()){
     try {
       const result = await loginUser({
         username,
@@ -40,6 +49,7 @@ const LoginScreen = () => {
       setError(rejected.data.error);
       console.log(`error caught: ${error}`);
     }
+  }
   };
 
   // // Configure Gmail login
@@ -94,7 +104,7 @@ const LoginScreen = () => {
         value={username}
         onChangeText={(text) => setUsername(text)}
       />
-
+      {errors.username ? <Text style={styles.errorText}>{errors.username}</Text> : null}
       <TextInput
         style={styles.input}
         placeholder="Password"
@@ -102,6 +112,7 @@ const LoginScreen = () => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
+      {errors.password ? <Text style={styles.errorText}>{errors.password}</Text> : null}
       {error && (
         <Text>
           {console.log(`error displayed: ${error}`)}
@@ -143,9 +154,6 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#ffffff",
     paddingRight: 20,
     paddingLeft: 20,
   },
@@ -184,6 +192,7 @@ const styles = StyleSheet.create({
   loginsub: {
     marginBottom: 30,
     marginTop: 30,
+    textAlign: 'center'
   },
   tinyLogo: {
     height: 24,
@@ -191,7 +200,7 @@ const styles = StyleSheet.create({
   },
   sociallogo: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     marginBottom: 30,
   },
   tinyLogom: {
@@ -201,6 +210,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 10,
     marginRight: 10,
+  },
+  errorText:{
+    color: 'red',
+    marginTop: 10,
+    textAlign: 'left'
   },
   register: { flexDirection: "row", justifyContent: "center" },
 });
