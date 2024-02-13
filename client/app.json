@@ -1,3 +1,5 @@
+
+
 {
   "expo": {
     "name": "client",
@@ -11,27 +13,38 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.566797729824-hv24ge4aqs2cvqvagnku0l28nbtfltj9"
+        }
+      ]
+    ],
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
       "supportsTablet": true,
-      "infoPlist" : {
+      "infoPlist": {
         "NSAppTransportSecurity": [
           {
             "xml": "<dict><key>NSAllowsArbitraryLoads</key><true /></dict>"
           }
         ]
-      }
+      },
+      "bundleIdentifier": "bleaf.client"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.client"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "scheme": "bleaf"
   }
 }
