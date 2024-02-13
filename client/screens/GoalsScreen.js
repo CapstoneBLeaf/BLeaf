@@ -5,7 +5,6 @@ const GoalsScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Goals Screen</Text>
-  
     </View>
   );
 };

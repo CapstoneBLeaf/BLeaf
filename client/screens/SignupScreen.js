@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet, ScrollView } from "react-native";
 import LottieView from "lottie-react-native";
 import Button from "./components/Button";
-import { useNavigation } from "@react-navigation/native"; // Keep only one import statement for useNavigation
-
 import { useRegisterMutation } from "../api/bleafApi";
 import { setCredentials } from "../actions/tokenSlice";
 import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/core";
 
 const SignupScreen = () => {
   const [firstname, setFirstname] = useState("");
@@ -15,11 +14,11 @@ const SignupScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [register] = useRegisterMutation();
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const dispatch = useDispatch();
-
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       const result = await register({
         firstname,
@@ -29,30 +28,29 @@ const SignupScreen = () => {
         password,
       }).unwrap();
       dispatch(setCredentials(result));
-
-      // Navigate to HabitsScreen after successful registration
-      navigation.navigate("Habits");
-
       setFirstname("");
       setUsername("");
       setLastname("");
       setEmail("");
       setPassword("");
       console.log(result);
+      navigation.navigate("Login");
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      automaticallyAdjustKeyboardInsets={true}
+    >
       <View style={styles.img}>
         <LottieView
           style={styles.login}
           source={require("../assets/animations/login.json")}
           autoPlay
-        />
-        <Text style={styles.title}>Register</Text>
+        ></LottieView>
       </View>
       <Text style={styles.label}>First Name:</Text>
       <TextInput

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux"; // Import connect from react-redux
-import { SafeAreaView, Text, FlatList, TouchableOpacity, View, StyleSheet, ScrollView, Button, Modal, TextInput } from "react-native";
+import { SafeAreaView, Text, FlatList, TouchableOpacity, View, StyleSheet, Image, Button, Modal, TextInput } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { bleafApi, useGetAllHabitsQuery } from "../api/bleafApi";
+import { useGetAllHabitsQuery } from "../api/bleafApi";
 
 // Import any necessary action creators here
 
@@ -54,15 +54,14 @@ function HabitsScreen(props) {
       <View style={[styles.habitContainer, selectedHabits.some((h) => h.id === item.id) && styles.selectedHabit]}>
         <Text style={styles.habitDetails}>
           <Text style={styles.habitName}>Name: {item.name}</Text>{"\n"}
-          <Text style={styles.habitDescription}>Description: {item.description}</Text>
-        </Text>
+          <Text style={styles.habitDescription}>Description: {item.description}</Text>{"\n"}
+          <Image style={styles.image} source={{uri:`${item.image}`}}/></Text>
       </View>
     </TouchableOpacity>
   );
   
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>Habit Selection</Text>
 
       <FlatList
         data={habits}
@@ -135,6 +134,7 @@ const styles = StyleSheet.create({
   },
   habitDescription: {
     fontSize: 16,
+    marginBottom:10,
   },
   selectedHabit: {
     backgroundColor: '#64b5f6',
@@ -154,6 +154,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22
+  },
+  image:{
+    height: 100,
+    width: 100,
   },
   modalView: {
     margin: 20,
