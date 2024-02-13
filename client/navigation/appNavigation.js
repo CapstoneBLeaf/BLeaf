@@ -5,10 +5,20 @@ import OnboardingScreen from "../screens/OnboardingScreen.js";
 import HomeScreen from "../screens/HomeScreen.js";
 import SignupScreen from "../screens/SignupScreen.js";
 import LoginScreen from "../screens/LoginScreen.js";
-import UserScreen from "../screens/UserScreen.js";
+import UserScreen from "../screens/UserScreen";
+import GoalsScreen from "../screens/GoalsScreen";
+import JournalsScreen from "../screens/JournalsScreen";
+import HabitsScreen from "../screens/HabitsScreen";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Ionicons from "react-native-vector-icons/Ionicons"
 import { getItem } from "../utils/asyncStorage.js";
 const Stack = createNativeStackNavigator();
-
+const Tab = createBottomTabNavigator();
+// screen names
+const accountName = "Account"
+const habitsName = "Habits"
+const goalName = "Goals"
+const journalName = "Journals"
 export default function AppNavigation() {
   const [showOnboarding, setShowOnboarding] = useState(null);
   useEffect(() => {
@@ -28,53 +38,98 @@ export default function AppNavigation() {
     return null;
   }
 
-  // if (showOnboarding) {
-  //   return (
-  //     <NavigationContainer>
-  //       <Stack.Navigator initialRouteName="Onboarding">
-  //         <Stack.Screen
-  //           name="Onboarding"
-  //           options={{ headerShown: false }}
-  //           component={OnboardingScreen}
-  //         />
-  //         <Stack.Screen
-  //           name="Home"
-  //           options={{ headerShown: false }}
-  //           component={HomeScreen}
-  //         />
-  //       </Stack.Navigator>
-  //     </NavigationContainer>
-  //   );
-  // } else {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Onboarding"
-          options={{ headerShown: false }}
-          component={OnboardingScreen}
-        />
-        <Stack.Screen
-          name="Home"
-          options={{ headerShown: false }}
-          component={HomeScreen}
-        />
-        <Stack.Screen
-          name="Signup"
-          options={{ headerShown: false }}
-          component={SignupScreen}
-        />
-        <Stack.Screen
-          name="Login"
-          options={{ headerShown: false }}
-          component={LoginScreen}
-        />
-        <Stack.Screen
-          name="User"
-          options={{ headerShown: false }}
-          component={UserScreen}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  
+  const TabNavigator = () => {
+    return (
+      <Tab.Navigator
+      initialRouteName={habitsName}
+      screenOptions={({route}) => ({
+          tabBarActiveTintColor: 'tomato',
+          tabBarInactiveTintColor: 'grey',
+          tabBarLabelStyle: [
+            {  fontSize: 10 }
+          ],
+          tabBarStyle: [
+              {
+                padding: 10,
+              }
+          ],
+          tabBarIcon: ({focused, color, size}) => {
+              let iconName;
+              let rn = route.name;
+
+              if (rn === habitsName) {
+                  iconName = focused ? "home" : "home-outline"
+              } else if (rn === accountName) {
+                  iconName = focused ? "person" : "person-outline"
+              } else if (rn === goalName) {
+                iconName = focused ? "trophy" : "trophy-outline"
+              }else if (rn === journalName) {
+                iconName = focused ? "book" : "book-outline"
+              }
+
+              return <Ionicons name={iconName} size={size} color={color}/>
+          },
+      })}      
+      >
+          <Tab.Screen name={habitsName} component={HabitsScreen}/>
+          <Tab.Screen name={goalName} component={GoalsScreen}/>
+          <Tab.Screen name={journalName} component={JournalsScreen}/>
+          <Tab.Screen name={accountName} component={UserScreen}/>
+      </Tab.Navigator>
+    );
+  };
+
+  if (showOnboarding) {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Onboarding">
+          <Stack.Screen
+            name="Onboarding"
+            options={{ headerShown: false }}
+            component={OnboardingScreen}
+          />
+          <Stack.Screen
+            name="Welcome"
+            options={{ headerShown: false }}
+            component={HomeScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  } else {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Welcome">
+          <Stack.Screen
+            name="Onboarding"
+            options={{ headerShown: false }}
+            component={OnboardingScreen}
+          />
+          <Stack.Screen
+            name="Welcome"
+            options={{ headerShown: false }}
+            component={HomeScreen}
+          />
+          <Stack.Screen
+            name="Signup"
+            options={{ headerShown: true }}
+            component={SignupScreen}
+          />
+          <Stack.Screen
+            name="Login"
+            options={{ headerShown: true }}
+            component={LoginScreen}
+          />
+          <Stack.Screen
+            name="Home"
+            options={{ headerShown: false }}
+            component={TabNavigator}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
+
+
 }

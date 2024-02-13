@@ -51,14 +51,15 @@ const LoginScreen = () => {
       dispatch(setCredentials(result));
       setUsername("");
       setPassword("");
-      navigation.navigate("User");
+      navigation.navigate("Home");
       console.log("Username:", username);
       console.log("Password:", password);
     } catch (rejected) {
-      setError(rejected.data.error)
-      console.log(`error caught: ${error}`)
+      setError(rejected.data.error);
+      console.log(`error caught: ${error}`);
     }
   };
+
 
   // async function handleGoogleLogin() {
   //   const user = await AsyncStorage.getItem("@user");
@@ -91,6 +92,8 @@ const LoginScreen = () => {
   //   }
   // }
 
+ 
+
   // const getUserInfo = async (token) => {
   //   if (!token) return;
   //   try {
@@ -116,7 +119,6 @@ const LoginScreen = () => {
           source={require("../assets/animations/login.json")}
           autoPlay
         ></LottieView>
-        <Text style={styles.title}>Login</Text>
       </View>
 
       <TextInput
@@ -134,11 +136,13 @@ const LoginScreen = () => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
+
         {error && <Text style={{color: 'red'}}>{
               console.log(`error displayed: ${error}`)}
               {error}
              </Text>
         }
+
       <Button title="Login" onPress={handleLogin} />
       <Text style={styles.loginsub}>Or, login with ...</Text>
       <View style={styles.sociallogo}>

@@ -15,7 +15,6 @@ export default function HomeScreen() {
   const navigation = useNavigation();
   const handleReset = async () => {
     await removeItem("onboarded");
-    removeItem("token");
     navigation.push("Onboarding");
   };
   return (
@@ -78,4 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 10,
   },
+  resetButton:{
+    marginBottom:10
+  }
 });
