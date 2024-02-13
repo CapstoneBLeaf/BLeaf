@@ -1,10 +1,10 @@
 import { SafeAreaView, Text } from "react-native";
 import React from "react";
 
-export default function AccountScreen() {
+export default function GoalsScreen() {
   return (
     <SafeAreaView>
-      <Text>AccountScreen</Text>
+      <Text>GoalsScreen</Text>
     </SafeAreaView>
   );
 }
