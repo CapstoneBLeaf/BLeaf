@@ -1,6 +1,3 @@
-// ios Client ID 566797729824-hv24ge4aqs2cvqvagnku0l28nbtfltj9.apps.googleusercontent.com
-
-
 import React, { useState } from "react";
 import {
   View,
@@ -16,14 +13,6 @@ import Button from "./components/Button";
 import { useLoginUserMutation } from "../api/bleafApi";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../actions/tokenSlice";
-// import {statusbar} from 'expo-status-bar';
-// import {
-//   GoogleSignin,
-//   GoogleSigninButton,
-//   statusCodes,
-// } from '@react-native-google-signin/google-signin';
-// import * as AuthSession from 'expo-auth-session';
-// import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -33,13 +22,6 @@ const LoginScreen = () => {
   const [loginUser] = useLoginUserMutation();
   const dispatch = useDispatch();
   const [error, setError] = useState(null);
- // const [request,promptAsync] = Google.useAuthRequest(566797729824-hv24ge4aqs2cvqvagnku0l28nbtfltj9.apps.googleusercontent.com);
-
-  // const response = null
-  const promtAsync = null
-  React.useEffect(() => {
-    handleGoogleLogin();
-  }, [response]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -60,55 +42,39 @@ const LoginScreen = () => {
     }
   };
 
+  // // Configure Gmail login
+  // const [requestGmail, responseGmail, promptAsyncGmail] = useAuthRequest(
+  //   {
+  //     redirectUri: makeRedirectUri({ useProxy: true }),
+  //     responseType: "token",
+  //     clientId: "your-gmail-client-id",
+  //     scopes: ["email"],
+  //   },
+  //   { authorizationEndpoint: "https://accounts.google.com/o/oauth2/auth" } // Gmail OAuth endpoint
+  // );
 
-  // async function handleGoogleLogin() {
-  //   const user = await AsyncStorage.getItem("@user");
-  //   if (!user) {
-  //     if (response?.type === "success") {
-  //       await getUserInfo(response.authentication.accessToken);
-  //     }
-  //   } else {
-  //       setUserInfo(JSON.parse(user));
-  //   }
-  // }
+  // // Configure Facebook login
+  // const [requestFacebook, responseFacebook, promptAsyncFacebook] =
+  //   useAuthRequest(
+  //     {
+  //       redirectUri: makeRedirectUri({ useProxy: true }),
+  //       responseType: "token",
+  //       clientId: "your-facebook-app-id",
+  //       scopes: ["public_profile", "email"],
+  //     },
+  //     { authorizationEndpoint: "https://www.facebook.com/v12.0/dialog/oauth" } // Facebook OAuth endpoint
+  //   );
 
+  // // Handle login with Gmail
+  // const handleGmailLogin = async () => {
+  //   const result = await promptAsyncGmail();
+  //   // Handle the result accordingly
+  // };
 
-  // THIS IS THE MORE RECENT VERSION OF GOOGLE OAUTH
-  // handleGoogleLogin = async () => {
-  //   try {
-  //     await GoogleSignin.hasPlayServices();
-  //     const userInfo = await GoogleSignin.signIn();
-  //     setState({ userInfo });
-  //   } catch (error) {
-  //     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-  //       return
-  //       // user cancelled the login flow
-  //     } else if (error.code === statusCodes.IN_PROGRESS) {
-  //        console.log("sign in is in progress already")
-  //       // operation (e.g. sign in) is in progress already
-  //     } else {
-  //         console.log("Error")
-  //     }
-  //   }
-  // }
-
- 
-
-  // const getUserInfo = async (token) => {
-  //   if (!token) return;
-  //   try {
-  //     const response = await fetch(
-  //       "https://www.googleapis.com/userinfo/v2/me",
-  //       {
-  //         headers: { Authorization: `Bearer ${token}`},
-  //       }
-  //     );
-  //     const user = await response.json();
-  //     await AsyncStorage.setItem("@user", JSON.stringify(user));
-  //     setUserInfo(user);
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
+  // // Handle login with Facebook
+  // const handleFacebookLogin = async () => {
+  //   const result = await promptAsyncFacebook();
+  //   // Handle the result accordingly
   // };
 
   return (
@@ -136,13 +102,12 @@ const LoginScreen = () => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-
-        {error && <Text style={{color: 'red'}}>{
-              console.log(`error displayed: ${error}`)}
-              {error}
-             </Text>
-        }
-
+      {error && (
+        <Text>
+          {console.log(`error displayed: ${error}`)}
+          {error}
+        </Text>
+      )}
       <Button title="Login" onPress={handleLogin} />
       <Text style={styles.loginsub}>Or, login with ...</Text>
       <View style={styles.sociallogo}>
@@ -153,7 +118,7 @@ const LoginScreen = () => {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => promptAsync()} style={styles.tinyLogom}>
+        <TouchableOpacity onPress={() => {}} style={styles.tinyLogom}>
           <Image
             style={styles.tinyLogo}
             source={require("../assets/google.png")}
@@ -168,13 +133,12 @@ const LoginScreen = () => {
           }}
           style={styles.registerbtn}
         >
-          <Text style={styles.registertxt} style={{color: 'blue'}}> Register</Text>
+          <Text style={styles.registertxt}> Register</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -190,7 +154,7 @@ const styles = StyleSheet.create({
     height: 150,
     resizeMode: "cover",
     marginBottom: 20,
-    borderRadius: 75, 
+    borderRadius: 75, // for a circular image, adjust as needed
   },
   title: {
     fontSize: 20,
