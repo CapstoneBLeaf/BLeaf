@@ -6,6 +6,8 @@ import HomeScreen from "../screens/HomeScreen.js";
 import SignupScreen from "../screens/SignupScreen.js";
 import LoginScreen from "../screens/LoginScreen.js";
 import UserScreen from "../screens/UserScreen";
+import GoalsScreen from "../screens/GoalsScreen";
+import JournalsScreen from "../screens/JournalsScreen";
 import HabitsScreen from "../screens/HabitsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons"
@@ -15,6 +17,8 @@ const Tab = createBottomTabNavigator();
 // screen names
 const accountName = "Account"
 const habitsName = "Habits"
+const goalName = "Goals"
+const journalName = "Journals"
 export default function AppNavigation() {
   const [showOnboarding, setShowOnboarding] = useState(null);
   useEffect(() => {
@@ -58,6 +62,10 @@ export default function AppNavigation() {
                   iconName = focused ? "home" : "home-outline"
               } else if (rn === accountName) {
                   iconName = focused ? "person" : "person-outline"
+              } else if (rn === goalName) {
+                iconName = focused ? "trophy" : "trophy-outline"
+              }else if (rn === journalName) {
+                iconName = focused ? "book" : "book-outline"
               }
 
               return <Ionicons name={iconName} size={size} color={color}/>
@@ -65,6 +73,8 @@ export default function AppNavigation() {
       })}      
       >
           <Tab.Screen name={habitsName} component={HabitsScreen}/>
+          <Tab.Screen name={goalName} component={GoalsScreen}/>
+          <Tab.Screen name={journalName} component={JournalsScreen}/>
           <Tab.Screen name={accountName} component={UserScreen}/>
       </Tab.Navigator>
     );
