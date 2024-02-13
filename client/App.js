@@ -7,6 +7,7 @@ export default function App() {
     <Provider store={store}>
       <SafeAreaProvider>
         <AppNavigation/>
+        <MainContainer/>
       </SafeAreaProvider>
     </Provider>
   );
