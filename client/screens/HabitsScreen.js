@@ -55,7 +55,7 @@ function HabitsScreen(props) {
         <Text style={styles.habitDetails}>
           <Text style={styles.habitName}>Name: {item.name}</Text>{"\n"}
           <Text style={styles.habitDescription}>Description: {item.description}</Text>{"\n"}
-          <Image style={styles.img} source={{uri:`${item.image}`}}/></Text>
+          <Image style={styles.image} source={{uri:`${item.image}`}}/></Text>
       </View>
     </TouchableOpacity>
   );
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 22
   },
-  img:{
+  image:{
     height: 100,
     width: 100,
   },
