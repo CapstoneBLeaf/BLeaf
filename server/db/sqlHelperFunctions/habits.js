@@ -11,17 +11,17 @@ async function getAllHabits() {
   }
 }
 
-const createHabits = async ({ description, image, checkIn }) => {
+const createHabits = async ({ name, description, image, checkIn }) => {
   try {
     const {
       rows: [habits],
     } = await client.query(
       `
-            INSERT INTO habits(description, image, "checkIn")
-            VALUES($1,$2,$3)
+            INSERT INTO habits(name,description, image, "checkIn")
+            VALUES($1,$2,$3,$4)
             RETURNING *;
             `,
-      [description, image, checkIn]
+      [name, description, image, checkIn]
     );
     return habits;
   } catch (error) {
