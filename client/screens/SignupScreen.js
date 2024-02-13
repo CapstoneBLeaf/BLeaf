@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, ScrollView } from "react-native";
+import { View, Text, Image,TextInput, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import LottieView from "lottie-react-native";
 import Button from "./components/Button";
 import { useRegisterMutation } from "../api/bleafApi";
 import { setCredentials } from "../actions/tokenSlice";
 import { useDispatch } from "react-redux";
+
 const SignupScreen = () => {
   const [firstname, setFirstname] = useState("");
   const [username, setUsername] = useState("");
@@ -86,6 +87,22 @@ const SignupScreen = () => {
 
       {/* <Button title="Edit" onPress={handleEdit} /> */}
       <Button title="Register" onPress={handleSubmit} />
+      <Text style={styles.loginsub}>Or, register with...</Text>
+      <View style={styles.sociallogo}>
+        <TouchableOpacity onPress={() => {}} style={styles.tinyLogom}>
+          <Image
+            style={styles.tinyLogo}
+            source={require("../assets/facebook.png")}
+          />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => {}} style={styles.tinyLogom}>
+          <Image
+            style={styles.tinyLogo}
+            source={require("../assets/google.png")}
+          />
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };
@@ -116,6 +133,27 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     marginBottom: 30,
+  },
+  img: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  tinyLogo: {
+    height: 24,
+    width: 24,
+  },
+  sociallogo: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 30,
+  },
+  tinyLogom: {
+    borderColor: "#ddd",
+    borderWidth: 2,
+    paddingHorizontal: 30,
+    paddingVertical: 10,
+    borderRadius: 10,
+    marginRight: 10,
   },
 });
 
