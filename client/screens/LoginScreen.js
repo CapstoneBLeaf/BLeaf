@@ -33,7 +33,7 @@ const LoginScreen = () => {
       dispatch(setCredentials(result));
       setUsername("");
       setPassword("");
-      navigation.navigate("User");
+      navigation.navigate("Home");
       console.log("Username:", username);
       console.log("Password:", password);
     } catch (rejected) {
@@ -85,7 +85,6 @@ const LoginScreen = () => {
           source={require("../assets/animations/login.json")}
           autoPlay
         ></LottieView>
-        <Text style={styles.title}>Login</Text>
       </View>
 
       <TextInput
