@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, StyleSheet} from "react-native";
+import { SafeAreaView, Text, StyleSheet, View, ImageBackground } from "react-native";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -8,6 +8,7 @@ import {
 } from "../actions/tokenSlice";
 import { useNavigation } from "@react-navigation/core";
 import Button from "./components/Button";
+import { useGetAllPlantsQuery } from "../api/bleafApi";
 
 export default function UserScreen() {
   const token = useSelector(selectCurrentToken);
@@ -16,22 +17,34 @@ export default function UserScreen() {
   console.log(user);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const { data: plant, error, isLoading } = useGetAllPlantsQuery();
 
-  const handleLogout = async () => {
-    dispatch(logOut());
-    navigation.navigate("Welcome");
+  if (isLoading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error: {error.message}</Text>;
+
+  const growingPlant = (plant) => {
+    // add rendering plant img  
+    // add growth plant logic (if (days of check ins increases) then growthLevel++)
   };
+
+  const handleLogout = async() => {
+    console.log("logging out")
+    dispatch(logOut());
+    navigation.navigate("Home");
+  } 
+
   if (token) {
       return (
         <SafeAreaView style={styles.container}>
           <Text style={styles.name}>
-            Hello {user.firstname} {user.lastname}
+            Hello, {user.firstname} {user.lastname}
           </Text>
+          <Image style={styles.image} source={{uri:`${plant.image}`}}/>
+          <Text>Done for the day?</Text>
           <Button title="Logout" onPress={handleLogout} />
         </SafeAreaView>
       );
-  } 
-    
+  }   
 }
 
 const styles = StyleSheet.create({
@@ -46,4 +59,18 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 20,
   },
+  ImageBackground: {
+    flex: 1,
+    resizeMode: "cover",
+    width: "100%",
+    alignItems: "center",
+  },
 });
+
+
+{/* <>
+<p>Done for the day?</p>
+{ Cookies.get("token") ? (<button id="logout-button" onClick={handleClick}>
+  Log out
+</button>) : null }
+</> */}

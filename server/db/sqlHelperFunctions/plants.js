@@ -40,7 +40,9 @@ const getPlantsById = async (plantId) => {
     const {
       rows: [plants],
     } = await client.query(`
-  SELECT * FROM plants WHERE "id" = ${plantId};
+  SELECT plants.*, growth_levels.image AS image FROM plants WHERE "id" = ${plantId} 
+  JOIN growth_levels
+    ON plants.growth_level = growth_levels.id;
     `);
     return plants;
   } catch (error) {
