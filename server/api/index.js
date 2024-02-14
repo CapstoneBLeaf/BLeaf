@@ -9,7 +9,7 @@ router.use("/goals", require("./goals"));
 
 router.use("/habits", require("./habits"));
 
-router.use("/journals", require("./journals"));
+router.use("/activity", require("./activity"));
 
 router.use("/plants", require("./plants"));
 
