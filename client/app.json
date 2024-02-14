@@ -13,14 +13,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "plugins": [
-      [
-        "@react-native-google-signin/google-signin",
-        {
-          "iosUrlScheme": "com.googleusercontent.apps.566797729824-hv24ge4aqs2cvqvagnku0l28nbtfltj9"
-        }
-      ]
-    ],
     "assetBundlePatterns": [
       "**/*"
     ],
