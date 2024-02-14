@@ -46,7 +46,7 @@ function HabitsScreen(props) {
   };
 
   const navigateToGoalsPage = () => {
-    navigation.navigate('Goals');
+    navigation.navigate('Acitivity');
   };
 
   const renderHabitItem = ({ item }) => (

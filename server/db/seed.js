@@ -4,24 +4,24 @@ const {
   plants,
   habits,
   goals,
-  journals,
+  activity,
   growth_levels,
 } = require("./seedData");
 const { createUsers } = require("./sqlHelperFunctions/users");
 const { createPlants } = require("./sqlHelperFunctions/plants");
 const { createHabits } = require("./sqlHelperFunctions/habits");
 const { createGoals } = require("./sqlHelperFunctions/goals");
-const { createJournals } = require("./sqlHelperFunctions/journals");
+const { createActivity } = require("./sqlHelperFunctions/activity");
 const dropTables = async () => {
   try {
     console.log("Starting to drop tables...");
     await client.query(`
-    DROP TABLE IF EXISTS plants;
-    DROP TABLE IF EXISTS journals;
-    DROP TABLE IF EXISTS goals;
-    DROP TABLE IF EXISTS habits;
-    DROP TABLE IF EXISTS users;
-    DROP TABLE IF EXISTS growth_levels;
+    DROP TABLE IF EXISTS plants CASCADE;
+    DROP TABLE IF EXISTS activity CASCADE;
+    DROP TABLE IF EXISTS goals CASCADE;
+    DROP TABLE IF EXISTS habits CASCADE;
+    DROP TABLE IF EXISTS users CASCADE;
+    DROP TABLE IF EXISTS growth_levels CASCADE;
     `);
     console.log("Table Dropped!");
   } catch (error) {
@@ -71,10 +71,11 @@ const createTable = async () => {
       "habitId" INTEGER REFERENCES habits(id) NOT NULL,
       "userId" INTEGER REFERENCES users(id) NOT NULL
   );
-  CREATE TABLE journals (
+  CREATE TABLE activity (
       id SERIAL PRIMARY KEY,
-      entry TEXT NOT NULL,
+      image TEXT NOT NULL,
       date DATE,
+      "habitId" INTEGER REFERENCES habits(id) NOT NULL,
       "userId" INTEGER REFERENCES users(id) NOT NULL
   );
     `);
@@ -126,12 +127,12 @@ const createInitialGoals = async () => {
   }
 };
 
-const createInitialJournals = async () => {
+const createInitialActivity = async () => {
   try {
-    for (const journal of journals) {
-      await createJournals(journal);
+    for (const act of activity) {
+      await createActivity(act);
     }
-    console.log("created journals");
+    console.log("created activity");
   } catch (error) {
     throw error;
   }
@@ -171,7 +172,7 @@ const buildDb = async () => {
     await createInitialPlants();
     await createInitialHabits();
     await createInitialGoals();
-    await createInitialJournals();
+    await createInitialActivity();
   } catch (error) {
     console.error(error);
   } finally {

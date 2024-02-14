@@ -92,33 +92,6 @@ export const bleafApi = createApi({
         headers: { Authorization: `Bearer ${token}` },
       }),
     }),
-    getAllJournals: builder.query({
-      query: () => "/journals",
-    }),
-    getJournalsById: builder.query({
-      query: (id) => `/journals/${id}`,
-    }),
-    createJournals: builder.mutation({
-      query: (body) => ({
-        url: "/journals",
-        method: "POST",
-        body: body,
-      }),
-    }),
-    deleteJournals: builder.mutation({
-      query: ({ id, token }) => ({
-        url: `/journals/${id}`,
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      }),
-    }),
-    updateJournals: builder.mutation({
-      query: ({ id, token }) => ({
-        url: `/habits/${id}`,
-        method: "PATCH",
-        headers: { Authorization: `Bearer ${token}` },
-      }),
-    }),
     getAllPlants: builder.query({
       query: () => "/plants",
     }),
