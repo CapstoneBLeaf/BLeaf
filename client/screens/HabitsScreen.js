@@ -27,7 +27,13 @@ function HabitsScreen(props) {
   };
 
   const saveGoal = () => {
+    if (!selectedHabit || !goalFrequency || !motivatingStatement) {
+      // Ensure all fields are filled before saving a goal
+      return;
+    }
+  
     const newGoal = {
+      habit: selectedHabit,
       frequency: goalFrequency,
       statement: motivatingStatement,
     };
@@ -36,10 +42,11 @@ function HabitsScreen(props) {
     // Here you can dispatch an action to save the new goal
     setModalVisible(false);
   };
-
+  
   const navigateToGoalsPage = () => {
     navigation.navigate('Goals', { goals: goals }); // Pass the list of goals to the GoalsScreen
   };
+  
 
   const renderHabitItem = ({ item }) => (
     <TouchableOpacity onPress={() => toggleHabitSelection(item)}>
@@ -124,7 +131,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   habitContainer: {
-    backgroundColor: '#f9c2ff',
+    backgroundColor: '#29eecb',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
