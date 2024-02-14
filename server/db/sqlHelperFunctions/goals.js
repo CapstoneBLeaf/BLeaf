@@ -11,17 +11,17 @@ async function getAllGoals() {
   }
 }
 
-const createGoals = async ({ name, frequency, achivements, habitId }) => {
+const createGoals = async ({ name, frequency, achivements, habitId, userId }) => {
   try {
     const {
       rows: [goals],
     } = await client.query(
       `
-            INSERT INTO goals(name, frequency, achivements, "habitId")
-            VALUES($1,$2,$3,$4)
+            INSERT INTO goals(name, frequency, achivements, "habitId", "userId")
+            VALUES($1,$2,$3,$4,$5)
             RETURNING *;
             `,
-      [name, frequency, achivements, habitId]
+      [name, frequency, achivements, habitId, userId]
     );
     return goals;
   } catch (error) {

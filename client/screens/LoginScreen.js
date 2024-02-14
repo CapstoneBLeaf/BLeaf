@@ -22,6 +22,7 @@ const LoginScreen = () => {
   const [loginUser] = useLoginUserMutation();
   const dispatch = useDispatch();
   const [error, setError] = useState(null);
+
   const [errors,setErrors] = useState({})
   const validateForm = () => {
     let errors = {}
