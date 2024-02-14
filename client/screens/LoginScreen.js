@@ -36,10 +36,10 @@ const LoginScreen = () => {
  // const [request,promptAsync] = Google.useAuthRequest(566797729824-hv24ge4aqs2cvqvagnku0l28nbtfltj9.apps.googleusercontent.com);
 
   // const response = null
-  const promtAsync = null
-  React.useEffect(() => {
-    handleGoogleLogin();
-  }, [response]);
+  // const promtAsync = null
+  // React.useEffect(() => {
+  //   handleGoogleLogin();
+  // }, [response]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
