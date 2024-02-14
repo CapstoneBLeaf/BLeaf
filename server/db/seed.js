@@ -68,7 +68,8 @@ const createTable = async () => {
       name TEXT NOT NULL,
       frequency VARCHAR(50) NOT NULL,
       achivements TEXT NOT NULL,
-      "habitId" INTEGER REFERENCES habits(id) NOT NULL
+      "habitId" INTEGER REFERENCES habits(id) NOT NULL,
+      "userId" INTEGER REFERENCES users(id) NOT NULL
   );
   CREATE TABLE journals (
       id SERIAL PRIMARY KEY,

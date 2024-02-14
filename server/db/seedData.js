@@ -313,12 +313,14 @@ const goals = [
     frequency: "Daily",
     achivements: "Drank 8 glasses of water",
     habitId: 1,
+    userId: 1,
   },
   {
     name: "Mindful Breathing",
     frequency: "Daily",
     achivements: "Practiced deep breathing exercises",
     habitId: 2,
+    userId: 2,
   },
 ];
 
