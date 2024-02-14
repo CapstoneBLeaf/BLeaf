@@ -7,7 +7,7 @@ import SignupScreen from "../screens/SignupScreen.js";
 import LoginScreen from "../screens/LoginScreen.js";
 import UserScreen from "../screens/UserScreen";
 import GoalsScreen from "../screens/GoalsScreen";
-import JournalsScreen from "../screens/JournalsScreen";
+import AcitivityScreen from "../screens/AcitivityScreen";
 import HabitsScreen from "../screens/HabitsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons"
@@ -18,7 +18,7 @@ const Tab = createBottomTabNavigator();
 const accountName = "Account"
 const habitsName = "Habits"
 const goalName = "Goals"
-const journalName = "Journals"
+const activityName = "Acitivity"
 export default function AppNavigation() {
   const [showOnboarding, setShowOnboarding] = useState(null);
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function AppNavigation() {
                   iconName = focused ? "person" : "person-outline"
               } else if (rn === goalName) {
                 iconName = focused ? "trophy" : "trophy-outline"
-              }else if (rn === journalName) {
+              }else if (rn === activityName) {
                 iconName = focused ? "book" : "book-outline"
               }
 
@@ -74,7 +74,7 @@ export default function AppNavigation() {
       >
           <Tab.Screen name={habitsName} component={HabitsScreen}/>
           <Tab.Screen name={goalName} component={GoalsScreen}/>
-          <Tab.Screen name={journalName} component={JournalsScreen}/>
+          <Tab.Screen name={activityName} component={AcitivityScreen}/>
           <Tab.Screen name={accountName} component={UserScreen}/>
       </Tab.Navigator>
     );
