@@ -3,10 +3,18 @@ const router = express.Router();
 const {
   createActivity,
   getActivityByUserId,
-  deleteActivity
+  deleteActivity,
+  getAllActivity
 } = require("../db/sqlHelperFunctions/activity");
 
-
+router.get("/", async (req, res, next) => {
+  try {
+    const activity = await getAllActivity(req.body);
+    res.send(activity);
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.post("/:id/add", async (req, res, next) => {
   try {
