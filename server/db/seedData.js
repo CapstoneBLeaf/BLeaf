@@ -5,6 +5,7 @@ const users = [
     lastname: "hennah",
     email: "abc@gmail.com",
     password: "obuprufi",
+    plantId: 1,
   },
   {
     username: "e@123",
@@ -12,6 +13,7 @@ const users = [
     lastname: "sharp",
     email: "xyz@gmail.com",
     password: "tynal",
+    plantId: 2,
   },
   {
     username: "d@123",
@@ -19,6 +21,7 @@ const users = [
     lastname: "Wicker",
     email: "dyl@gmail.com",
     password: "qwerty",
+    plantId: 3,
   },
   {
     username: "ta@123",
@@ -26,6 +29,7 @@ const users = [
     lastname: "patel",
     email: "qwe@gmail.com",
     password: "theralu",
+    plantId: 4,
   },
 ];
 
@@ -35,28 +39,24 @@ const plants = [
     color: "green",
     growth_level: 1,
     birth_date: "2023-12-06",
-    userId: 1,
   },
   {
     name: "arfaj ",
     color: "blue",
     growth_level: 40,
     birth_date: "2024-01-15",
-    userId: 2,
   },
   {
     name: "cedar ",
     color: "red",
     growth_level: 23,
     birth_date: "2024-02-01",
-    userId: 3,
   },
   {
     name: "dindle",
     color: "orange",
     growth_level: 32,
     birth_date: "2023-06-20",
-    userId: 4,
   },
 ];
 

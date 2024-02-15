@@ -16,11 +16,11 @@ const dropTables = async () => {
   try {
     console.log("Starting to drop tables...");
     await client.query(`
-    DROP TABLE IF EXISTS plants CASCADE;
     DROP TABLE IF EXISTS activity CASCADE;
     DROP TABLE IF EXISTS goals CASCADE;
     DROP TABLE IF EXISTS habits CASCADE;
     DROP TABLE IF EXISTS users CASCADE;
+    DROP TABLE IF EXISTS plants CASCADE;
     DROP TABLE IF EXISTS growth_levels CASCADE;
     `);
     console.log("Table Dropped!");
@@ -39,7 +39,8 @@ const createTable = async () => {
       lastname varchar(50) NOT NULL,
       username varchar(50) NOT NULL,
       email varchar(50) NOT NULL,
-      password varchar(255) NOT NULL
+      password varchar(255) NOT NULL,
+      "plantId" INTEGER REFERENCES plants(id) NOT NULL
     );
 
     CREATE TABLE growth_levels(
@@ -52,8 +53,7 @@ const createTable = async () => {
       name TEXT NOT NULL,
       color TEXT NOT NULL,
       growth_level INT REFERENCES growth_levels(id) NOT NULL,
-      birth_date DATE NOT NULL,
-      "userId" INTEGER REFERENCES users(id) NOT NULL
+      birth_date DATE NOT NULL
       
     );
     CREATE TABLE habits (

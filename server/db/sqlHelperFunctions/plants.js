@@ -15,19 +15,18 @@ const createPlants = async ({
   name,
   color,
   growth_level,
-  birth_date,
-  userId,
+  birth_date
 }) => {
   try {
     const {
       rows: [plants],
     } = await client.query(
       `
-            INSERT INTO plants(name,color,growth_level,birth_date,"userId")
-            VALUES($1,$2,$3,$4,$5)
+            INSERT INTO plants(name,color,growth_level,birth_date)
+            VALUES($1,$2,$3,$4)
             RETURNING *;
             `,
-      [name, color, growth_level, birth_date, userId]
+      [name, color, growth_level, birth_date]
     );
     return plants;
   } catch (error) {
