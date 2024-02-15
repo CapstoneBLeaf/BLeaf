@@ -3,35 +3,43 @@ const router = express.Router();
 const {
   createActivity,
   getActivityByUserId,
-  deleteActivity
+  deleteActivity,
+  getAllActivity,
 } = require("../db/sqlHelperFunctions/activity");
 
-
-
-router.post("/:id/add", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
-    const activity = await createActivity(req.body);
+    const activity = await getAllActivity(req.body);
     res.send(activity);
   } catch (err) {
     next(err);
   }
 });
 
-router.delete('/:id/delete', async (req, res, next) => {
+router.post("/:id/add", async (req, res, next) => {
   try {
-      const activity = await deleteActivity(req.body.userId, req.params.id);
-      res.send(activity);
-  } catch (error) {
-      next(error);
+    const activity = await createActivity(req.body.userId, req.params.id);
+    res.send(activity);
+  } catch (err) {
+    next(err);
   }
 });
 
-router.get('/user/:id', async (req, res, next) => {
+router.delete("/:id/delete", async (req, res, next) => {
   try {
-      const activity = await getActivityByUserId(req.params.id);
-      res.send(activity);
-  } catch(error) {
-      next(error);
+    const activity = await deleteActivity(req.body.userId, req.params.id);
+    res.send(activity);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/user/:id", async (req, res, next) => {
+  try {
+    const activity = await getActivityByUserId(req.params.id);
+    res.send(activity);
+  } catch (error) {
+    next(error);
   }
 });
 

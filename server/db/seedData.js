@@ -326,23 +326,14 @@ const goals = [
 
 const activity = [
   {
-    image:
-      "https://png.pngtree.com/png-clipart/20190617/original/pngtree-hand-painted-life-supplies-pink-pillow-png-image_3888310.jpg",
-    date: "2024/02/02",
     userId: 1,
     habitId: 1,
   },
   {
-    image:
-      "https://t3.ftcdn.net/jpg/04/46/09/68/360_F_446096863_mbuNBq46AZQETaTY0V8nLH2DcpxNFW9M.jpg",
-    date: "2024/01/12",
     userId: 2,
     habitId: 1,
   },
   {
-    image:
-      "https://t3.ftcdn.net/jpg/04/46/09/68/360_F_446096863_mbuNBq46AZQETaTY0V8nLH2DcpxNFW9M.jpg",
-    date: "2023/12/10",
     userId: 1,
     habitId: 3,
   },

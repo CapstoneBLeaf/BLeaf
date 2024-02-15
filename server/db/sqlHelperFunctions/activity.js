@@ -11,17 +11,17 @@ async function getAllActivity() {
   }
 }
 
-const createActivity = async ({ image, date, userId, habitId }) => {
+const createActivity = async ({ userId, habitId }) => {
   try {
     const {
       rows: [activity],
     } = await client.query(
       `
-            INSERT INTO activity(image, date, "userId", "habitId")
-            VALUES($1,$2,$3,$4)
+            INSERT INTO activity("userId", "habitId")
+            VALUES($1,$2)
             RETURNING *;
             `,
-      [image, date, userId, habitId]
+      [userId, habitId]
     );
     return activity;
   } catch (error) {
@@ -32,9 +32,7 @@ const createActivity = async ({ image, date, userId, habitId }) => {
 const getActivityByUserId = async (userId) => {
   try {
     const returnList = [] 
-    const {
-      rows: [activity],
-    } = await client.query('SELECT * FROM activity WHERE userId=$3', 
+    const {rows: activity} = await client.query('SELECT * FROM activity WHERE "userId"=$1', 
     [userId]);
     const { rows: habits } = await client.query(`
     SELECT * FROM habits
@@ -81,7 +79,7 @@ async function deleteActivity(userId, habitId) {
   try {
       const { rows: activity } = await client.query(`
       DELETE FROM activity 
-      WHERE userId=$3 AND habitId=$4 
+      WHERE "userId"=$3 AND "habitId"=$4 
       RETURNING *
       `, [userId, habitId]);
       return activity;
