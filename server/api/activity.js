@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {
-  createActivity,
+  addHabit,
   getActivityByUserId,
   deleteActivity,
   getAllActivity,
@@ -18,7 +18,8 @@ router.get("/", async (req, res, next) => {
 
 router.post("/:id/add", async (req, res, next) => {
   try {
-    const activity = await createActivity(req.body.userId, req.params.id);
+    const activity = await addHabit(req.body.userId, req.params.id);
+    console.log(activity);
     res.send(activity);
   } catch (err) {
     next(err);
