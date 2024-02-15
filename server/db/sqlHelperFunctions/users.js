@@ -25,7 +25,7 @@ const createUsers = async ({
       rows: [user],
     } = await client.query(
       `
-            INSERT INTO users(firstname,lastname,username,email,password, "plantId")
+            INSERT INTO users(firstname,lastname,username,email,password, plant_birth_date, growth_level)
             VALUES($1,$2,$3,$4,$5, $6, $7)
             RETURNING *;
             `,

@@ -32,6 +32,11 @@ const createTable = async () => {
   try {
     console.log("building tables..");
     await client.query(`
+    CREATE TABLE growth_levels(
+      id SERIAL PRIMARY KEY,
+      image TEXT NOT NULL
+    );
+    
     CREATE TABLE users(
       id SERIAL PRIMARY KEY,
       firstname varchar(50) NOT NULL,
@@ -40,12 +45,7 @@ const createTable = async () => {
       email varchar(50) NOT NULL,
       password varchar(255) NOT NULL,
       growth_level INT REFERENCES growth_levels(id) NOT NULL,
-      birth_date DATE NOT NULL
-    );
-
-    CREATE TABLE growth_levels(
-      id SERIAL PRIMARY KEY,
-      image TEXT NOT NULL
+      plant_birth_date DATE NOT NULL
     );
 
     CREATE TABLE plants(
@@ -77,7 +77,7 @@ const createTable = async () => {
       "userId" INTEGER REFERENCES users(id) NOT NULL
   );
     `);
-    console.log("Table Created!");
+    console.log("Tables Created!");
   } catch (error) {
     console.error(error);
   }
@@ -156,9 +156,8 @@ const buildDb = async () => {
     client.connect();
     await dropTables();
     await createTable();
-    await createInitialUsers();
     await createInitialGrowthLevels();
-    await createInitialPlants();
+    await createInitialUsers();
     await createInitialHabits();
     await createInitialGoals();
   } catch (error) {
