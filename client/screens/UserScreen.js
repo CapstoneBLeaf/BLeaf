@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, StyleSheet, View, ImageBackground } from "react-native";
+import { SafeAreaView, Text, StyleSheet, View, Image, ImageBackground } from "react-native";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -8,7 +8,7 @@ import {
 } from "../actions/tokenSlice";
 import { useNavigation } from "@react-navigation/core";
 import Button from "./components/Button";
-import { useGetAllPlantsQuery } from "../api/bleafApi";
+import { useGetPlantsByIdQuery } from "../api/bleafApi";
 
 export default function UserScreen() {
   const token = useSelector(selectCurrentToken);
@@ -17,7 +17,7 @@ export default function UserScreen() {
   console.log(user);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { data: plant, error, isLoading } = useGetAllPlantsQuery();
+  const { data: plant, error, isLoading } = useGetPlantsByIdQuery(id);
 
   if (isLoading) return <Text>Loading...</Text>;
   if (error) return <Text>Error: {error.message}</Text>;
@@ -39,7 +39,7 @@ export default function UserScreen() {
           <Text style={styles.name}>
             Hello, {user.firstname} {user.lastname}
           </Text>
-          <Image style={styles.image} source={{uri:`${plant.image}`}}/>
+          <Image source={require(`../${plant.image}`)}/>
           <Text>Done for the day?</Text>
           <Button title="Logout" onPress={handleLogout} />
         </SafeAreaView>
