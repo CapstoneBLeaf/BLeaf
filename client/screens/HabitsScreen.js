@@ -23,6 +23,7 @@ function HabitsScreen(props) {
 
   const clearSelectedHabits = () => {
     setSelectedHabit(null);
+    setGoals([]); // Clear all selected goals
     setModalVisible(false); // Hide the modal when clearing selected habits
   };
 
@@ -37,16 +38,23 @@ function HabitsScreen(props) {
       frequency: goalFrequency,
       statement: motivatingStatement,
     };
-    setGoals([...goals, newGoal]); // Add the new goal to the list of goals
+    
+    const updatedGoals = [...goals, newGoal]; // Add the new goal to the list of goals
+    setGoals(updatedGoals);
     console.log("New Goal:", newGoal);
-    // Here you can dispatch an action to save the new goal
+    // Navigate to GoalsScreen with the updated goals
+    navigation.navigate('Goals', { goals: updatedGoals });
     setModalVisible(false);
   };
   
-  const navigateToGoalsPage = () => {
-    navigation.navigate('Goals', { goals: goals }); // Pass the list of goals to the GoalsScreen
+  
+  const navigateToGoalsScreen = () => {
+    navigation.navigate('Goals', { goals });
   };
   
+  const navigateToActivityPage = () => {
+    navigation.navigate('Activity');
+  };
 
   const renderHabitItem = ({ item }) => (
     <TouchableOpacity onPress={() => toggleHabitSelection(item)}>
@@ -70,7 +78,8 @@ function HabitsScreen(props) {
 
       <View style={styles.buttonContainer}>
         <Button title="Clear" onPress={clearSelectedHabits} />
-        <Button title="Check-in" onPress={navigateToGoalsPage} />
+       
+        <Button title="Check-in" onPress={navigateToActivityPage} />
       </View>
 
       <Modal
