@@ -11,7 +11,6 @@ const { createUsers } = require("./sqlHelperFunctions/users");
 const { createPlants } = require("./sqlHelperFunctions/plants");
 const { createHabits } = require("./sqlHelperFunctions/habits");
 const { createGoals } = require("./sqlHelperFunctions/goals");
-const { createActivity } = require("./sqlHelperFunctions/activity");
 const dropTables = async () => {
   try {
     console.log("Starting to drop tables...");
@@ -73,8 +72,6 @@ const createTable = async () => {
   );
   CREATE TABLE activity (
       id SERIAL PRIMARY KEY,
-      image TEXT NOT NULL,
-      date DATE,
       "habitId" INTEGER REFERENCES habits(id) NOT NULL,
       "userId" INTEGER REFERENCES users(id) NOT NULL
   );
@@ -127,16 +124,7 @@ const createInitialGoals = async () => {
   }
 };
 
-const createInitialActivity = async () => {
-  try {
-    for (const act of activity) {
-      await createActivity(act);
-    }
-    console.log("created activity");
-  } catch (error) {
-    throw error;
-  }
-};
+
 
 const createInitialGrowthLevels = async () => {
   try {
@@ -172,7 +160,6 @@ const buildDb = async () => {
     await createInitialPlants();
     await createInitialHabits();
     await createInitialGoals();
-    await createInitialActivity();
   } catch (error) {
     console.error(error);
   } finally {
