@@ -17,7 +17,8 @@ const createUsers = async ({
   username,
   email,
   password,
-  plantId
+  plant_birth_date,
+  growth_level,
 }) => {
   try {
     const {
@@ -25,10 +26,10 @@ const createUsers = async ({
     } = await client.query(
       `
             INSERT INTO users(firstname,lastname,username,email,password, "plantId")
-            VALUES($1,$2,$3,$4,$5, $6)
+            VALUES($1,$2,$3,$4,$5, $6, $7)
             RETURNING *;
             `,
-      [firstname, lastname, username, email, password, plantId]
+      [firstname, lastname, username, email, password, plant_birth_date, growth_level]
     );
     return user;
   } catch (error) {
@@ -53,7 +54,9 @@ const getUsersById = async (id) => {
   const {
     rows: [users],
   } = await client.query(`
-    SELECT * FROM users WHERE users.id = '${id}';
+    SELECT users.*, growth_levels.image AS plant_image FROM users WHERE users.id = '${id}'
+    JOIN growth_levels
+      ON users.growth_level = growth_levels.id;
     `);
   return users;
 };

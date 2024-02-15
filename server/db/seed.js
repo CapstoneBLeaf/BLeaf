@@ -39,7 +39,8 @@ const createTable = async () => {
       username varchar(50) NOT NULL,
       email varchar(50) NOT NULL,
       password varchar(255) NOT NULL,
-      "plantId" INTEGER REFERENCES plants(id) NOT NULL
+      growth_level INT REFERENCES growth_levels(id) NOT NULL,
+      birth_date DATE NOT NULL
     );
 
     CREATE TABLE growth_levels(
