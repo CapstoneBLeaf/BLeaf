@@ -11,35 +11,40 @@ async function getAllActivity() {
   }
 }
 
-const createActivity = async ({ userId, habitId }) => {
+async function addHabit(userId, habitId) {
   try {
-    const {
-      rows: [activity],
-    } = await client.query(
+    const { rows: activity } = await client.query(
       `
-            INSERT INTO activity("userId", "habitId")
-            VALUES($1,$2)
-            RETURNING *;
-            `,
+      INSERT INTO activity ("userId", "habitId")
+      VALUES($1, $2)
+      RETURNING *;
+      `,
       [userId, habitId]
     );
     return activity;
   } catch (error) {
-    throw error;
+    throw new Error(
+      `adding like to exercise did not work because: ${error.message}`
+    );
   }
-};
+}
 
 const getActivityByUserId = async (userId) => {
   try {
-    const returnList = [] 
-    const {rows: activity} = await client.query('SELECT * FROM activity WHERE "userId"=$1', 
-    [userId]);
-    const { rows: habits } = await client.query(`
+    const returnList = [];
+    const { rows: activity } = await client.query(
+      'SELECT * FROM activity WHERE "userId"=$1',
+      [userId]
+    );
+    const { rows: habits } = await client.query(
+      `
     SELECT * FROM habits
-    `, []);
-    for(const act of activity ) { 
-      const habit = habits.find(it => it.id === act.habitid)           
-      returnList.push({activityId: act.id, ...habit})
+    `,
+      []
+    );
+    for (const act of activity) {
+      const habit = habits.find((it) => it.id === act.habitid);
+      returnList.push({ activityId: act.id, ...habit });
     }
     return returnList;
   } catch (error) {
@@ -77,23 +82,24 @@ async function updateActivity(activityId, fields = {}) {
 
 async function deleteActivity(userId, habitId) {
   try {
-      const { rows: activity } = await client.query(`
+    const { rows: activity } = await client.query(
+      `
       DELETE FROM activity 
-      WHERE "userId"=$3 AND "habitId"=$4 
+      WHERE "userId"=$1 AND "habitId"=$2 
       RETURNING *
-      `, [userId, habitId]);
-      return activity;
+      `,
+      [userId, habitId]
+    );
+    return activity;
   } catch (error) {
-      throw new Error('removing activity from habit did not work, try again :(');
+    throw new Error("removing activity from habit did not work, try again :(");
   }
 }
 
-
-
 module.exports = {
   getAllActivity,
-  createActivity,
   getActivityByUserId,
   updateActivity,
   deleteActivity,
+  addHabit,
 };
