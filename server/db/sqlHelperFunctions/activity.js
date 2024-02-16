@@ -38,7 +38,11 @@ async function getActivityByUserId(userId) {
     const { rows: habits } = await client.query(`SELECT * FROM habits`, []);
     for (const act of activity) {
       const habit = habits.find((it) => it.id === act.habitId);
-      returnList.push({ activityId: act.id, ...habit });
+      returnList.push({
+        activityId: act.id,
+        completed_at: act.completed_at,
+        ...habit,
+      });
     }
     return returnList;
   } catch (error) {
