@@ -1,11 +1,4 @@
-import {
-  SafeAreaView,
-  Text,
-  StyleSheet,
-  View,
-  ImageBackground,
-  Image,
-} from "react-native";
+import { SafeAreaView, Text, StyleSheet, View, ImageBackground, Image } from "react-native";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
