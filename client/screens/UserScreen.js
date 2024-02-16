@@ -32,26 +32,6 @@ export default function UserScreen() {
     navigation.navigate("Welcome");
   } 
 
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
-  //   if(validateForm()){
-  //   try {
-  //     const result = await loginUser({
-  //       username,
-  //       password
-  //     }).unwrap();
-  //     dispatch(setCredentials(result));
-  //     setUsername("");
-  //     setPassword("");
-  //     navigation.navigate("Home");
-  //     console.log("Username:", username);
-  //     console.log("Password:", password);
-  //   } catch (rejected) {
-  //     setError(rejected.data.error);
-  //     console.log(`error caught: ${error}`);
-  //   }
-  // }
-  // };
 
   if (token) {
       return (
