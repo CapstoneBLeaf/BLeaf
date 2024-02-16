@@ -24,13 +24,12 @@ export default function UserScreen() {
     //img_arr[user.growth_level++]
   };
 
-  const handleLogout = async(e) => {
+  const handleLogout = async (e) => {
     e.preventDefault();
-    console.log("logging out")
+    console.log("logging out");
     dispatch(logOut());
     navigation.navigate("Welcome");
-  } 
-
+  };
 
   if (token) {
       return (
