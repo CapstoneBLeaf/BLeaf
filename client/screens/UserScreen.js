@@ -9,6 +9,7 @@ import {
 import { useNavigation } from "@react-navigation/core";
 import Button from "./components/Button";
 import { useGetUsersByIdQuery } from "../api/bleafApi";
+import img_arr from "../plants/plants";
 
 export default function UserScreen() {
   const token = useSelector(selectCurrentToken);
@@ -19,10 +20,9 @@ export default function UserScreen() {
   const navigation = useNavigation();
   // const plant_image = require(user.plant_image);
 
-
   const growingPlant = (plant) => {
-    // add rendering plant img  
     // add growth plant logic (if (days of check ins increases) then growthLevel++)
+    // alert for plant growing, day 0 just explaining it
   };
 
   const handleLogout = async(e) => {
@@ -39,7 +39,7 @@ export default function UserScreen() {
           <Text style={styles.name}>
             Hello, {user.firstname} {user.lastname}
           </Text>
-          {/* <Image source={plant_image}/> */}
+          <Image source={img_arr[user.growth_level - 1]}/>
           <Text>Done for the day?</Text>
           <Button title="Logout" onPress={handleLogout} />
         </SafeAreaView>
@@ -66,11 +66,3 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-
-
-{/* <>
-<p>Done for the day?</p>
-{ Cookies.get("token") ? (<button id="logout-button" onClick={handleClick}>
-  Log out
-</button>) : null }
-</> */}
