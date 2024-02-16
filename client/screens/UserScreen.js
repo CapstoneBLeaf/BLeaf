@@ -1,5 +1,5 @@
-import { SafeAreaView, Text, StyleSheet, View, ImageBackground, Image } from "react-native";
-import React from "react";
+import { SafeAreaView, Text, StyleSheet, View, ImageBackground, Image, Modal } from "react-native";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectCurrentToken,
@@ -18,11 +18,10 @@ export default function UserScreen() {
   console.log(user);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  // const plant_image = require(user.plant_image);
 
   const growingPlant = (plant) => {
     // add growth plant logic (if (days of check ins increases) then growthLevel++)
-    // alert for plant growing, day 0 just explaining it
+    //img_arr[user.growth_level++]
   };
 
   const handleLogout = async (e) => {
@@ -33,17 +32,19 @@ export default function UserScreen() {
   };
 
   if (token) {
-    return (
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.name}>
-          Hello, {user.firstname} {user.lastname}
-        </Text>
-        <Image source={img_arr[user.growth_level - 1]} />
-        <Text>Done for the day?</Text>
-        <Button title="Logout" onPress={handleLogout} />
-      </SafeAreaView>
-    );
-  }
+      return (
+        <SafeAreaView style={styles.container}>
+          <Text style={styles.name}>
+            Hello, {user.firstname} {user.lastname}
+          </Text>
+          <Image source={img_arr[user.growth_level - 1]}/>
+          {/* different messages for plant growth stages */}
+          <Text>Grow your plant by completing several days of healthy habits!</Text>
+          <Button title="Logout" onPress={handleLogout} />
+        
+        </SafeAreaView>
+      );
+  }   
 }
 
 const styles = StyleSheet.create({
