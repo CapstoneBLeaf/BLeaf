@@ -14,6 +14,7 @@ export default function AcitivityScreen() {
   const user = useSelector(selectCurrentUser);
   const userId = user.id;
   const { data: habitData, isLoading: isLoading } = useListCheckInQuery(userId);
+  console.log(habitData);
   if (isLoading) {
     return <Text className="loading">Loading...</Text>;
   }
