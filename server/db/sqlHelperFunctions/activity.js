@@ -28,29 +28,23 @@ async function addHabit(userId, habitId) {
     );
   }
 }
-
-const getActivityByUserId = async (userId) => {
+async function getActivityByUserId(userId) {
   try {
     const returnList = [];
     const { rows: activity } = await client.query(
       'SELECT * FROM activity WHERE "userId"=$1',
       [userId]
     );
-    const { rows: habits } = await client.query(
-      `
-    SELECT * FROM habits
-    `,
-      []
-    );
+    const { rows: habits } = await client.query(`SELECT * FROM habits`, []);
     for (const act of activity) {
-      const habit = habits.find((it) => it.id === act.habitid);
+      const habit = habits.find((it) => it.id === act.habitId);
       returnList.push({ activityId: act.id, ...habit });
     }
     return returnList;
   } catch (error) {
     throw error;
   }
-};
+}
 
 async function updateActivity(activityId, fields = {}) {
   const setString = Object.keys(fields)
