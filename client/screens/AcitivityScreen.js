@@ -1,25 +1,30 @@
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  SafeAreaView,
+} from "react-native";
 import React from "react";
 import { useSelector } from "react-redux";
-import { useListCheckInQuery, useRemoveCheckInMutation } from "../api/bleafApi";
+import { useListCheckInQuery } from "../api/bleafApi";
 import { selectCurrentUser } from "../actions/tokenSlice";
-import Ionicons from "react-native-vector-icons/Ionicons";
 export default function AcitivityScreen() {
   const user = useSelector(selectCurrentUser);
   const userId = user.id;
   const { data: habitData, isLoading: isLoading } = useListCheckInQuery(userId);
-  const [removeCheckIn] = useRemoveCheckInMutation();
   if (isLoading) {
     return <Text className="loading">Loading...</Text>;
   }
 
-  async function handleRemoveCheckIn(id) {
-    try {
-      await removeCheckIn({ id, userId });
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  // async function handleRemoveCheckIn(id) {
+  //   try {
+  //     await removeCheckIn({ id, userId });
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   return (
     <ScrollView
@@ -37,16 +42,13 @@ export default function AcitivityScreen() {
                 />
                 <Text>{checkin.name}</Text>
               </View>
-              <Ionicons
-                onPress={() => handleRemoveCheckIn(checkin.id)}
-                style={styles.icon}
-                name="trash-outline"
-              />
             </View>
           ))}
         </>
       ) : (
-        <Text>No more habits</Text>
+        <SafeAreaView>
+          <Text>No more habits</Text>
+        </SafeAreaView>
       )}
     </ScrollView>
   );
