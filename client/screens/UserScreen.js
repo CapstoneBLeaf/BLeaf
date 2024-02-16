@@ -17,10 +17,8 @@ export default function UserScreen() {
   console.log(user);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const plant_image = require(user.plant_image);
+  // const plant_image = require(user.plant_image);
 
-  if (isLoading) return <Text>Loading...</Text>;
-  if (error) return <Text>Error: {error.message}</Text>;
 
   const growingPlant = (plant) => {
     // add rendering plant img  
@@ -31,8 +29,29 @@ export default function UserScreen() {
     e.preventDefault();
     console.log("logging out")
     dispatch(logOut());
-    navigation.navigate("Home");
+    navigation.navigate("Welcome");
   } 
+
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   if(validateForm()){
+  //   try {
+  //     const result = await loginUser({
+  //       username,
+  //       password
+  //     }).unwrap();
+  //     dispatch(setCredentials(result));
+  //     setUsername("");
+  //     setPassword("");
+  //     navigation.navigate("Home");
+  //     console.log("Username:", username);
+  //     console.log("Password:", password);
+  //   } catch (rejected) {
+  //     setError(rejected.data.error);
+  //     console.log(`error caught: ${error}`);
+  //   }
+  // }
+  // };
 
   if (token) {
       return (
@@ -40,7 +59,7 @@ export default function UserScreen() {
           <Text style={styles.name}>
             Hello, {user.firstname} {user.lastname}
           </Text>
-          <Image source={plant_image}/>
+          {/* <Image source={plant_image}/> */}
           <Text>Done for the day?</Text>
           <Button title="Logout" onPress={handleLogout} />
         </SafeAreaView>
