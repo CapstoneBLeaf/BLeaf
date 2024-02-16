@@ -14,12 +14,15 @@ export const bleafApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["User", "Activity", "Habits"],
   endpoints: (builder) => ({
     getAllHabits: builder.query({
       query: () => "/habits",
+      providesTags: ["Habits"],
     }),
     getHabitsById: builder.query({
       query: (id) => `/habits/${id}`,
+      providesTags: ["Habits"],
     }),
     createHabits: builder.mutation({
       query: (body) => ({
@@ -27,6 +30,7 @@ export const bleafApi = createApi({
         method: "POST",
         body: body,
       }),
+      invalidatesTags: ["Habits"],
     }),
     deleteHabits: builder.mutation({
       query: ({ id, token }) => ({
@@ -34,15 +38,18 @@ export const bleafApi = createApi({
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       }),
+      invalidatesTags: ["Habits"],
     }),
     getAllUsers: builder.query({
       query: () => "/users",
+      providesTags: ["User"],
     }),
     getUsersById: builder.query({
       query: (id, token) => ({
         url: `/users/${id}`,
         headers: { Authorization: `Bearer ${token}` },
       }),
+      providesTags: ["User"],
     }),
     register: builder.mutation({
       query: (body) => ({
@@ -50,6 +57,7 @@ export const bleafApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["User"],
     }),
     loginUser: builder.mutation({
       query: (body) => ({
@@ -57,6 +65,7 @@ export const bleafApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["User"],
     }),
     deleteUser: builder.mutation({
       query: ({ id, token }) => ({
@@ -64,6 +73,7 @@ export const bleafApi = createApi({
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       }),
+      invalidatesTags: ["User"],
     }),
     getAllGoals: builder.query({
       query: () => "/goals",
@@ -72,10 +82,10 @@ export const bleafApi = createApi({
       query: (id) => `/goals/${id}`,
     }),
     createGoals: builder.mutation({
-      query: (body) => ({
+      query: ({ name, frequency, achivements }) => ({
         url: "/goals",
         method: "POST",
-        body: body,
+        body: { name, frequency, achivements },
       }),
     }),
     deleteGoal: builder.mutation({
@@ -119,6 +129,33 @@ export const bleafApi = createApi({
         headers: { Authorization: `Bearer ${token}` },
       }),
     }),
+    //list checkIn habits
+    listCheckIn: builder.query({
+      query: (id) => ({
+        url: `/activity/user/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Activity", "User"],
+    }),
+
+    //checkIn a habit
+    CheckIn: builder.mutation({
+      query: (data) => ({
+        url: `/activity/${data.id}/add`,
+        method: "POST",
+        body: { userId: data.userId },
+      }),
+      invalidatesTags: ["Activity"],
+    }),
+    //remove CheckIn
+    removeCheckIn: builder.mutation({
+      query: (data) => ({
+        url: `/activity/${data.id}/delete`,
+        method: "DELETE",
+        body: { userId: data.userId },
+      }),
+      invalidatesTags: ["Activity"],
+    }),
   }),
 });
 
@@ -137,14 +174,12 @@ export const {
   useCreateGoalsMutation,
   useDeleteGoalMutation,
   useUpdateGoalsMutation,
-  useGetAllJournalsQuery,
-  useGetJournalsByIdQuery,
-  useCreateJournalsMutation,
-  useDeleteJournalsMutation,
-  useUpdateJournalsMutation,
   useGetAllPlantsQuery,
   useGetPlantsByIdQuery,
   useCreatePlantsMutation,
   useDeletePlantsMutation,
   useUpdatePlantsMutation,
+  useListCheckInQuery,
+  useCheckInMutation,
+  useRemoveCheckInMutation,
 } = bleafApi;
