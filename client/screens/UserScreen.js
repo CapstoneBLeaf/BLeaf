@@ -8,7 +8,7 @@ import {
 } from "../actions/tokenSlice";
 import { useNavigation } from "@react-navigation/core";
 import Button from "./components/Button";
-import { useGetPlantsByIdQuery } from "../api/bleafApi";
+import { useGetUsersByIdQuery } from "../api/bleafApi";
 
 export default function UserScreen() {
   const token = useSelector(selectCurrentToken);
@@ -17,7 +17,7 @@ export default function UserScreen() {
   console.log(user);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { data: plant, error, isLoading } = useGetPlantsByIdQuery(id);
+  const plant_image = require(user.plant_image);
 
   if (isLoading) return <Text>Loading...</Text>;
   if (error) return <Text>Error: {error.message}</Text>;
@@ -27,7 +27,8 @@ export default function UserScreen() {
     // add growth plant logic (if (days of check ins increases) then growthLevel++)
   };
 
-  const handleLogout = async() => {
+  const handleLogout = async(e) => {
+    e.preventDefault();
     console.log("logging out")
     dispatch(logOut());
     navigation.navigate("Home");
@@ -39,7 +40,7 @@ export default function UserScreen() {
           <Text style={styles.name}>
             Hello, {user.firstname} {user.lastname}
           </Text>
-          <Image source={require(`../${plant.image}`)}/>
+          <Image source={plant_image}/>
           <Text>Done for the day?</Text>
           <Button title="Logout" onPress={handleLogout} />
         </SafeAreaView>
