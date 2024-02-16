@@ -82,10 +82,10 @@ export const bleafApi = createApi({
       query: (id) => `/goals/${id}`,
     }),
     createGoals: builder.mutation({
-      query: ({ name, frequency, achivements }) => ({
+      query: (body) => ({
         url: "/goals",
         method: "POST",
-        body: { name, frequency, achivements },
+        body: body,
       }),
     }),
     deleteGoal: builder.mutation({
