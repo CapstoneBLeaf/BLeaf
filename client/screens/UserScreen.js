@@ -1,4 +1,12 @@
-import { SafeAreaView, Text, StyleSheet, View, ImageBackground, Image, Modal } from "react-native";
+import {
+  SafeAreaView,
+  Text,
+  StyleSheet,
+  View,
+  ImageBackground,
+  Image,
+  Modal,
+} from "react-native";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -32,19 +40,20 @@ export default function UserScreen() {
   };
 
   if (token) {
-      return (
-        <SafeAreaView style={styles.container}>
-          <Text style={styles.name}>
-            Hello, {user.firstname} {user.lastname}
-          </Text>
-          <Image source={img_arr[user.growth_level - 1]}/>
-          {/* different messages for plant growth stages */}
-          <Text>Grow your plant by completing several days of healthy habits!</Text>
-          <Button title="Logout" onPress={handleLogout} />
-        
-        </SafeAreaView>
-      );
-  }   
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.name}>
+          Hello, {user.firstname} {user.lastname}
+        </Text>
+        <Image source={img_arr[user.growth_level - 1]} />
+        {/* different messages for plant growth stages */}
+        <Text>
+          Grow your plant by completing several days of healthy habits!
+        </Text>
+        <Button title="Logout" onPress={handleLogout} />
+      </SafeAreaView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
