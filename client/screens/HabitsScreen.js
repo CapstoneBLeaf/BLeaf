@@ -1,57 +1,64 @@
 import React, { useState } from "react";
-import { connect } from "react-redux"; // Import connect from react-redux
+import { connect } from "react-redux"; 
 import { SafeAreaView, Text, FlatList, TouchableOpacity, View, StyleSheet, Image, Button, Modal, TextInput } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { useGetAllHabitsQuery } from "../api/bleafApi";
 
-// Import any necessary action creators here
-
 function HabitsScreen(props) {
   const { data: habits, error, isLoading } = useGetAllHabitsQuery();
-  const [selectedHabits, setSelectedHabits] = useState([]);
+  const [selectedHabit, setSelectedHabit] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [goalFrequency, setGoalFrequency] = useState("");
   const [motivatingStatement, setMotivatingStatement] = useState("");
-  const [timesPerDay, setTimesPerDay] = useState("");
+  const [goals, setGoals] = useState([]);
   const navigation = useNavigation();
 
   if (isLoading) return <Text>Loading...</Text>;
   if (error) return <Text>Error: {error.message}</Text>;
 
   const toggleHabitSelection = (habit) => {
-    const isSelected = selectedHabits.some((h) => h.id === habit.id);
-    if (isSelected) {
-      setSelectedHabits(selectedHabits.filter((h) => h.id !== habit.id));
-    } else {
-      setSelectedHabits([...selectedHabits, habit]);
-    }
+    setSelectedHabit(habit);
+    setModalVisible(true); // Show the modal when a habit is selected
   };
 
   const clearSelectedHabits = () => {
-    setSelectedHabits([]);
-  };
-
-  const setGoal = () => {
-    setModalVisible(true);
+    setSelectedHabit(null);
+    setGoals([]); // Clear all selected goals
+    setModalVisible(false); // Hide the modal when clearing selected habits
   };
 
   const saveGoal = () => {
+    if (!selectedHabit || !goalFrequency || !motivatingStatement) {
+      // Ensure all fields are filled before saving a goal
+      return;
+    }
+  
     const newGoal = {
+      habit: selectedHabit,
       frequency: goalFrequency,
       statement: motivatingStatement,
-      timesPerDay: timesPerDay
     };
+    
+    const updatedGoals = [...goals, newGoal]; // Add the new goal to the list of goals
+    setGoals(updatedGoals);
     console.log("New Goal:", newGoal);
+    // Navigate to GoalsScreen with the updated goals
+    navigation.navigate('Goals', { goals: updatedGoals });
     setModalVisible(false);
   };
-
-  const navigateToGoalsPage = () => {
-    navigation.navigate('Acitivity');
+  
+  
+  const navigateToGoalsScreen = () => {
+    navigation.navigate('Goals', { goals });
+  };
+  
+  const navigateToActivityPage = () => {
+    navigation.navigate('Activity');
   };
 
   const renderHabitItem = ({ item }) => (
     <TouchableOpacity onPress={() => toggleHabitSelection(item)}>
-      <View style={[styles.habitContainer, selectedHabits.some((h) => h.id === item.id) && styles.selectedHabit]}>
+      <View style={[styles.habitContainer, selectedHabit && selectedHabit.id === item.id && styles.selectedHabit]}>
         <Text style={styles.habitDetails}>
           <Text style={styles.habitName}>Name: {item.name}</Text>{"\n"}
           <Text style={styles.habitDescription}>Description: {item.description}</Text>{"\n"}
@@ -70,44 +77,57 @@ function HabitsScreen(props) {
       />
 
       <View style={styles.buttonContainer}>
-        {selectedHabits.length > 0 && (
-          <>
-            <Button title="Clear" onPress={clearSelectedHabits} />
-            <Button title="Set Goal" onPress={setGoal} />
-            <Button title="Check-in" onPress={navigateToGoalsPage} />
-          </>
-        )}
+        <Button title="Clear" onPress={clearSelectedHabits} />
+       
+        <Button title="Check-in" onPress={navigateToActivityPage} />
       </View>
 
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => setModalVisible(!modalVisible)}
+        onRequestClose={() => setModalVisible(false)}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <TextInput
-              style={[styles.input, { color: '#000', backgroundColor: '#ffffff' }]}
-              placeholder="Enter Goal Frequency"
-              placeholderTextColor="#999999" // Set placeholder text color to gray
-              onChangeText={text => setGoalFrequency(text)}
-            />
+            <View style={styles.radioContainer}>
+              <TouchableOpacity
+                style={[styles.radioOption, goalFrequency === "1 x day" && styles.radioSelected]}
+                onPress={() => setGoalFrequency("1 x day")}
+              >
+                <Text>1 x day</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.radioOption, goalFrequency === "2 x day" && styles.radioSelected]}
+                onPress={() => setGoalFrequency("2 x day")}
+              >
+                <Text>2 x day</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.radioOption, goalFrequency === "3 x day" && styles.radioSelected]}
+                onPress={() => setGoalFrequency("3 x day")}
+              >
+                <Text>3 x day</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.radioOption, goalFrequency === "4 x day" && styles.radioSelected]}
+                onPress={() => setGoalFrequency("4 x day")}
+              >
+                <Text>4 x day</Text>
+              </TouchableOpacity>
+            </View>
+
             <TextInput
               style={[styles.input, { color: '#000', backgroundColor: '#ffffff' }]}
               placeholder="Enter Motivating Statement"
               placeholderTextColor="#999999" // Set placeholder text color to gray
               onChangeText={text => setMotivatingStatement(text)}
             />
-            <TextInput
-              style={[styles.input, { color: '#000', backgroundColor: '#ffffff' }]}
-              placeholder="Enter Times Per Day"
-              placeholderTextColor="#999999" // Set placeholder text color to gray
-              onChangeText={text => setTimesPerDay(text)}
-              keyboardType="numeric"
-            />
 
-            <Button title="Save Goal" onPress={saveGoal} />
+            <View style={styles.buttonRow}>
+              <Button title="Back" onPress={() => setModalVisible(false)} />
+              <Button title="Add Goal" onPress={saveGoal} />
+            </View>
           </View>
         </View>
       </Modal>
@@ -120,7 +140,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   habitContainer: {
-    backgroundColor: '#f9c2ff',
+    backgroundColor: '#29eecb',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
@@ -182,7 +202,27 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     width: 200,
   },
+  radioContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  radioOption: {
+    borderWidth: 1,
+    borderColor: '#999999',
+    padding: 10,
+    borderRadius: 5,
+  },
+  radioSelected: {
+    backgroundColor: '#64b5f6',
+    borderColor: '#64b5f6',
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '100%',
+    marginTop: 20,
+  },
 });
 
-// Connect the component to Redux store
 export default connect()(HabitsScreen);
