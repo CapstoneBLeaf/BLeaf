@@ -1,4 +1,11 @@
-import { SafeAreaView, Text, StyleSheet, View, ImageBackground } from "react-native";
+import {
+  SafeAreaView,
+  Text,
+  StyleSheet,
+  View,
+  ImageBackground,
+  Image,
+} from "react-native";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -25,26 +32,25 @@ export default function UserScreen() {
     // alert for plant growing, day 0 just explaining it
   };
 
-  const handleLogout = async(e) => {
+  const handleLogout = async (e) => {
     e.preventDefault();
-    console.log("logging out")
+    console.log("logging out");
     dispatch(logOut());
     navigation.navigate("Welcome");
-  } 
-
+  };
 
   if (token) {
-      return (
-        <SafeAreaView style={styles.container}>
-          <Text style={styles.name}>
-            Hello, {user.firstname} {user.lastname}
-          </Text>
-          <Image source={img_arr[user.growth_level - 1]}/>
-          <Text>Done for the day?</Text>
-          <Button title="Logout" onPress={handleLogout} />
-        </SafeAreaView>
-      );
-  }   
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.name}>
+          Hello, {user.firstname} {user.lastname}
+        </Text>
+        <Image source={img_arr[user.growth_level - 1]} />
+        <Text>Done for the day?</Text>
+        <Button title="Logout" onPress={handleLogout} />
+      </SafeAreaView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
