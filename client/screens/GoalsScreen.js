@@ -2,12 +2,12 @@ import React from "react";
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from "react-native";
 
 const GoalsScreen = ({ route, navigation }) => {
-  const { goals } = route.params;
+  const goals = route.params?.goals || [];
 
-  if (!goals || goals.length === 0) {
+  if (goals.length === 0) {
     return (
       <View style={styles.container}>
-        <Text style={styles.noGoalsText}>No goals selected</Text>
+        <Text style={styles.noGoalsText}>Set goals on Habits page!</Text>
       </View>
     );
   }
@@ -17,19 +17,20 @@ const GoalsScreen = ({ route, navigation }) => {
     updatedGoals.splice(index, 1);
     navigation.setParams({ goals: updatedGoals });
   };
-const renderGoalItem = ({ item, index }) => (
-  <View style={styles.goalContainer}>
-    <TouchableOpacity onPress={() => removeHabit(index)} style={styles.deleteButton}>
-      <Text style={styles.deleteButtonText}>Delete</Text>
-    </TouchableOpacity>
-    <Image style={styles.image} source={{ uri: item.habit.image }} />
-    <View style={styles.goalDetails}>
-      <Text style={styles.goalText}>Habit: {item.habit.name}</Text>
-      <Text style={styles.goalText}>Frequency: {item.frequency}</Text>
-      <Text style={styles.goalText}>Motivation: {item.statement}</Text>
+
+  const renderGoalItem = ({ item, index }) => (
+    <View style={styles.goalContainer}>
+      <TouchableOpacity onPress={() => removeHabit(index)} style={styles.deleteButton}>
+        <Text style={styles.deleteButtonText}>Delete</Text>
+      </TouchableOpacity>
+      <Image style={styles.image} source={{ uri: item.habit.image }} />
+      <View style={styles.goalDetails}>
+        <Text style={styles.goalText}>Habit: {item.habit.name}</Text>
+        <Text style={styles.goalText}>Frequency: {item.frequency}</Text>
+        <Text style={styles.goalText}>Motivation: {item.statement}</Text>
+      </View>
     </View>
-  </View>
-);
+  );
 
   return (
     <View style={styles.container}>
@@ -64,9 +65,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     flexDirection: "row",
     alignItems: "center",
-    width: 336, // Set a fixed width for the container
-    height: 120, // Set a fixed height for the container
-    borderRadius: 10, // Add borderRadius for square shape
+    width: 336, 
+    height: 120, 
+    borderRadius: 10, 
   },
   goalDetails: {
     flex: 1,
@@ -77,21 +78,19 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   image: {
-    height: 80, // Adjusted height
-    width: 80, // Adjusted width
-    borderRadius: 5, // Add borderRadius to match the container
+    height: 80, 
+    width: 80, 
+    borderRadius: 5,
   },
-    
-    deleteButton: {
-      backgroundColor: "red",
-      padding: 10,
-      borderRadius: 5,
-    },
-    deleteButtonText: {
-      color: "white",
-      fontWeight: "bold",
-    },
-  });
-  
-export default GoalsScreen;
+  deleteButton: {
+    backgroundColor: "red",
+    padding: 10,
+    borderRadius: 5,
+  },
+  deleteButtonText: {
+    color: "white",
+    fontWeight: "bold",
+  },
+});
 
+export default GoalsScreen;
