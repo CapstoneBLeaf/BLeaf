@@ -27,11 +27,6 @@ export default function UserScreen() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const growingPlant = (plant) => {
-    // add growth plant logic (if (days of check ins increases) then growthLevel++)
-    //img_arr[user.growth_level++]
-  };
-
   const handleLogout = async (e) => {
     e.preventDefault();
     console.log("logging out");
