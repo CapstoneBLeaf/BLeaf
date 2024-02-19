@@ -11,36 +11,45 @@ async function getAllGoals() {
   }
 }
 
-const createGoals = async ({ name, frequency, achivements, habitId, userId }) => {
+async function createGoals({ frequency, statement, habitId, userId }) {
   try {
     const {
       rows: [goals],
     } = await client.query(
       `
-            INSERT INTO goals(name, frequency, achivements, "habitId", "userId")
-            VALUES($1,$2,$3,$4,$5)
+            INSERT INTO goals(frequency, statement, "habitId", "userId")
+            VALUES($1,$2,$3,$4)
             RETURNING *;
             `,
-      [name, frequency, achivements, habitId, userId]
+      [frequency, statement, habitId, userId]
     );
     return goals;
   } catch (error) {
     throw error;
   }
-};
+}
 
-const getGoalsById = async (goalId) => {
+async function getGoalsByUserId(userId) {
   try {
-    const {
-      rows: [goals],
-    } = await client.query('DELETE FROM goals WHERE "id"=$1 RETURNING *', [
-      goalId,
-    ]);
-    return goals;
+    const returnList = [];
+    const { rows: goals } = await client.query(
+      `SELECT * FROM goals WHERE "userId"=${userId}`
+    );
+    const { rows: habits } = await client.query(`SELECT * FROM habits`, []);
+    for (const goal of goals) {
+      const habit = habits.find((it) => it.id === goal.habitId);
+      returnList.push({
+        goalId: goal.id,
+        frequency: goal.frequency,
+        statement: goal.statement,
+        ...habit,
+      });
+    }
+    return returnList;
   } catch (error) {
     throw error;
   }
-};
+}
 
 async function updateGoal(goalId, fields = {}) {
   const setString = Object.keys(fields)
@@ -77,7 +86,7 @@ async function deleteGoal(goalId) {
     } = await client.query(
       `
     DELETE FROM goals
-    WHERE id=$1
+    WHERE id=${goalId}
     RETURNING *;
   `,
       [goalId]
@@ -91,7 +100,7 @@ async function deleteGoal(goalId) {
 module.exports = {
   getAllGoals,
   createGoals,
-  getGoalsById,
+  getGoalsByUserId,
   deleteGoal,
   updateGoal,
 };
