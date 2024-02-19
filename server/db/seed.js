@@ -65,7 +65,7 @@ const createTable = async () => {
     );
     CREATE TABLE goals (
       id SERIAL PRIMARY KEY,
-      frequency VARCHAR(50) NOT NULL,
+      frequency TEXT NOT NULL,
       statement TEXT NOT NULL,
       "habitId" INTEGER REFERENCES habits(id) NOT NULL,
       "userId" INTEGER REFERENCES users(id) NOT NULL
