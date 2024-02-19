@@ -262,7 +262,7 @@ const goals = [
   },
   {
     frequency: "Weekly",
-    Statement: "Practiced deep breathing exercises",
+    statement: "Practiced deep breathing exercises",
     habitId: 2,
     userId: 1,
   },
