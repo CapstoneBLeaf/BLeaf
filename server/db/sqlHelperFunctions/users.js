@@ -88,6 +88,36 @@ async function deleteUser(id) {
   }
 }
 
+async function updateUser(userId, fields = {}) {
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ");
+
+  if (setString.length === 0) {
+    return;
+  }
+
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+    UPDATE users
+    SET ${setString}
+    WHERE id=${userId}
+    RETURNING *;
+  `,
+      Object.values(fields)
+    );
+
+    return user;
+  } catch (error) {
+    throw error;
+    }
+}
+
+
+
 growth_states = `SELECT * from growth_states where id=0`;
 growth_states; // url1
 
@@ -98,4 +128,5 @@ module.exports = {
   deleteUser,
   loginUser,
   getUsersByUsername,
+  updateUser,
 };

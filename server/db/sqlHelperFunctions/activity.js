@@ -94,10 +94,27 @@ async function deleteActivity(userId, habitId) {
   }
 }
 
+async function getLatestActivityDatebyUserId(userId) {
+  try { 
+    const { rows: activity} = await client.query(
+      `
+      SELECT DATE(completed_at) FROM activity 
+      WHERE "userId"=$1 
+      SORT BY completed_at DESC
+      LIMIT(1)
+      `,
+      [userId]
+    );
+  } catch (error) {
+    throw new Error("get latest activity failed")
+  }
+}
+
 module.exports = {
   getAllActivity,
   getActivityByUserId,
   updateActivity,
   deleteActivity,
   addHabit,
+  getLatestActivityDatebyUserId,
 };

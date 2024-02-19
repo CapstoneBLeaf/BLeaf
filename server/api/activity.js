@@ -5,7 +5,13 @@ const {
   getActivityByUserId,
   deleteActivity,
   getAllActivity,
+  getLatestActivityDatebyUserId,
 } = require("../db/sqlHelperFunctions/activity");
+
+const {
+  updateUser, getUsersById
+} = require("../db/sqlHelperFunctions/users");
+
 
 router.get("/", async (req, res, next) => {
   try {
@@ -19,6 +25,17 @@ router.get("/", async (req, res, next) => {
 router.post("/:id/add", async (req, res, next) => {
   try {
     const activity = await addHabit(req.body.userId, req.params.id);
+    const date = getLatestActivityDatebyUserId(req.body.userId)
+    const today = new Date()
+    const user = await getUsersById(req.body.userId)
+    if (today > date) {
+      const updatedUser = await updateUser({
+        user_id: req.body.userId, 
+        fields: {
+          growth_level: user.growth_level + 1
+        }
+      });
+    }
     console.log(activity);
     res.send(activity);
   } catch (err) {
