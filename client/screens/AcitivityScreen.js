@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,26 +7,35 @@ import {
   ScrollView,
   SafeAreaView,
 } from "react-native";
-import React from "react";
 import { useSelector } from "react-redux";
 import { useListCheckInQuery } from "../api/bleafApi";
 import { selectCurrentUser } from "../actions/tokenSlice";
+import DateTimePicker from "@react-native-community/datetimepicker";
+
 export default function AcitivityScreen() {
   const user = useSelector(selectCurrentUser);
   const userId = user.id;
   const { data: habitData, isLoading: isLoading } = useListCheckInQuery(userId);
-  console.log(habitData);
+
+  const [date, setDate] = useState(new Date());
+  const filteredData = habitData?.filter((checkin) => {
+    if (!date) return true; // If no date selected, return all data
+    const isoStr = checkin.completed_at;
+    const idate = new Date(isoStr);
+    return idate.toDateString() === date.toDateString();
+  });
+  if (habitData) {
+    filteredData.sort((a, b) => {
+      return new Date(b.completed_at) - new Date(a.completed_at);
+    });
+  }
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setDate(currentDate);
+  };
   if (isLoading) {
     return <Text className="loading">Loading...</Text>;
   }
-
-  // async function handleRemoveCheckIn(id) {
-  //   try {
-  //     await removeCheckIn({ id, userId });
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
 
   return (
     <ScrollView
@@ -34,21 +44,44 @@ export default function AcitivityScreen() {
     >
       {habitData ? (
         <>
-          {habitData.map((checkin) => (
-            <View key={checkin.activityId} style={styles.content}>
-              <View style={styles.leftcontent}>
-                <Image
-                  style={styles.image}
-                  source={{ uri: `${checkin.image}` }}
-                />
-                <Text>{checkin.name}</Text>
-              </View>
-            </View>
-          ))}
+          <View style={styles.filterContainer}>
+            <Text style={styles.filterLabel}>Filter by Date:</Text>
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              is24Hour={false}
+              onChange={onChange}
+            />
+          </View>
+          {filteredData.length > 0 ? (
+            filteredData.map((checkin) => {
+              const isoStr = checkin.completed_at;
+              const date = new Date(isoStr);
+              var time = date.toLocaleTimeString("en-US", { hour12: true });
+              return (
+                <View key={checkin.activityId} style={styles.content}>
+                  <View style={styles.leftcontent}>
+                    <Image
+                      style={styles.image}
+                      source={{ uri: `${checkin.image}` }}
+                    />
+                    <Text style={styles.name}>{checkin.name}</Text>
+                  </View>
+                  <Text style={styles.time}>{time}</Text>
+                </View>
+              );
+            })
+          ) : (
+            <SafeAreaView>
+              <Text style={styles.error}>
+                No habits found for selected date
+              </Text>
+            </SafeAreaView>
+          )}
         </>
       ) : (
         <SafeAreaView>
-          <Text>No more habits</Text>
+          <Text style={styles.error}>No habits found</Text>
         </SafeAreaView>
       )}
     </ScrollView>
@@ -67,6 +100,12 @@ const styles = StyleSheet.create({
   icon: {
     fontSize: 24,
   },
+  name: {
+    paddingLeft: 10,
+  },
+  time: {
+    color: "blue",
+  },
   content: {
     display: "flex",
     alignItems: "center",
@@ -80,5 +119,19 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     flexDirection: "row",
+  },
+  filterContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+    marginTop: 10,
+    justifyContent: "center",
+  },
+  filterLabel: {
+    marginRight: 10,
+  },
+  error: {
+    color: "red",
+    textAlign: "center",
   },
 });
