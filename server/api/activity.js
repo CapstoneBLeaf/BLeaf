@@ -28,6 +28,7 @@ router.post("/:id/add", async (req, res, next) => {
     const date = getLatestActivityDatebyUserId(req.body.userId)
     const today = new Date()
     const user = await getUsersById(req.body.userId)
+    console.log(`comparing: ${today}, ${date}`)
     if (today > date) {
       const updatedUser = await updateUser({
         user_id: req.body.userId, 
