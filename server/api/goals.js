@@ -27,9 +27,9 @@ router.get("/user/:id", async (req, res, next) => {
   }
 });
 
-router.post("/:id/add", async (req, res, next) => {
+router.post("/add", async (req, res, next) => {
   try {
-    const goal = await createGoals(req.body.userId, req.params.id);
+    const goal = await createGoals(req.body);
     res.send(goal);
   } catch (err) {
     next(err);
