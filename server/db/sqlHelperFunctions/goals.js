@@ -11,7 +11,7 @@ async function getAllGoals() {
   }
 }
 
-async function createGoals(frequency, statement, habitId, userId) {
+async function createGoals({ frequency, statement, habitId, userId }) {
   try {
     const {
       rows: [goals],
@@ -32,16 +32,16 @@ async function createGoals(frequency, statement, habitId, userId) {
 async function getGoalsByUserId(userId) {
   try {
     const returnList = [];
-    const {
-      rows: [goals],
-    } = await client.query('SELECT * FROM goals WHERE "userId"=$4', [userId]);
+    const { rows: goals } = await client.query(
+      `SELECT * FROM goals WHERE "userId"=${userId}`
+    );
     const { rows: habits } = await client.query(`SELECT * FROM habits`, []);
     for (const goal of goals) {
-      const habit = habits.find((it) => it.id === act.habitId);
+      const habit = habits.find((it) => it.id === goal.habitId);
       returnList.push({
         goalId: goal.id,
-        frequency: frequency,
-        statement: statement,
+        frequency: goal.frequency,
+        statement: goal.statement,
         ...habit,
       });
     }
@@ -86,7 +86,7 @@ async function deleteGoal(goalId) {
     } = await client.query(
       `
     DELETE FROM goals
-    WHERE id=$1
+    WHERE id=${goalId}
     RETURNING *;
   `,
       [goalId]
