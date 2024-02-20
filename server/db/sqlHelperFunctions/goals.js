@@ -81,12 +81,10 @@ async function updateGoal(goalId, fields = {}) {
 
 async function deleteGoal(goalId) {
   try {
-    const {
-      rows: [goal],
-    } = await client.query(
+    const { rows: goal } = await client.query(
       `
     DELETE FROM goals
-    WHERE id=${goalId}
+    WHERE "id"=$1
     RETURNING *;
   `,
       [goalId]
