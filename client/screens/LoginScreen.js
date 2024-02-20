@@ -23,34 +23,34 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
   const [error, setError] = useState(null);
 
-  const [errors,setErrors] = useState({})
+  const [errors, setErrors] = useState({});
   const validateForm = () => {
-    let errors = {}
-    if(!username) errors.username = "Username is required"
-    if(!password) errors.password = "Password is required"
-    setErrors(errors)
-    return Object.keys(errors).length === 0
-  }
+    let errors = {};
+    if (!username) errors.username = "Username is required";
+    if (!password) errors.password = "Password is required";
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if(validateForm()){
-    try {
-      const result = await loginUser({
-        username,
-        password
-      }).unwrap();
-      dispatch(setCredentials(result));
-      setUsername("");
-      setPassword("");
-      navigation.navigate("Home");
-      console.log("Username:", username);
-      console.log("Password:", password);
-    } catch (rejected) {
-      setError(rejected.data.error);
-      console.log(`error caught: ${error}`);
+    if (validateForm()) {
+      try {
+        const result = await loginUser({
+          username,
+          password,
+        }).unwrap();
+        dispatch(setCredentials(result));
+        setUsername("");
+        setPassword("");
+        navigation.navigate("Home");
+        console.log("Username:", username);
+        console.log("Password:", password);
+      } catch (rejected) {
+        setError(rejected.data.error);
+        console.log(`error caught: ${error}`);
+      }
     }
-  }
   };
 
   // // Configure Gmail login
@@ -105,7 +105,9 @@ const LoginScreen = () => {
         value={username}
         onChangeText={(text) => setUsername(text)}
       />
-      {errors.username ? <Text style={styles.errorText}>{errors.username}</Text> : null}
+      {errors.username ? (
+        <Text style={styles.errorText}>{errors.username}</Text>
+      ) : null}
       <TextInput
         style={styles.input}
         placeholder="Password"
@@ -113,7 +115,9 @@ const LoginScreen = () => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-      {errors.password ? <Text style={styles.errorText}>{errors.password}</Text> : null}
+      {errors.password ? (
+        <Text style={styles.errorText}>{errors.password}</Text>
+      ) : null}
       {error && (
         <Text>
           {console.log(`error displayed: ${error}`)}
@@ -193,7 +197,7 @@ const styles = StyleSheet.create({
   loginsub: {
     marginBottom: 30,
     marginTop: 30,
-    textAlign: 'center'
+    textAlign: "center",
   },
   tinyLogo: {
     height: 24,
@@ -212,10 +216,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginRight: 10,
   },
-  errorText:{
-    color: 'red',
+  errorText: {
+    color: "red",
     marginTop: 10,
-    textAlign: 'left'
+    textAlign: "left",
   },
   register: { flexDirection: "row", justifyContent: "center" },
 });
