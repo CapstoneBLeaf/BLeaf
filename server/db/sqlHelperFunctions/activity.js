@@ -105,7 +105,7 @@ async function getLatestActivityDatebyUserId(userId) {
       `,
       [userId]
     );
-
+    console.log(JSON.stringify(activity))
     return activity.most_recent;
   } catch (error) {
     console.log(error)
