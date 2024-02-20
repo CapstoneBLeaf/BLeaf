@@ -10,15 +10,15 @@ import GoalsScreen from "../screens/GoalsScreen";
 import AcitivityScreen from "../screens/AcitivityScreen";
 import HabitsScreen from "../screens/HabitsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Ionicons from "react-native-vector-icons/Ionicons"
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { getItem } from "../utils/asyncStorage.js";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 // screen names
-const accountName = "Account"
-const habitsName = "Habits"
-const goalName = "Goals"
-const activityName = "Acitivity"
+const accountName = "Account";
+const habitsName = "Habits";
+const goalName = "Goals";
+const activityName = "Acitivity";
 export default function AppNavigation() {
   const [showOnboarding, setShowOnboarding] = useState(null);
   useEffect(() => {
@@ -38,44 +38,41 @@ export default function AppNavigation() {
     return null;
   }
 
-  
   const TabNavigator = () => {
     return (
       <Tab.Navigator
-      initialRouteName={habitsName}
-      screenOptions={({route}) => ({
-          tabBarActiveTintColor: 'tomato',
-          tabBarInactiveTintColor: 'grey',
-          tabBarLabelStyle: [
-            {  fontSize: 10 }
-          ],
+        initialRouteName={habitsName}
+        screenOptions={({ route }) => ({
+          tabBarActiveTintColor: "#2c2cff",
+          tabBarInactiveTintColor: "grey",
+          tabBarLabelStyle: [{ fontSize: 10 }],
           tabBarStyle: [
-              {
-                padding: 10,
-              }
+            {
+              padding: 10,
+            },
           ],
-          tabBarIcon: ({focused, color, size}) => {
-              let iconName;
-              let rn = route.name;
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+            let rn = route.name;
 
-              if (rn === habitsName) {
-                  iconName = focused ? "home" : "home-outline"
-              } else if (rn === accountName) {
-                  iconName = focused ? "person" : "person-outline"
-              } else if (rn === goalName) {
-                iconName = focused ? "trophy" : "trophy-outline"
-              }else if (rn === activityName) {
-                iconName = focused ? "book" : "book-outline"
-              }
+            if (rn === habitsName) {
+              iconName = focused ? "home" : "home-outline";
+            } else if (rn === accountName) {
+              iconName = focused ? "person" : "person-outline";
+            } else if (rn === goalName) {
+              iconName = focused ? "trophy" : "trophy-outline";
+            } else if (rn === activityName) {
+              iconName = focused ? "book" : "book-outline";
+            }
 
-              return <Ionicons name={iconName} size={size} color={color}/>
+            return <Ionicons name={iconName} size={size} color={color} />;
           },
-      })}      
+        })}
       >
-          <Tab.Screen name={habitsName} component={HabitsScreen}/>
-          <Tab.Screen name={goalName} component={GoalsScreen}/>
-          <Tab.Screen name={activityName} component={AcitivityScreen}/>
-          <Tab.Screen name={accountName} component={UserScreen}/>
+        <Tab.Screen name={habitsName} component={HabitsScreen} />
+        <Tab.Screen name={goalName} component={GoalsScreen} />
+        <Tab.Screen name={activityName} component={AcitivityScreen} />
+        <Tab.Screen name={accountName} component={UserScreen} />
       </Tab.Navigator>
     );
   };
@@ -130,6 +127,4 @@ export default function AppNavigation() {
       </NavigationContainer>
     );
   }
-
-
 }
