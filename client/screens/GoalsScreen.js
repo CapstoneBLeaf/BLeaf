@@ -1,45 +1,56 @@
 import React from "react";
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from "react-native";
-
-const GoalsScreen = ({ route, navigation }) => {
-  const { goals } = route.params;
-
-  if (!goals || goals.length === 0) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.noGoalsText}>No goals selected</Text>
-      </View>
-    );
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  SafeAreaView,
+} from "react-native";
+import { useGetGoalsByIdQuery, useDeleteGoalMutation } from "../api/bleafApi";
+import { useSelector } from "react-redux";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { selectCurrentUser } from "../actions/tokenSlice";
+const GoalsScreen = () => {
+  const user = useSelector(selectCurrentUser);
+  const userId = user.id;
+  const { data: goalData, isLoading: isLoading } = useGetGoalsByIdQuery(userId);
+  const [deleteGoal] = useDeleteGoalMutation();
+  console.log("Goals", goalData);
+  if (isLoading) {
+    return <Text className="loading">Loading...</Text>;
   }
 
-  const removeHabit = (index) => {
-    const updatedGoals = [...goals];
-    updatedGoals.splice(index, 1);
-    navigation.setParams({ goals: updatedGoals });
-  };
-const renderGoalItem = ({ item, index }) => (
-  <View style={styles.goalContainer}>
-    <TouchableOpacity onPress={() => removeHabit(index)} style={styles.deleteButton}>
-      <Text style={styles.deleteButtonText}>Delete</Text>
-    </TouchableOpacity>
-    <Image style={styles.image} source={{ uri: item.habit.image }} />
-    <View style={styles.goalDetails}>
-      <Text style={styles.goalText}>Habit: {item.habit.name}</Text>
-      <Text style={styles.goalText}>Frequency: {item.frequency}</Text>
-      <Text style={styles.goalText}>Motivation: {item.statement}</Text>
-    </View>
-  </View>
-);
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Goals Screen</Text>
-      <FlatList
-        data={goals}
-        renderItem={renderGoalItem}
-        keyExtractor={(item, index) => index.toString()}
-      />
-    </View>
+    <ScrollView key={styles.goalView} automaticallyAdjustKeyboardInsets={true}>
+      {goalData.length > 0 ? (
+        goalData.map((goal) => {
+          return (
+            <View key={goal.id} style={styles.goalContainer}>
+              <Image style={styles.image} source={{ uri: `${goal.image}` }} />
+              <View style={styles.goalDetails}>
+                <Text style={styles.name}>Habit: {goal.name}</Text>
+                <Text style={styles.frequency}>
+                  Frequency: {goal.frequency}
+                </Text>
+                <Text style={styles.statement}>
+                  Motivation: {goal.statement}
+                </Text>
+              </View>
+              <Ionicons
+                style={styles.deleteButton}
+                name="trash-outline"
+                onPress={() => deleteGoal(goal.goalId)}
+              />
+            </View>
+          );
+        })
+      ) : (
+        <SafeAreaView>
+          <Text style={styles.error}>Goals Not Found</Text>
+        </SafeAreaView>
+      )}
+    </ScrollView>
   );
 };
 
@@ -64,8 +75,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     flexDirection: "row",
     alignItems: "center",
-    width: 336, // Set a fixed width for the container
-    height: 120, // Set a fixed height for the container
     borderRadius: 10, // Add borderRadius for square shape
   },
   goalDetails: {
@@ -81,17 +90,16 @@ const styles = StyleSheet.create({
     width: 80, // Adjusted width
     borderRadius: 5, // Add borderRadius to match the container
   },
-    
-    deleteButton: {
-      backgroundColor: "red",
-      padding: 10,
-      borderRadius: 5,
-    },
-    deleteButtonText: {
-      color: "white",
-      fontWeight: "bold",
-    },
-  });
-  
-export default GoalsScreen;
 
+  deleteButton: {
+    color: "black",
+    fontSize: 24,
+  },
+  error: {
+    color: "red",
+    textAlign: "center",
+    marginTop: 10,
+  },
+});
+
+export default GoalsScreen;
