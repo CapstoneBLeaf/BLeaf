@@ -24,8 +24,8 @@ router.get("/", async (req, res, next) => {
 
 router.post("/:id/add", async (req, res, next) => {
   try {
-    const activity = await addHabit(req.body.userId, req.params.id);
     const date = await getLatestActivityDatebyUserId(req.body.userId)
+    const activity = await addHabit(req.body.userId, req.params.id);
     const today = new Date()
     const user = await getUsersById(req.body.userId)
     console.log(`comparing: ${today}, ${date}`)
