@@ -38,7 +38,11 @@ async function getActivityByUserId(userId) {
     const { rows: habits } = await client.query(`SELECT * FROM habits`, []);
     for (const act of activity) {
       const habit = habits.find((it) => it.id === act.habitId);
-      returnList.push({ activityId: act.id, ...habit });
+      returnList.push({
+        activityId: act.id,
+        completed_at: act.completed_at,
+        ...habit,
+      });
     }
     return returnList;
   } catch (error) {
@@ -90,10 +94,35 @@ async function deleteActivity(userId, habitId) {
   }
 }
 
+async function getLatestActivityDatebyUserId(userId) {
+  try { 
+    const { rows: activity} = await client.query(
+      `
+      SELECT DATE(completed_at) as most_recent FROM activity 
+      WHERE "userId"=$1 
+      ORDER BY completed_at DESC
+      LIMIT(1)
+      `,
+      [userId]
+    );
+    console.log(JSON.stringify(activity))
+    if (activity[0]) {
+      return activity[0].most_recent;
+    } else {
+      return null
+    }
+
+  } catch (error) {
+    console.log(error)
+    throw new Error("get latest activity failed")
+  }
+}
+
 module.exports = {
   getAllActivity,
   getActivityByUserId,
   updateActivity,
   deleteActivity,
   addHabit,
+  getLatestActivityDatebyUserId,
 };

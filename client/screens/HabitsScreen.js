@@ -1,8 +1,21 @@
 import React, { useState } from "react";
-import { connect } from "react-redux"; 
-import { SafeAreaView, Text, FlatList, TouchableOpacity, View, StyleSheet, Image, Button, Modal, TextInput } from "react-native";
-import { useNavigation } from '@react-navigation/native';
-import { useGetAllHabitsQuery } from "../api/bleafApi";
+import { connect } from "react-redux";
+import {
+  SafeAreaView,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  Image,
+  Button,
+  Modal,
+  TextInput,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+import { useGetAllHabitsQuery, useCheckInMutation } from "../api/bleafApi";
+import { selectCurrentUser } from "../actions/tokenSlice";
 
 function HabitsScreen(props) {
   const { data: habits, error, isLoading } = useGetAllHabitsQuery();
@@ -11,10 +24,22 @@ function HabitsScreen(props) {
   const [goalFrequency, setGoalFrequency] = useState("");
   const [motivatingStatement, setMotivatingStatement] = useState("");
   const [goals, setGoals] = useState([]);
+  const [checkInHabit] = useCheckInMutation();
   const navigation = useNavigation();
-
+  const user = useSelector(selectCurrentUser);
+  const userId = user.id;
   if (isLoading) return <Text>Loading...</Text>;
   if (error) return <Text>Error: {error.message}</Text>;
+
+  async function handleCheckIn(id) {
+    try {
+      console.log(id, userId);
+      const response = await checkInHabit({ id, userId });
+      console.log("responsech:", response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const toggleHabitSelection = (habit) => {
     setSelectedHabit(habit);
@@ -32,44 +57,59 @@ function HabitsScreen(props) {
       // Ensure all fields are filled before saving a goal
       return;
     }
-  
+
     const newGoal = {
       habit: selectedHabit,
       frequency: goalFrequency,
       statement: motivatingStatement,
     };
-    
+
     const updatedGoals = [...goals, newGoal]; // Add the new goal to the list of goals
     setGoals(updatedGoals);
     console.log("New Goal:", newGoal);
     // Navigate to GoalsScreen with the updated goals
-    navigation.navigate('Goals', { goals: updatedGoals });
+    navigation.navigate("Goals", { goals: updatedGoals });
     setModalVisible(false);
   };
-  
-  
+
   const navigateToGoalsScreen = () => {
-    navigation.navigate('Goals', { goals });
+    navigation.navigate("Goals", { goals });
   };
-  
+
   const navigateToActivityPage = () => {
-    navigation.navigate('Activity');
+    navigation.navigate("Activity");
   };
 
   const renderHabitItem = ({ item }) => (
     <TouchableOpacity onPress={() => toggleHabitSelection(item)}>
-      <View style={[styles.habitContainer, selectedHabit && selectedHabit.id === item.id && styles.selectedHabit]}>
+      <View
+        style={[
+          styles.habitContainer,
+          selectedHabit && selectedHabit.id === item.id && styles.selectedHabit,
+        ]}
+      >
         <Text style={styles.habitDetails}>
-          <Text style={styles.habitName}>Name: {item.name}</Text>{"\n"}
-          <Text style={styles.habitDescription}>Description: {item.description}</Text>{"\n"}
-          <Image style={styles.image} source={{uri:`${item.image}`}}/></Text>
+          <Text style={styles.habitName}>Name: {item.name}</Text>
+          {"\n"}
+          <Text style={styles.habitDescription}>
+            Description: {item.description}
+          </Text>
+          {"\n"}
+          <Image style={styles.image} source={{ uri: `${item.image}` }} />{" "}
+          {"\n"}
+          <Button
+            title="Check-in"
+            onPress={() => {
+              handleCheckIn(item.id);
+            }}
+          />
+        </Text>
       </View>
     </TouchableOpacity>
   );
-  
+
   return (
     <SafeAreaView style={styles.container}>
-
       <FlatList
         data={habits}
         renderItem={renderHabitItem}
@@ -78,8 +118,6 @@ function HabitsScreen(props) {
 
       <View style={styles.buttonContainer}>
         <Button title="Clear" onPress={clearSelectedHabits} />
-       
-        <Button title="Check-in" onPress={navigateToActivityPage} />
       </View>
 
       <Modal
@@ -92,25 +130,37 @@ function HabitsScreen(props) {
           <View style={styles.modalView}>
             <View style={styles.radioContainer}>
               <TouchableOpacity
-                style={[styles.radioOption, goalFrequency === "1 x day" && styles.radioSelected]}
+                style={[
+                  styles.radioOption,
+                  goalFrequency === "1 x day" && styles.radioSelected,
+                ]}
                 onPress={() => setGoalFrequency("1 x day")}
               >
                 <Text>1 x day</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={[styles.radioOption, goalFrequency === "2 x day" && styles.radioSelected]}
+                style={[
+                  styles.radioOption,
+                  goalFrequency === "2 x day" && styles.radioSelected,
+                ]}
                 onPress={() => setGoalFrequency("2 x day")}
               >
                 <Text>2 x day</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={[styles.radioOption, goalFrequency === "3 x day" && styles.radioSelected]}
+                style={[
+                  styles.radioOption,
+                  goalFrequency === "3 x day" && styles.radioSelected,
+                ]}
                 onPress={() => setGoalFrequency("3 x day")}
               >
                 <Text>3 x day</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={[styles.radioOption, goalFrequency === "4 x day" && styles.radioSelected]}
+                style={[
+                  styles.radioOption,
+                  goalFrequency === "4 x day" && styles.radioSelected,
+                ]}
                 onPress={() => setGoalFrequency("4 x day")}
               >
                 <Text>4 x day</Text>
@@ -118,10 +168,13 @@ function HabitsScreen(props) {
             </View>
 
             <TextInput
-              style={[styles.input, { color: '#000', backgroundColor: '#ffffff' }]}
+              style={[
+                styles.input,
+                { color: "#000", backgroundColor: "#ffffff" },
+              ]}
               placeholder="Enter Motivating Statement"
               placeholderTextColor="#999999" // Set placeholder text color to gray
-              onChangeText={text => setMotivatingStatement(text)}
+              onChangeText={(text) => setMotivatingStatement(text)}
             />
 
             <View style={styles.buttonRow}>
@@ -140,7 +193,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   habitContainer: {
-    backgroundColor: '#29eecb',
+    backgroundColor: "#29eecb",
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
@@ -150,32 +203,32 @@ const styles = StyleSheet.create({
   },
   habitName: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   habitDescription: {
     fontSize: 16,
-    marginBottom:10,
+    marginBottom: 10,
   },
   selectedHabit: {
-    backgroundColor: '#64b5f6',
+    backgroundColor: "#64b5f6",
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-around",
     marginTop: 20,
     paddingHorizontal: 16,
   },
   header: {
     fontSize: 24,
-    textAlign: 'center',
+    textAlign: "center",
   },
   centeredView: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
+    marginTop: 22,
   },
-  image:{
+  image: {
     height: 100,
     width: 100,
   },
@@ -188,39 +241,39 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    elevation: 5
+    elevation: 5,
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     marginBottom: 20,
     paddingHorizontal: 10,
     width: 200,
   },
   radioContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 20,
   },
   radioOption: {
     borderWidth: 1,
-    borderColor: '#999999',
+    borderColor: "#999999",
     padding: 10,
     borderRadius: 5,
   },
   radioSelected: {
-    backgroundColor: '#64b5f6',
-    borderColor: '#64b5f6',
+    backgroundColor: "#64b5f6",
+    borderColor: "#64b5f6",
   },
   buttonRow: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    width: '100%',
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "100%",
     marginTop: 20,
   },
 });

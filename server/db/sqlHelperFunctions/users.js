@@ -54,9 +54,10 @@ const getUsersById = async (id) => {
   const {
     rows: [users],
   } = await client.query(`
-    SELECT users.*, growth_levels.image AS plant_image FROM users WHERE users.id = '${id}'
+    SELECT users.*, growth_levels.image AS plant_image FROM users 
     JOIN growth_levels
-      ON users.growth_level = growth_levels.id;
+      ON users.growth_level = growth_levels.id
+    WHERE users.id = '${id}';
     `);
   return users;
 };
@@ -88,6 +89,37 @@ async function deleteUser(id) {
   }
 }
 
+async function updateUser(userId, fields = {}) {
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ");
+
+  console.log(setString)
+  if (setString.length === 0) {
+    return;
+  }
+
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+    UPDATE users
+    SET ${setString}
+    WHERE id=${userId}
+    RETURNING *;
+  `,
+      Object.values(fields)
+    );
+
+    return user;
+  } catch (error) {
+    throw error;
+    }
+}
+
+
+
 growth_states = `SELECT * from growth_states where id=0`;
 growth_states; // url1
 
@@ -98,4 +130,5 @@ module.exports = {
   deleteUser,
   loginUser,
   getUsersByUsername,
+  updateUser,
 };

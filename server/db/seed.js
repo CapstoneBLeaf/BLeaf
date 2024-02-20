@@ -65,16 +65,16 @@ const createTable = async () => {
     );
     CREATE TABLE goals (
       id SERIAL PRIMARY KEY,
-      name TEXT NOT NULL,
-      frequency VARCHAR(50) NOT NULL,
-      achivements TEXT NOT NULL,
+      frequency TEXT NOT NULL,
+      statement TEXT NOT NULL,
       "habitId" INTEGER REFERENCES habits(id) NOT NULL,
       "userId" INTEGER REFERENCES users(id) NOT NULL
   );
   CREATE TABLE activity (
       id SERIAL PRIMARY KEY,
       "habitId" INTEGER REFERENCES habits(id) NOT NULL,
-      "userId" INTEGER REFERENCES users(id) NOT NULL
+      "userId" INTEGER REFERENCES users(id) NOT NULL,
+      completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   );
     `);
     console.log("Tables Created!");
@@ -124,8 +124,6 @@ const createInitialGoals = async () => {
     throw error;
   }
 };
-
-
 
 const createInitialGrowthLevels = async () => {
   try {
