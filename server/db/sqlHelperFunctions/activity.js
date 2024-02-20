@@ -105,6 +105,8 @@ async function getLatestActivityDatebyUserId(userId) {
       `,
       [userId]
     );
+
+    return activity;
   } catch (error) {
     console.log(error)
     throw new Error("get latest activity failed")
