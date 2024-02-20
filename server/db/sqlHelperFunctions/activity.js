@@ -98,7 +98,7 @@ async function getLatestActivityDatebyUserId(userId) {
   try { 
     const { rows: activity} = await client.query(
       `
-      SELECT DATE(completed_at) FROM activity 
+      SELECT DATE(completed_at) as most_recent FROM activity 
       WHERE "userId"=$1 
       ORDER BY completed_at DESC
       LIMIT(1)
@@ -106,7 +106,7 @@ async function getLatestActivityDatebyUserId(userId) {
       [userId]
     );
 
-    return activity;
+    return activity.most_recent;
   } catch (error) {
     console.log(error)
     throw new Error("get latest activity failed")
