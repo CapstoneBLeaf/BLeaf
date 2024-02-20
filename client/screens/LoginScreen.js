@@ -125,22 +125,6 @@ const LoginScreen = () => {
         </Text>
       )}
       <Button title="Login" onPress={handleLogin} />
-      <Text style={styles.loginsub}>Or, login with ...</Text>
-      <View style={styles.sociallogo}>
-        <TouchableOpacity onPress={() => {}} style={styles.tinyLogom}>
-          <Image
-            style={styles.tinyLogo}
-            source={require("../assets/facebook.png")}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => {}} style={styles.tinyLogom}>
-          <Image
-            style={styles.tinyLogo}
-            source={require("../assets/google.png")}
-          />
-        </TouchableOpacity>
-      </View>
       <View style={styles.register}>
         <Text style={styles.newapp}>New to the app?</Text>
         <TouchableOpacity

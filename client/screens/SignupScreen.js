@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, Image,TextInput, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import LottieView from "lottie-react-native";
 import Button from "./components/Button";
 import { useRegisterMutation } from "../api/bleafApi";
@@ -15,51 +7,53 @@ import { setCredentials } from "../actions/tokenSlice";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
 
+
 const SignupScreen = () => {
   const [firstname, setFirstname] = useState("");
   const [username, setUsername] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [errors,setErrors] = useState({})
   const [register] = useRegisterMutation();
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
+
   const validateForm = () => {
-    let errors = {};
-    if (!firstname) errors.firstname = "Firstname is required";
-    if (!username) errors.username = "Username is required";
-    if (!lastname) errors.lastname = "Lastname is required";
-    if (!email) errors.email = "Email is required";
-    if (!password) errors.password = "Password is required";
-    setErrors(errors);
-    return Object.keys(errors).length === 0;
-  };
+    let errors = {}
+    if(!firstname) errors.firstname = "Firstname is required"
+    if(!username) errors.username = "Username is required"
+    if(!lastname) errors.lastname = "Lastname is required"
+    if(!email) errors.email = "Email is required"
+    if(!password) errors.password = "Password is required"
+    setErrors(errors)
+    return Object.keys(errors).length === 0
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      try {
-        const result = await register({
-          firstname,
-          username,
-          lastname,
-          email,
-          password,
-        }).unwrap();
-        dispatch(setCredentials(result));
-        setFirstname("");
-        setUsername("");
-        setLastname("");
-        setEmail("");
-        setPassword("");
-        console.log(result);
-        navigation.navigate("Home");
-      } catch (error) {
-        console.error(error);
-      }
+    if(validateForm()){
+    try {
+      const result = await register({
+        firstname,
+        username,
+        lastname,
+        email,
+        password,
+      }).unwrap();
+      dispatch(setCredentials(result));
+      setFirstname("");
+      setUsername("");
+      setLastname("");
+      setEmail("");
+      setPassword("");
+      console.log(result);
+      navigation.navigate("Home");
+    } catch (error) {
+      console.error(error);
     }
+  }
   };
 
   return (
@@ -81,9 +75,7 @@ const SignupScreen = () => {
         onChangeText={(text) => setFirstname(text)}
         value={firstname}
       />
-      {errors.firstname ? (
-        <Text style={styles.errorText}>{errors.firstname}</Text>
-      ) : null}
+      {errors.firstname ? <Text style={styles.errorText}>{errors.firstname}</Text> : null}
       <Text style={styles.label}>Last Name:</Text>
       <TextInput
         style={styles.input}
@@ -91,9 +83,7 @@ const SignupScreen = () => {
         onChangeText={(text) => setLastname(text)}
         value={lastname}
       />
-      {errors.lastname ? (
-        <Text style={styles.errorText}>{errors.lastname}</Text>
-      ) : null}
+      {errors.lastname ? <Text style={styles.errorText}>{errors.lastname}</Text> : null}
       <Text style={styles.label}>Username:</Text>
       <TextInput
         style={styles.input}
@@ -101,9 +91,7 @@ const SignupScreen = () => {
         value={username}
         onChangeText={(text) => setUsername(text)}
       />
-      {errors.username ? (
-        <Text style={styles.errorText}>{errors.username}</Text>
-      ) : null}
+      {errors.username ? <Text style={styles.errorText}>{errors.username}</Text> : null}
       <Text style={styles.label}>Email:</Text>
       <TextInput
         style={styles.input}
@@ -113,9 +101,7 @@ const SignupScreen = () => {
         value={email}
         onChangeText={(text) => setEmail(text)}
       />
-      {errors.email ? (
-        <Text style={styles.errorText}>{errors.email}</Text>
-      ) : null}
+      {errors.email ? <Text style={styles.errorText}>{errors.email}</Text> : null}
       <Text style={styles.label}>Password:</Text>
       <TextInput
         style={styles.input}
@@ -124,30 +110,14 @@ const SignupScreen = () => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-      {errors.password ? (
-        <Text style={styles.errorText}>{errors.password}</Text>
-      ) : null}
+      {errors.password ? <Text style={styles.errorText}>{errors.password}</Text> : null}
       {/* <Button title="Edit" onPress={handleEdit} /> */}
       <Button title="Register" onPress={handleSubmit} />
-      <Text style={styles.loginsub}>Or, register with...</Text>
-      <View style={styles.sociallogo}>
-        <TouchableOpacity onPress={() => {}} style={styles.tinyLogom}>
-          <Image
-            style={styles.tinyLogo}
-            source={require("../assets/facebook.png")}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => {}} style={styles.tinyLogom}>
-          <Image
-            style={styles.tinyLogo}
-            source={require("../assets/google.png")}
-          />
-        </TouchableOpacity>
-      </View>
     </ScrollView>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -156,7 +126,7 @@ const styles = StyleSheet.create({
   loginsub: {
     marginBottom: 30,
     marginTop: 30,
-    textAlign: "center",
+    textAlign: 'center'
   },
   input: {
     height: 40,
@@ -202,11 +172,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginRight: 10,
   },
-  errorText: {
-    color: "red",
+  errorText:{
+    color: 'red',
     marginBottom: 10,
-    textAlign: "left",
-  },
+    textAlign: 'left'
+  }
 });
 
 export default SignupScreen;

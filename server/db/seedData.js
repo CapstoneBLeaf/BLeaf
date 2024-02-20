@@ -133,7 +133,7 @@ const habits = [
     name: "health",
     description:
       "Taking our medication on time is one fo the best things we can do for ourselves",
-    image: "https://p1.hiclipart.com/preview/206/764/836/pixel-png-clipart.jpg",
+    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fpngimg.com%2Fimage%2F73248&psig=AOvVaw2xiauA9v7D2mXNrp0A72ZS&ust=1708530967055000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCICbuf2juoQDFQAAAAAdAAAAABAE",
     checkIn: false,
   },
   {
