@@ -29,7 +29,7 @@ router.post("/:id/add", async (req, res, next) => {
     const today = new Date()
     const user = await getUsersById(req.body.userId)
     const updatedUser = await updateUser({
-      user_id: req.body.userId, 
+      userId: req.body.userId, 
       fields: {
         growth_level: user.growth_level + 1
       }
