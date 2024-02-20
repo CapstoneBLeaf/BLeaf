@@ -113,22 +113,6 @@ const SignupScreen = () => {
       {errors.password ? <Text style={styles.errorText}>{errors.password}</Text> : null}
       {/* <Button title="Edit" onPress={handleEdit} /> */}
       <Button title="Register" onPress={handleSubmit} />
-      <Text style={styles.loginsub}>Or, register with...</Text>
-      <View style={styles.sociallogo}>
-        <TouchableOpacity onPress={() => {}} style={styles.tinyLogom}>
-          <Image
-            style={styles.tinyLogo}
-            source={require("../assets/facebook.png")}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => {}} style={styles.tinyLogom}>
-          <Image
-            style={styles.tinyLogo}
-            source={require("../assets/google.png")}
-          />
-        </TouchableOpacity>
-        </View>
     </ScrollView>
   );
 };
