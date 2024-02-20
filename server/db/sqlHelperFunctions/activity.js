@@ -24,7 +24,7 @@ async function addHabit(userId, habitId) {
     return activity;
   } catch (error) {
     throw new Error(
-      `adding like to exercise did not work because: ${error.message}`
+      `adding habit to activity did not work because: ${error.message}`
     );
   }
 }
@@ -95,8 +95,8 @@ async function deleteActivity(userId, habitId) {
 }
 
 async function getLatestActivityDatebyUserId(userId) {
-  try { 
-    const { rows: activity} = await client.query(
+  try {
+    const { rows: activity } = await client.query(
       `
       SELECT DATE(completed_at) FROM activity 
       WHERE "userId"=$1 
@@ -105,8 +105,9 @@ async function getLatestActivityDatebyUserId(userId) {
       `,
       [userId]
     );
+    return activity;
   } catch (error) {
-    throw new Error("get latest activity failed")
+    throw new Error("get latest activity failed");
   }
 }
 
