@@ -94,6 +94,7 @@ async function updateUser(userId, fields = {}) {
     .map((key, index) => `"${key}"=$${index + 1}`)
     .join(", ");
 
+  console.log(setString)
   if (setString.length === 0) {
     return;
   }

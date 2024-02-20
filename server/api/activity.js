@@ -34,7 +34,8 @@ router.post("/:id/add", async (req, res, next) => {
         growth_level: user.growth_level + 1
       }
     });
-    console.log(activity);
+    console.log(updatedUser)
+    console.log(activity);  
     res.send(activity);
   } catch (err) {
     next(err);
