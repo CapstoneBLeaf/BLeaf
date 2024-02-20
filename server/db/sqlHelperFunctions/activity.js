@@ -100,7 +100,7 @@ async function getLatestActivityDatebyUserId(userId) {
       `
       SELECT DATE(completed_at) FROM activity 
       WHERE "userId"=$1 
-      SORT BY completed_at DESC
+      ORDER BY completed_at DESC
       LIMIT(1)
       `,
       [userId]
