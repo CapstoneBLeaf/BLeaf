@@ -54,9 +54,10 @@ const getUsersById = async (id) => {
   const {
     rows: [users],
   } = await client.query(`
-    SELECT users.*, growth_levels.image AS plant_image FROM users WHERE users.id = '${id}'
+    SELECT users.*, growth_levels.image AS plant_image FROM users 
     JOIN growth_levels
-      ON users.growth_level = growth_levels.id;
+      ON users.growth_level = growth_levels.id
+    WHERE users.id = '${id}';
     `);
   return users;
 };
@@ -93,6 +94,7 @@ async function updateUser(userId, fields = {}) {
     .map((key, index) => `"${key}"=$${index + 1}`)
     .join(", ");
 
+  console.log(setString)
   if (setString.length === 0) {
     return;
   }
