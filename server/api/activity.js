@@ -28,15 +28,12 @@ router.post("/:id/add", async (req, res, next) => {
     const activity = await addHabit(req.body.userId, req.params.id);
     const today = new Date()
     const user = await getUsersById(req.body.userId)
-    console.log(`comparing: ${today}, ${date}`)
-    if (today > date) {
-      const updatedUser = await updateUser({
-        user_id: req.body.userId, 
-        fields: {
-          growth_level: user.growth_level + 1
-        }
-      });
-    }
+    const updatedUser = await updateUser({
+      user_id: req.body.userId, 
+      fields: {
+        growth_level: user.growth_level + 1
+      }
+    });
     console.log(activity);
     res.send(activity);
   } catch (err) {
