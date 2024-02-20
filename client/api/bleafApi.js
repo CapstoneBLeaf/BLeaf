@@ -14,7 +14,7 @@ export const bleafApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["User", "Activity", "Habits"],
+  tagTypes: ["User", "Activity", "Habits", "Goals"],
   endpoints: (builder) => ({
     getAllHabits: builder.query({
       query: () => "/habits",
@@ -79,21 +79,26 @@ export const bleafApi = createApi({
       query: () => "/goals",
     }),
     getGoalsById: builder.query({
-      query: (id) => `/goals/${id}`,
+      query: (id) => ({
+        url: `/goals/user/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Goals", "User"],
     }),
     createGoals: builder.mutation({
       query: (body) => ({
-        url: "/goals",
+        url: `/goals/add`,
         method: "POST",
-        body: body,
+        body,
       }),
+      invalidatesTags: ["Goals"],
     }),
     deleteGoal: builder.mutation({
-      query: ({ id, token }) => ({
+      query: (id) => ({
         url: `/goals/${id}`,
         method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
       }),
+      invalidatesTags: ["Goals"],
     }),
     updateGoals: builder.mutation({
       query: ({ id, token }) => ({

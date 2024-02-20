@@ -44,7 +44,7 @@ export default function HomeScreen() {
       <View style={styles.account}>
         <Text>Already have an account?</Text>
         <Pressable onPress={() => navigation.navigate("Login")}>
-          <Text style={{color: 'blue'}}> Login</Text>
+          <Text style={{ color: "blue" }}> Login</Text>
         </Pressable>
       </View>
     </SafeAreaView>
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 10,
   },
-  resetButton:{
-    marginBottom:10
-  }
+  resetButton: {
+    marginBottom: 10,
+  },
 });
