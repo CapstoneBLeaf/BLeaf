@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Text, View, Button, Platform } from "react-native";
+import { Text, View, Button } from "react-native";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import Constants from "expo-constants";
@@ -10,7 +10,18 @@ Notifications.setNotificationHandler({
     shouldPlaySound: true,
     shouldSetBadge: false,
   }),
+    // Should the initial notification be popped automatically
+    // default: true
+    // popInitialNotification: true,
+        /**
+      * (optional) default: true
+      * - Specified if permissions (ios) and token will requested or not,
+      * - if not, you must call PushNotificationsHandler.requestPermissions() later
+      */
+    requestPermissions: true,
 });
+
+
 
 export default function App() {
   const [expoPushToken, setExpoPushToken] = useState("");
@@ -66,12 +77,13 @@ export default function App() {
 async function scheduleNotification(expoPushToken) {
   Notifications.scheduleNotificationAsync({
     content: {
+        to: expoPushToken,
       title: "my first locally scheduled notification",
       body: "body of scheduled notification",
       data: { data: "username" }
     },
     trigger: {
-      seconds: 90
+      seconds: 5
     },
   })
 
@@ -103,9 +115,7 @@ async function scheduleNotification(expoPushToken) {
 }
 
   return (
-    <Provider store={store}>
-       <SafeAreaProvider>
-       <AppNavigation/>
+
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around' }}>
       <Text>Your push token: {expoPushToken}</Text>
       <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -119,7 +129,6 @@ async function scheduleNotification(expoPushToken) {
         title="Press to Send Notification" 
         onPress={async () => {await sendPushNotification(expoPushToken)}} />
     </View>
-    </SafeAreaProvider>
-    </Provider>
+
   );
 };

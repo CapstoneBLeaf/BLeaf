@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 import { useGetAllHabitsQuery, useCheckInMutation } from "../api/bleafApi";
 import { selectCurrentUser } from "../actions/tokenSlice";
 
+
 function HabitsScreen(props) {
   const { data: habits, error, isLoading } = useGetAllHabitsQuery();
   const [selectedHabit, setSelectedHabit] = useState(null);
@@ -30,6 +31,8 @@ function HabitsScreen(props) {
   const userId = user.id;
   if (isLoading) return <Text>Loading...</Text>;
   if (error) return <Text>Error: {error.message}</Text>;
+
+  
 
   async function handleCheckIn(id) {
     try {
