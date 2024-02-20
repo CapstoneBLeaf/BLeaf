@@ -8,19 +8,19 @@ import {
   View,
   StyleSheet,
   Image,
-  Button,
   Modal,
   TextInput,
+  Button,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
+
 import {
   useGetAllHabitsQuery,
   useCheckInMutation,
   useCreateGoalsMutation,
 } from "../api/bleafApi";
 import { selectCurrentUser } from "../actions/tokenSlice";
-
 
 function HabitsScreen(props) {
   const { data: habits, error, isLoading } = useGetAllHabitsQuery();
@@ -35,8 +35,6 @@ function HabitsScreen(props) {
   const userId = user.id;
   if (isLoading) return <Text>Loading...</Text>;
   if (error) return <Text>Error: {error.message}</Text>;
-
-  
 
   async function handleCheckIn(id) {
     try {
@@ -85,20 +83,23 @@ function HabitsScreen(props) {
         ]}
       >
         <Text style={styles.habitDetails}>
-          <Text style={styles.habitName}>Name: {item.name}</Text>
+          <Text style={styles.habitName}>{item.name}</Text>
           {"\n"}
-          <Text style={styles.habitDescription}>
-            Description: {item.description}
-          </Text>
           {"\n"}
-          <Image style={styles.image} source={{ uri: `${item.image}` }} />{" "}
+          <Text style={styles.habitDescription}>{item.description}</Text>
           {"\n"}
-          <Button
-            title="Check-in"
+          {"\n"}
+          <Image style={styles.image} source={{ uri: `${item.image}` }} />
+          {"\n"}
+          {"\n"}
+          <TouchableOpacity
             onPress={() => {
               handleCheckIn(item.id);
             }}
-          />
+            style={styles.check}
+          >
+            <Text style={styles.title}>CheckIn</Text>
+          </TouchableOpacity>
         </Text>
       </View>
     </TouchableOpacity>
@@ -111,10 +112,12 @@ function HabitsScreen(props) {
         renderItem={renderHabitItem}
         keyExtractor={(item, index) => index.toString()}
       />
-
-      <View style={styles.buttonContainer}>
-        <Button title="Clear" onPress={clearSelectedHabits} />
-      </View>
+      <TouchableOpacity
+        onPress={clearSelectedHabits}
+        style={styles.buttonContainer}
+      >
+        <Text style={styles.title}>Clear</Text>
+      </TouchableOpacity>
 
       <Modal
         animationType="slide"
@@ -165,8 +168,15 @@ function HabitsScreen(props) {
             />
 
             <View style={styles.buttonRow}>
-              <Button title="Back" onPress={() => setModalVisible(false)} />
-              <Button title="Add Goal" onPress={handleAddGoals} />
+              <TouchableOpacity onPress={handleAddGoals} style={styles.btn}>
+                <Text style={styles.title}>Add Goal</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => setModalVisible(false)}
+                style={styles.btn}
+              >
+                <Text style={styles.title}>Back</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -177,13 +187,14 @@ function HabitsScreen(props) {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#58e4dc",
     flex: 1,
   },
   habitContainer: {
-    backgroundColor: "#29eecb",
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+    backgroundColor: "#ffffff",
   },
   habitDetails: {
     fontSize: 16,
@@ -191,10 +202,11 @@ const styles = StyleSheet.create({
   habitName: {
     fontSize: 18,
     fontWeight: "bold",
+    textTransform: "capitalize",
+    marginBottom: 0,
   },
   habitDescription: {
     fontSize: 16,
-    marginBottom: 10,
   },
   selectedHabit: {
     backgroundColor: "#64b5f6",
@@ -204,6 +216,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     marginTop: 20,
     paddingHorizontal: 16,
+    backgroundColor: "#2c2cff",
+    padding: 20,
   },
   header: {
     fontSize: 24,
@@ -212,8 +226,6 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22,
   },
   image: {
     height: 100,
@@ -223,8 +235,7 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 15,
-    alignItems: "center",
+    padding: 20,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -238,15 +249,16 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: "gray",
     borderWidth: 1,
-    marginBottom: 15,
+    marginBottom: 20,
     paddingHorizontal: 10,
-    width: 230,
+    width: "100%",
     borderRadius: 5,
   },
   radioContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
     marginBottom: 20,
+    width: "auto",
+    justifyContent: "center",
   },
   radioOption: {
     borderWidth: 1,
@@ -261,9 +273,26 @@ const styles = StyleSheet.create({
     borderColor: "#64b5f6",
   },
   buttonRow: {
+    width: "100%",
+    display: "flex",
     flexDirection: "row",
     justifyContent: "center",
+  },
+  check: {
+    backgroundColor: "#2c2cff",
+    padding: 15,
     width: "100%",
+    alignItems: "center",
+    borderRadius: 10,
+  },
+  title: {
+    color: "white",
+  },
+  btn: {
+    backgroundColor: "#2c2cff",
+    padding: 12,
+    marginHorizontal: 5,
+    borderRadius: 10,
   },
 });
 
