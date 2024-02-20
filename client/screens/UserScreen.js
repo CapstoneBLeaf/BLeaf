@@ -16,7 +16,6 @@ import {
 } from "../actions/tokenSlice";
 import { useNavigation } from "@react-navigation/core";
 import Button from "./components/Button";
-import { useGetUsersByIdQuery } from "../api/bleafApi";
 import img_arr from "../plants/plants";
 
 export default function UserScreen() {
@@ -33,6 +32,7 @@ export default function UserScreen() {
     dispatch(logOut());
     navigation.navigate("Welcome");
   };
+  // conditional alert if plant grows
 
   if (token) {
     return (
@@ -41,9 +41,8 @@ export default function UserScreen() {
           Hello, {user.firstname} {user.lastname}
         </Text>
         <Image source={img_arr[user.growth_level - 1]} />
-        {/* different messages for plant growth stages */}
         <Text>
-          Grow your plant by completing several days of healthy habits!
+          Grow a flower by completing several days of healthy habits!
         </Text>
         <Button title="Logout" onPress={handleLogout} />
       </SafeAreaView>
