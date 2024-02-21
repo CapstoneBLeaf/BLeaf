@@ -26,13 +26,22 @@ export default function UserScreen() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
+  function fetchPlantGrowth() {
+    if (user.growth_level === 51 ) {
+      return "Hooray! You grew a flower!"
+    }
+    else {
+      return "Grow your flower by completing healthy habits!"
+    }
+  }
+  
+
   const handleLogout = async (e) => {
     e.preventDefault();
     console.log("logging out");
     dispatch(logOut());
     navigation.navigate("Welcome");
   };
-  // conditional alert if plant grows
 
   if (token) {
     return (
@@ -42,7 +51,7 @@ export default function UserScreen() {
         </Text>
         <Image source={img_arr[user.growth_level - 1]} />
         <Text>
-          Grow a flower by completing several days of healthy habits!
+          {fetchPlantGrowth()}
         </Text>
         <Button title="Logout" onPress={handleLogout} />
       </SafeAreaView>
