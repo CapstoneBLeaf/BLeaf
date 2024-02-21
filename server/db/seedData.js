@@ -123,21 +123,21 @@ const habits = [
     name: "Breathe",
     description: "Breathe in for 4.",
     image:
-      "https://i.pinimg.com/originals/6a/b6/ed/6ab6ed08d21f05c48e6da543e9f98f5d.png",
+      "https://art.pixilart.com/00df378d675e0f1.png",
     checkIn: false,
   },
   {
     name: "Health",
     description:
       "Taking our medication on time is one fo the best things we can do for ourselves",
-    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fpngimg.com%2Fimage%2F73248&psig=AOvVaw2xiauA9v7D2mXNrp0A72ZS&ust=1708530967055000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCICbuf2juoQDFQAAAAAdAAAAABAE",
+    image: "https://cdn-icons-png.flaticon.com/512/3165/3165263.png",
     checkIn: false,
   },
   {
     name: "Make the bed",
     description: "Healthy soil beds grow healthy plants!",
     image:
-      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/591baa6b-53a4-4d3e-8749-ae3476ca19fc/ddq4v0t-d4ea2f48-f996-4bc0-9736-2a9adb00df49.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzU5MWJhYTZiLTUzYTQtNGQzZS04NzQ5LWFlMzQ3NmNhMTlmY1wvZGRxNHYwdC1kNGVhMmY0OC1mOTk2LTRiYzAtOTczNi0yYTlhZGIwMGRmNDkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.kr5dCFyZclfQNoIYD6KXrQ6mM9UDK1QxXFhmVmtY6_4",
+      "https://cdn-icons-png.flaticon.com/512/6543/6543683.png",
     checkIn: false,
   },
   {
@@ -170,21 +170,21 @@ const habits = [
     name: "Gratitude",
     description: "Say one thing you're grateful for before bed",
     image:
-      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b0b7f079-2f3a-4895-8dda-4f6bdb7a6659/daz6ils-83d9e001-46cc-462e-bfeb-114409e0e8b4.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2IwYjdmMDc5LTJmM2EtNDg5NS04ZGRhLTRmNmJkYjdhNjY1OVwvZGF6Nmlscy04M2Q5ZTAwMS00NmNjLTQ2MmUtYmZlYi0xMTQ0MDllMGU4YjQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.YhSoLbcK-KRu66nTUQ3B9PB-YmBZLIKl4RsCV8gG9Jk",
+      "https://cdn.pixabay.com/photo/2017/09/23/16/33/pixel-heart-2779422_1280.png",
     checkIn: false,
   },
   {
     name: "Survive the day",
     description: "You can do it. We all have those days.",
     image:
-      "https://t3.ftcdn.net/jpg/04/46/09/68/360_F_446096863_mbuNBq46AZQETaTY0V8nLH2DcpxNFW9M.jpg",
+      "https://png.pngtree.com/png-clipart/20230407/ourmid/pngtree-plant-in-pot-pixel-art-png-image_6681713.png",
     checkIn: false,
   },
   {
     name: "Break",
     description:
       "Taking a step back might give you just want you need to keep moving forward.",
-    image: "https://image.pngaaa.com/471/132471-middle.png",
+    image: "https://p1.hiclipart.com/preview/643/355/589/pixel-pink-white-bunny-pixelated-illustration.jpg",
     checkIn: false,
   },
   {
@@ -207,15 +207,15 @@ const habits = [
     description:
       "Cold showers are beneficial for relieving stress, and warm promotes the relaxation of our muscles.",
     image:
-      "https://png.pngtree.com/png-clipart/20190118/ourmid/pngtree-hand-drawn-bathtub-bath-bathtub-cartoon-bathtub-png-image_456369.jpg",
+      "https://static.vecteezy.com/system/resources/previews/028/651/787/original/pixel-art-rubber-duck-icon-png.png",
     checkIn: false,
   },
   {
     name: "People",
     description:
-      "Fill your day with kindness. Whether it's forgiving yourself, or helping someone else. Do your bed, bud!",
+      "Fill your day with kindness. Whether it's forgiving yourself, or helping someone else. Do your best, bud!",
     image:
-      "https://png.pngtree.com/png-clipart/20210216/ourmid/pngtree-heart-8-bit-pixel-png-image_2896183.jpg",
+      "https://images.vexels.com/media/users/3/246281/isolated/preview/44a75eec57302fb40f8458fb56ec2b7f-phone-pixel-art.png",
     checkIn: false,
   },
   {
@@ -223,14 +223,14 @@ const habits = [
     description:
       "Whether it's a novel, poetry, fan-fic or your favorite blog, reading is an adventure that never ends.",
     image:
-      "https://png.pngtree.com/png-clipart/20210623/ourmid/pngtree-pixel-art-game-supplies-cute-books-png-image_3429895.jpg",
+      "https://static.vecteezy.com/system/resources/previews/027/205/877/non_2x/isolated-simple-microscope-for-laboratory-in-pixel-art-free-png.png",
     checkIn: false,
   },
   {
     name: "Motivate",
     description: "Fast or slow, we all grow! Do the best you can today bud!",
     image:
-      "https://png.pngtree.com/png-clipart/20220714/original/pngtree-trophy-cup-winner-pixel-illustration-png-image_8357870.png",
+      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/1e764174-f164-43e2-aa61-a6636998ba6d/d9no6ej-8eec8fba-c0b7-4cf8-929c-6c5222a3b226.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzFlNzY0MTc0LWYxNjQtNDNlMi1hYTYxLWE2NjM2OTk4YmE2ZFwvZDlubzZlai04ZWVjOGZiYS1jMGI3LTRjZjgtOTI5Yy02YzUyMjJhM2IyMjYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.98lucN22YatrDLtbDV0fnp6xFuBbqA1teLp3Lro9_Pc",
     checkIn: false,
   },
   {
