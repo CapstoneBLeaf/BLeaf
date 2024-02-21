@@ -57,7 +57,7 @@ export const bleafApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["User"],
+      providesTags: ["User"],
     }),
     loginUser: builder.mutation({
       query: (body) => ({
@@ -65,7 +65,7 @@ export const bleafApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["User"],
+      providesTags: ["User"],
     }),
     deleteUser: builder.mutation({
       query: ({ id, token }) => ({
