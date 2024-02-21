@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     padding: 20,
     width: "100%",
     marginTop: 20,
-    borderRadius: 12,
+    borderRadius: 10,
     alignItems: "center",
   },
   title: {

@@ -1,54 +1,69 @@
 import React from "react";
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  SafeAreaView,
+} from "react-native";
+import { useGetGoalsByIdQuery, useDeleteGoalMutation } from "../api/bleafApi";
+import { useSelector } from "react-redux";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { selectCurrentUser } from "../actions/tokenSlice";
+import Notification from "./components/Notification";
 
-const GoalsScreen = ({ route, navigation }) => {
-  const goals = route.params?.goals || [];
-
-  if (goals.length === 0) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.noGoalsText}>Set goals on Habits page!</Text>
-      </View>
-    );
+const GoalsScreen = () => {
+  const user = useSelector(selectCurrentUser);
+  const userId = user.id;
+  const { data: goalData, isLoading: isLoading } = useGetGoalsByIdQuery(userId);
+  const [deleteGoal] = useDeleteGoalMutation();
+  console.log("Goals", goalData);
+  if (isLoading) {
+    return <Text className="loading">Loading...</Text>;
   }
 
-  const removeHabit = (index) => {
-    const updatedGoals = [...goals];
-    updatedGoals.splice(index, 1);
-    navigation.setParams({ goals: updatedGoals });
-  };
-
-  const renderGoalItem = ({ item, index }) => (
-    <View style={styles.goalContainer}>
-      <TouchableOpacity onPress={() => removeHabit(index)} style={styles.deleteButton}>
-        <Text style={styles.deleteButtonText}>Delete</Text>
-      </TouchableOpacity>
-      <Image style={styles.image} source={{ uri: item.habit.image }} />
-      <View style={styles.goalDetails}>
-        <Text style={styles.goalText}>Habit: {item.habit.name}</Text>
-        <Text style={styles.goalText}>Frequency: {item.frequency}</Text>
-        <Text style={styles.goalText}>Motivation: {item.statement}</Text>
-      </View>
-    </View>
-  );
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Goals Screen</Text>
-      <FlatList
-        data={goals}
-        renderItem={renderGoalItem}
-        keyExtractor={(item, index) => index.toString()}
-      />
-    </View>
+    <ScrollView
+      style={styles.goalView}
+      automaticallyAdjustKeyboardInsets={true}
+    >
+      {goalData.length > 0 ? (
+        goalData.map((goal) => {
+          return (
+            <View style={styles.goalContainer} key={goal.goalId}>
+              <Image style={styles.image} source={{ uri: `${goal.image}` }} />
+              <View style={styles.goalDetails}>
+                <Text style={styles.name}>Habit: {goal.name}</Text>
+                <Text style={styles.frequency}>
+                  Frequency: {goal.frequency}
+                </Text>
+                <Text style={styles.statement}>
+                  Motivation: {goal.statement}
+                </Text>
+              </View>
+              <Ionicons
+                style={styles.deleteButton}
+                name="trash-outline"
+                onPress={() => deleteGoal(goal.goalId)}
+              />
+            </View>
+          );
+        })
+      ) : (
+        <SafeAreaView>
+          <Text style={styles.error}>Goals Not Found</Text>
+        </SafeAreaView>
+      )}
+      <Notification />
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  goalView: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: "#58e4dc",
   },
   header: {
     fontSize: 24,
@@ -59,15 +74,14 @@ const styles = StyleSheet.create({
     color: "gray",
   },
   goalContainer: {
-    backgroundColor: "#29eecb",
-    padding: 20,
+    backgroundColor: "#fff",
+    padding: 15,
     marginVertical: 8,
     marginHorizontal: 16,
     flexDirection: "row",
     alignItems: "center",
-    width: 336, 
-    height: 120, 
-    borderRadius: 10, 
+    rowGap: 10,
+    borderRadius: 10, // Add borderRadius for square shape
   },
   goalDetails: {
     flex: 1,
@@ -82,14 +96,15 @@ const styles = StyleSheet.create({
     width: 80, 
     borderRadius: 5,
   },
+
   deleteButton: {
-    backgroundColor: "red",
-    padding: 10,
-    borderRadius: 5,
+    color: "black",
+    fontSize: 24,
   },
-  deleteButtonText: {
-    color: "white",
-    fontWeight: "bold",
+  error: {
+    color: "red",
+    textAlign: "center",
+    marginTop: 10,
   },
 });
 

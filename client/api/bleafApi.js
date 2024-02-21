@@ -14,7 +14,7 @@ export const bleafApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["User", "Activity", "Habits"],
+  tagTypes: ["User", "Activity", "Habits", "Goals"],
   endpoints: (builder) => ({
     getAllHabits: builder.query({
       query: () => "/habits",
@@ -79,52 +79,30 @@ export const bleafApi = createApi({
       query: () => "/goals",
     }),
     getGoalsById: builder.query({
-      query: (id) => `/goals/${id}`,
+      query: (id) => ({
+        url: `/goals/user/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Goals", "User"],
     }),
     createGoals: builder.mutation({
       query: (body) => ({
-        url: "/goals",
+        url: `/goals/add`,
         method: "POST",
-        body: body,
+        body,
       }),
+      invalidatesTags: ["Goals"],
     }),
     deleteGoal: builder.mutation({
-      query: ({ id, token }) => ({
+      query: (id) => ({
         url: `/goals/${id}`,
         method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
       }),
+      invalidatesTags: ["Goals"],
     }),
     updateGoals: builder.mutation({
       query: ({ id, token }) => ({
         url: `/habits/${id}`,
-        method: "PATCH",
-        headers: { Authorization: `Bearer ${token}` },
-      }),
-    }),
-    getAllPlants: builder.query({
-      query: () => "/plants",
-    }),
-    getPlantsById: builder.query({
-      query: (id) => `/plants/${id}`,
-    }),
-    createPlants: builder.mutation({
-      query: (body) => ({
-        url: "/plants",
-        method: "POST",
-        body: body,
-      }),
-    }),
-    deletePlants: builder.mutation({
-      query: ({ id, token }) => ({
-        url: `/plants/${id}`,
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      }),
-    }),
-    updatePlants: builder.mutation({
-      query: ({ id, token }) => ({
-        url: `/plants/${id}`,
         method: "PATCH",
         headers: { Authorization: `Bearer ${token}` },
       }),
@@ -145,7 +123,7 @@ export const bleafApi = createApi({
         method: "POST",
         body: { userId: data.userId },
       }),
-      invalidatesTags: ["Activity"],
+      invalidatesTags: ["Activity", "User"],
     }),
     //remove CheckIn
     removeCheckIn: builder.mutation({

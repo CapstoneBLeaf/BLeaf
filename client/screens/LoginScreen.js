@@ -23,34 +23,34 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
   const [error, setError] = useState(null);
 
-  const [errors,setErrors] = useState({})
+  const [errors, setErrors] = useState({});
   const validateForm = () => {
-    let errors = {}
-    if(!username) errors.username = "Username is required"
-    if(!password) errors.password = "Password is required"
-    setErrors(errors)
-    return Object.keys(errors).length === 0
-  }
+    let errors = {};
+    if (!username) errors.username = "Username is required";
+    if (!password) errors.password = "Password is required";
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if(validateForm()){
-    try {
-      const result = await loginUser({
-        username,
-        password
-      }).unwrap();
-      dispatch(setCredentials(result));
-      setUsername("");
-      setPassword("");
-      navigation.navigate("Home");
-      console.log("Username:", username);
-      console.log("Password:", password);
-    } catch (rejected) {
-      setError(rejected.data.error);
-      console.log(`error caught: ${error}`);
+    if (validateForm()) {
+      try {
+        const result = await loginUser({
+          username,
+          password,
+        }).unwrap();
+        dispatch(setCredentials(result));
+        setUsername("");
+        setPassword("");
+        navigation.navigate("Home");
+        console.log("Username:", username);
+        console.log("Password:", password);
+      } catch (rejected) {
+        setError(rejected.data.error);
+        console.log(`error caught: ${error}`);
+      }
     }
-  }
   };
 
   // // Configure Gmail login
@@ -105,7 +105,9 @@ const LoginScreen = () => {
         value={username}
         onChangeText={(text) => setUsername(text)}
       />
-      {errors.username ? <Text style={styles.errorText}>{errors.username}</Text> : null}
+      {errors.username ? (
+        <Text style={styles.errorText}>{errors.username}</Text>
+      ) : null}
       <TextInput
         style={styles.input}
         placeholder="Password"
@@ -113,7 +115,9 @@ const LoginScreen = () => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-      {errors.password ? <Text style={styles.errorText}>{errors.password}</Text> : null}
+      {errors.password ? (
+        <Text style={styles.errorText}>{errors.password}</Text>
+      ) : null}
       {error && (
         <Text>
           {console.log(`error displayed: ${error}`)}
@@ -121,31 +125,15 @@ const LoginScreen = () => {
         </Text>
       )}
       <Button title="Login" onPress={handleLogin} />
-      <Text style={styles.loginsub}>Or, login with ...</Text>
-      <View style={styles.sociallogo}>
-        <TouchableOpacity onPress={() => {}} style={styles.tinyLogom}>
-          <Image
-            style={styles.tinyLogo}
-            source={require("../assets/facebook.png")}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => {}} style={styles.tinyLogom}>
-          <Image
-            style={styles.tinyLogo}
-            source={require("../assets/google.png")}
-          />
-        </TouchableOpacity>
-      </View>
       <View style={styles.register}>
-        <Text style={styles.newapp}>New to the app?</Text>
+        <Text style={{ fontSize: 16 }}>New to the app?</Text>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("Signup");
           }}
           style={styles.registerbtn}
         >
-          <Text style={styles.registertxt}> Register</Text>
+          <Text style={{ color: "blue", fontSize: 16 }}> Register</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -157,6 +145,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingRight: 20,
     paddingLeft: 20,
+    backgroundColor: "#ffffff",
+    justifyContent: "center",
   },
   logo: {
     width: 150,
@@ -171,12 +161,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
-    height: 40,
-    width: "100%",
-    borderColor: "gray",
-    borderWidth: 1,
-    marginTop: 10,
+    height: 45,
+    marginBottom: 10,
     paddingHorizontal: 10,
+    backgroundColor: "#f3f3f4",
+    borderRadius: 10,
   },
   buttonText: {
     color: "white",
@@ -193,7 +182,7 @@ const styles = StyleSheet.create({
   loginsub: {
     marginBottom: 30,
     marginTop: 30,
-    textAlign: 'center'
+    textAlign: "center",
   },
   tinyLogo: {
     height: 24,
@@ -212,12 +201,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginRight: 10,
   },
-  errorText:{
-    color: 'red',
+  errorText: {
+    color: "red",
     marginTop: 10,
-    textAlign: 'left'
+    textAlign: "left",
   },
-  register: { flexDirection: "row", justifyContent: "center" },
+  register: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 15,
+  },
 });
 
 export default LoginScreen;

@@ -1,9 +1,7 @@
-
-
 {
   "expo": {
     "name": "client",
-    "slug": "client",
+    "slug": "bleaf",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -38,6 +36,12 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "scheme": "bleaf"
+    "scheme": "bleaf",
+    "extra": {
+      "eas": {
+        "projectId": "9af06c01-1913-4dd4-a776-c0608cfb725c"
+      }
+    },
+    "owner": "estela.sharp"
   }
 }

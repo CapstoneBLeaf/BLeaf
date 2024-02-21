@@ -112,48 +112,45 @@ const growth_levels = [
 
 const habits = [
   {
-    name: "hydrate",
+    name: "Hydrate",
     description:
       "Similar to flowers and plants, water helps us grow. Have you watered yourself today?",
     image:
-      "https://t3.ftcdn.net/jpg/04/46/09/68/360_F_446096863_mbuNBq46AZQETaTY0V8nLH2DcpxNFW9M.jpg",
+      "https://opengameart.org/sites/default/files/water_bottle_32bit_img_preview.png",
     checkIn: false,
   },
   {
-    name: "breathe",
+    name: "Breathe",
     description: "Breathe in for 4.",
     image:
-      "https://t3.ftcdn.net/jpg/04/46/09/68/360_F_446096863_mbuNBq46AZQETaTY0V8nLH2DcpxNFW9M.jpg",
-    description: "Breathe in for 4.",
-    image:
-      "https://t3.ftcdn.net/jpg/04/46/09/68/360_F_446096863_mbuNBq46AZQETaTY0V8nLH2DcpxNFW9M.jpg",
+      "https://i.pinimg.com/originals/6a/b6/ed/6ab6ed08d21f05c48e6da543e9f98f5d.png",
     checkIn: false,
   },
   {
-    name: "health",
+    name: "Health",
     description:
       "Taking our medication on time is one fo the best things we can do for ourselves",
-    image: "https://p1.hiclipart.com/preview/206/764/836/pixel-png-clipart.jpg",
+    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fpngimg.com%2Fimage%2F73248&psig=AOvVaw2xiauA9v7D2mXNrp0A72ZS&ust=1708530967055000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCICbuf2juoQDFQAAAAAdAAAAABAE",
     checkIn: false,
   },
   {
     name: "Make the bed",
     description: "Healthy soil beds grow healthy plants!",
     image:
-      "https://png.pngtree.com/png-clipart/20190617/original/pngtree-hand-painted-life-supplies-pink-pillow-png-image_3888310.jpg",
+      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/591baa6b-53a4-4d3e-8749-ae3476ca19fc/ddq4v0t-d4ea2f48-f996-4bc0-9736-2a9adb00df49.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzU5MWJhYTZiLTUzYTQtNGQzZS04NzQ5LWFlMzQ3NmNhMTlmY1wvZGRxNHYwdC1kNGVhMmY0OC1mOTk2LTRiYzAtOTczNi0yYTlhZGIwMGRmNDkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.kr5dCFyZclfQNoIYD6KXrQ6mM9UDK1QxXFhmVmtY6_4",
     checkIn: false,
   },
   {
     name: "Wash your face",
     description: "Wipe the old dirt away.",
     image:
-      "https://static.wikia.nocookie.net/minecraft_gamepedia/images/e/e3/Bubble_Column_JE1_BE1.png/revision/latest?cb=20190518115608",
+      "https://png.pngtree.com/png-clipart/20230112/original/pngtree-water-drop-pixels-png-image_8905892.png",
     checkIn: false,
   },
   {
     name: "Step outside of the house",
     description: "Photosynthesize!",
-    image: "https://image.pngaaa.com/658/2101658-middle.png",
+    image: "https://i.pinimg.com/originals/61/ff/a4/61ffa46d6942d7cca6165b63e9a18f95.png",
     checkIn: false,
   },
   {
@@ -166,7 +163,7 @@ const habits = [
     name: "Exercise",
     description: "Getting some movement in can boost the mood!",
     image:
-      "https://w7.pngwing.com/pngs/167/230/png-transparent-dumbbell-bodybuilding-weightlifting-fitness-exercise-workout-icon-pixel-pixel-art-8-bit-thumbnail.png",
+      "https://png.pngtree.com/png-clipart/20220918/original/pngtree-tennis-ball-icon-in-pixel-style-png-image_8622907.png",
     checkIn: false,
   },
   {
@@ -194,7 +191,7 @@ const habits = [
     name: "Rest",
     description: "A good night's sleep can be a serious game changer.",
     image:
-      "https://as2.ftcdn.net/v2/jpg/02/96/46/51/1000_F_296465161_Rhwin3BrGI7QquCbWV3TOdnSuqT6NVUf.jpg",
+      "https://static.vecteezy.com/system/resources/previews/027/190/648/original/pixel-art-sleeping-persain-cat-png.png",
     checkIn: false,
   },
   {
@@ -202,7 +199,7 @@ const habits = [
     description:
       "Eating fruits and veggies is a simple way to stay hydrated and stabilize energy throughout the day.",
     image:
-      "https://png.pngtree.com/png-clipart/20210530/ourmid/pngtree-pixel-food-fruit-vegetable-apple-png-image_3373213.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/013/743/158/small_2x/apple-pixel-art-png.png",
     checkIn: false,
   },
   {
