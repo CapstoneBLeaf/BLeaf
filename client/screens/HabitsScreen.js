@@ -166,7 +166,6 @@ function HabitsScreen(props) {
               placeholderTextColor="#999999" // Set placeholder text color to gray
               onChangeText={(text) => setStatement(text)}
             />
-
             <View style={styles.buttonRow}>
               <TouchableOpacity onPress={handleAddGoals} style={styles.btn}>
                 <Text style={styles.title}>Add Goal</Text>
