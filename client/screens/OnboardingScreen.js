@@ -26,7 +26,7 @@ export default function OnboardingScreen() {
         DoneButtonComponent={doneButton}
         pages={[
           {
-            backgroundColor: "#44564A",
+            backgroundColor: "#32CB7E",
             image: (
               <View style={styles.img}>
                 <LottieView
@@ -40,7 +40,7 @@ export default function OnboardingScreen() {
             subtitle: "Welcome to Bleaf",
           },
           {
-            backgroundColor: "#BF5335",
+            backgroundColor: "#1F91A3",
             image: (
               <View style={styles.img}>
                 <LottieView
@@ -54,7 +54,7 @@ export default function OnboardingScreen() {
             subtitle: "Done with React Native Onboarding Swiper",
           },
           {
-            backgroundColor: "#412E32",
+            backgroundColor: "#6C6CFF",
             image: (
               <View style={styles.img}>
                 <LottieView
@@ -68,7 +68,7 @@ export default function OnboardingScreen() {
             subtitle: "Done with React Native Onboarding Swiper",
           },
           {
-            backgroundColor: "#6D7448",
+            backgroundColor: "#F4A9A9",
             image: (
               <View style={styles.img}>
                 <LottieView
