@@ -11,6 +11,8 @@ import { useGetGoalsByIdQuery, useDeleteGoalMutation } from "../api/bleafApi";
 import { useSelector } from "react-redux";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { selectCurrentUser } from "../actions/tokenSlice";
+import Notification from "./components/Notification";
+
 const GoalsScreen = () => {
   const user = useSelector(selectCurrentUser);
   const userId = user.id;
@@ -22,11 +24,14 @@ const GoalsScreen = () => {
   }
 
   return (
-    <ScrollView key={styles.goalView} automaticallyAdjustKeyboardInsets={true}>
+    <ScrollView
+      style={styles.goalView}
+      automaticallyAdjustKeyboardInsets={true}
+    >
       {goalData.length > 0 ? (
         goalData.map((goal) => {
           return (
-            <View key={goal.id} style={styles.goalContainer}>
+            <View style={styles.goalContainer} key={goal.goalId}>
               <Image style={styles.image} source={{ uri: `${goal.image}` }} />
               <View style={styles.goalDetails}>
                 <Text style={styles.name}>Habit: {goal.name}</Text>
@@ -50,15 +55,15 @@ const GoalsScreen = () => {
           <Text style={styles.error}>Goals Not Found</Text>
         </SafeAreaView>
       )}
+      <Notification />
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  goalView: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: "#58e4dc",
   },
   header: {
     fontSize: 24,
@@ -69,12 +74,13 @@ const styles = StyleSheet.create({
     color: "gray",
   },
   goalContainer: {
-    backgroundColor: "#29eecb",
-    padding: 20,
+    backgroundColor: "#fff",
+    padding: 15,
     marginVertical: 8,
     marginHorizontal: 16,
     flexDirection: "row",
     alignItems: "center",
+    rowGap: 10,
     borderRadius: 10, // Add borderRadius for square shape
   },
   goalDetails: {

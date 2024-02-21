@@ -126,14 +126,14 @@ const LoginScreen = () => {
       )}
       <Button title="Login" onPress={handleLogin} />
       <View style={styles.register}>
-        <Text style={styles.newapp}>New to the app?</Text>
+        <Text style={{ fontSize: 16 }}>New to the app?</Text>
         <TouchableOpacity
           onPress={() => {
             navigation.navigate("Signup");
           }}
           style={styles.registerbtn}
         >
-          <Text style={styles.registertxt}> Register</Text>
+          <Text style={{ color: "blue", fontSize: 16 }}> Register</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -145,6 +145,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingRight: 20,
     paddingLeft: 20,
+    backgroundColor: "#ffffff",
+    justifyContent: "center",
   },
   logo: {
     width: 150,
@@ -159,12 +161,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
-    height: 40,
-    width: "100%",
-    borderColor: "gray",
-    borderWidth: 1,
-    marginTop: 10,
+    height: 45,
+    marginBottom: 10,
     paddingHorizontal: 10,
+    backgroundColor: "#f3f3f4",
+    borderRadius: 10,
   },
   buttonText: {
     color: "white",
@@ -205,7 +206,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: "left",
   },
-  register: { flexDirection: "row", justifyContent: "center" },
+  register: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 15,
+  },
 });
 
 export default LoginScreen;

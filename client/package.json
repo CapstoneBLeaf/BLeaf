@@ -16,16 +16,11 @@
     "@react-navigation/native": "^6.1.10",
     "@react-navigation/native-stack": "^6.9.17",
     "@reduxjs/toolkit": "^2.1.0",
-
-    
-    
+    "expo": "~50.0.7",
     "expo-constants": "^15.4.5",
+    "expo-crypto": "~12.8.1",
     "expo-device": "^5.9.3",
     "expo-notifications": "^0.27.6",
-
-    "expo": "~50.0.7",
-    "expo-crypto": "~12.8.1",
-
     "expo-status-bar": "~1.11.1",
     "i": "^0.3.7",
     "install": "^0.13.0",

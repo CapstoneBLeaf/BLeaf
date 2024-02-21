@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
-    backgroundColor: "pink",
+    backgroundColor: "#58e4dc",
     padding: 10,
     marginBottom: 10,
   },
