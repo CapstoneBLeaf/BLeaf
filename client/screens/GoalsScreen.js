@@ -31,7 +31,7 @@ const GoalsScreen = () => {
       {goalData.length > 0 ? (
         goalData.map((goal) => {
           return (
-            <View style={styles.goalContainer}>
+            <View style={styles.goalContainer} key={goal.goalId}>
               <Image style={styles.image} source={{ uri: `${goal.image}` }} />
               <View style={styles.goalDetails}>
                 <Text style={styles.name}>Habit: {goal.name}</Text>
