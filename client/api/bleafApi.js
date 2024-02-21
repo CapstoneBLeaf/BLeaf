@@ -107,33 +107,6 @@ export const bleafApi = createApi({
         headers: { Authorization: `Bearer ${token}` },
       }),
     }),
-    getAllPlants: builder.query({
-      query: () => "/plants",
-    }),
-    getPlantsById: builder.query({
-      query: (id) => `/plants/${id}`,
-    }),
-    createPlants: builder.mutation({
-      query: (body) => ({
-        url: "/plants",
-        method: "POST",
-        body: body,
-      }),
-    }),
-    deletePlants: builder.mutation({
-      query: ({ id, token }) => ({
-        url: `/plants/${id}`,
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      }),
-    }),
-    updatePlants: builder.mutation({
-      query: ({ id, token }) => ({
-        url: `/plants/${id}`,
-        method: "PATCH",
-        headers: { Authorization: `Bearer ${token}` },
-      }),
-    }),
     //list checkIn habits
     listCheckIn: builder.query({
       query: (id) => ({
@@ -150,7 +123,7 @@ export const bleafApi = createApi({
         method: "POST",
         body: { userId: data.userId },
       }),
-      invalidatesTags: ["Activity"],
+      invalidatesTags: ["Activity", "User"],
     }),
     //remove CheckIn
     removeCheckIn: builder.mutation({
