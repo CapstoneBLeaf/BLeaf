@@ -137,7 +137,7 @@ const habits = [
     name: "Make the bed",
     description: "Healthy soil beds grow healthy plants!",
     image:
-      "https://cdn-icons-png.flaticon.com/512/6543/6543683.png",
+      "https://64.media.tumblr.com/c72c5681278fb5cacacd58047007590a/tumblr_njxcsc0C7I1r7ueqyo1_400.pnj",
     checkIn: false,
   },
   {
