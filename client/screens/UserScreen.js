@@ -4,8 +4,10 @@ import {
   Image,
   ScrollView,
   Dimensions,
+  View,
+  SafeAreaView,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectCurrentToken,
@@ -17,7 +19,6 @@ import { useGetUsersByIdQuery } from "../api/bleafApi";
 import Button from "./components/Button";
 import img_arr from "../plants/plants";
 import ConfettiCannon from "react-native-confetti-cannon";
-
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 export default function UserScreen() {
@@ -28,22 +29,18 @@ export default function UserScreen() {
   console.log(user);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-
   if (isLoading) {
-    return <Text>Loading</Text>
+    return <Text>Loading</Text>;
   }
-
   function fetchPlantGrowth() {
-    if (user.growth_level === 51 ) {
-      return "Hooray! You grew a flower!"
-    }
-    else {
-      return "Grow your flower by completing healthy habits!"
+    if (user.growth_level === 51) {
+      return "Hooray! You grew a flower!";
+    } else {
+      return "Grow your flower by completing healthy habits!";
     }
   }
-  console.log("data")
-  console.log(JSON.stringify(data))
-  
+  console.log("data");
+  console.log(JSON.stringify(data));
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -51,39 +48,41 @@ export default function UserScreen() {
     dispatch(logOut());
     navigation.navigate("Welcome");
   };
-
   if (token) {
     return (
       <ScrollView automaticallyAdjustKeyboardInsets={true}>
-        <Text style={styles.container}>
-          Hello, {data.firstname} {data.lastname}
-        </Text>
-        <Image source={img_arr[data.growth_level - 1]}
-        style={styles.image}
-        resizeMode="contain" />
-        <Text>
-          {fetchPlantGrowth()}
-        </Text>
-        {user.growth_level === 51 && (
-            <ConfettiCannon count={200} origin={{ x: -10, y: 0 }} />
-          )}
-        <Button title="Logout" onPress={handleLogout} />
+        <SafeAreaView>
+          <View style={styles.container}>
+            <Text style={styles.name}>
+              Hello, {data.firstname} {data.lastname}
+            </Text>
+            <Image
+              source={img_arr[data.growth_level - 1]}
+              style={styles.image}
+              resizeMode="contain"
+            />
+            <Text>{fetchPlantGrowth()}</Text>
+            {user.growth_level === 51 && (
+              <ConfettiCannon count={200} origin={{ x: -10, y: 0 }} />
+            )}
+            <Button title="Logout" onPress={handleLogout} />
+          </View>
+        </SafeAreaView>
       </ScrollView>
     );
   }
 }
-
 const styles = StyleSheet.create({
   name: {
     fontSize: 24,
+    marginBottom: 20,
   },
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#ffffff",
-    paddingRight: 20,
-    paddingLeft: 20,
+    padding: 20,
   },
   ImageBackground: {
     flex: 1,
