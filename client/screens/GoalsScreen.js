@@ -59,7 +59,8 @@ const GoalsScreen = () => {
         ) : (
           <SafeAreaView>
             <Text style={styles.error}>
-              No goals set yet. Go to the habits page to get started!
+              No goals set yet. Go to the habits page to get started and set
+              reminder as well!
             </Text>
           </SafeAreaView>
         )}
