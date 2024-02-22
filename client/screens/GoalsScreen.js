@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,15 +6,19 @@ import {
   ScrollView,
   Image,
   SafeAreaView,
+  Modal,
+  Pressable,
 } from "react-native";
 import { useGetGoalsByIdQuery, useDeleteGoalMutation } from "../api/bleafApi";
 import { useSelector } from "react-redux";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { selectCurrentUser } from "../actions/tokenSlice";
 import Notification from "./components/Notification";
+import Button from "./components/Button";
 
 const GoalsScreen = () => {
   const user = useSelector(selectCurrentUser);
+  const [modalVisible, setModalVisible] = useState(false);
   const userId = user.id;
   const { data: goalData, isLoading: isLoading } = useGetGoalsByIdQuery(userId);
   const [deleteGoal] = useDeleteGoalMutation();
@@ -22,40 +26,62 @@ const GoalsScreen = () => {
   if (isLoading) {
     return <Text className="loading">Loading...</Text>;
   }
-
+  const handleReminder = async (e) => {
+    setModalVisible(true);
+  };
   return (
     <ScrollView
       style={styles.goalView}
       automaticallyAdjustKeyboardInsets={true}
     >
-      {goalData.length > 0 ? (
-        goalData.map((goal) => {
-          return (
-            <View style={styles.goalContainer} key={goal.goalId}>
-              <Image style={styles.image} source={{ uri: `${goal.image}` }} />
-              <View style={styles.goalDetails}>
-                <Text style={styles.name}>Habit: {goal.name}</Text>
-                <Text style={styles.frequency}>
-                  Frequency: {goal.frequency}
-                </Text>
-                <Text style={styles.statement}>
-                  Motivation: {goal.statement}
-                </Text>
+      <View style={styles.container}>
+        {goalData.length > 0 ? (
+          goalData.map((goal) => {
+            return (
+              <View style={styles.goalContainer} key={goal.goalId}>
+                <Image style={styles.image} source={{ uri: `${goal.image}` }} />
+                <View style={styles.goalDetails}>
+                  <Text style={styles.name}>Habit: {goal.name}</Text>
+                  <Text style={styles.frequency}>
+                    Frequency: {goal.frequency}
+                  </Text>
+                  <Text style={styles.statement}>
+                    Motivation: {goal.statement}
+                  </Text>
+                </View>
+                <Ionicons
+                  style={styles.deleteButton}
+                  name="trash-outline"
+                  onPress={() => deleteGoal(goal.goalId)}
+                />
               </View>
-              <Ionicons
-                style={styles.deleteButton}
-                name="trash-outline"
-                onPress={() => deleteGoal(goal.goalId)}
-              />
+            );
+          })
+        ) : (
+          <SafeAreaView>
+            <Text style={styles.error}>Goals Not Found</Text>
+          </SafeAreaView>
+        )}
+        <Button title="Set Reminder" onPress={handleReminder} />
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modal}>
+              <Pressable
+                style={styles.buttonClose}
+                onPress={() => setModalVisible(false)}
+              >
+                <Ionicons style={styles.close} name="close-outline" />
+              </Pressable>
+              <Notification />
             </View>
-          );
-        })
-      ) : (
-        <SafeAreaView>
-          <Text style={styles.error}>Goals Not Found</Text>
-        </SafeAreaView>
-      )}
-      <Notification />
+          </View>
+        </Modal>
+      </View>
     </ScrollView>
   );
 };
@@ -76,12 +102,13 @@ const styles = StyleSheet.create({
   goalContainer: {
     backgroundColor: "#fff",
     padding: 15,
-    marginVertical: 8,
-    marginHorizontal: 16,
     flexDirection: "row",
     alignItems: "center",
     rowGap: 10,
     borderRadius: 10, // Add borderRadius for square shape
+  },
+  container: {
+    padding: 20,
   },
   goalDetails: {
     flex: 1,
@@ -92,14 +119,41 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   image: {
-    height: 80, 
-    width: 80, 
-    borderRadius: 5,
+    height: 80, // Adjusted height
+    width: 80, // Adjusted width
+    borderRadius: 5, // Add borderRadius to match the container
   },
-
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  modal: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    justifyContent: "center",
+    display: "flex",
+  },
   deleteButton: {
     color: "black",
     fontSize: 24,
+  },
+  close: {
+    color: "black",
+    fontSize: 24,
+    alignItems: "flex-end",
+    position: "absolute",
+    right: -10,
+    top: -10,
   },
   error: {
     color: "red",
