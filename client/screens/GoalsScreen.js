@@ -92,9 +92,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   image: {
-    height: 80, // Adjusted height
-    width: 80, // Adjusted width
-    borderRadius: 5, // Add borderRadius to match the container
+    height: 80, 
+    width: 80, 
+    borderRadius: 5,
   },
 
   deleteButton: {
