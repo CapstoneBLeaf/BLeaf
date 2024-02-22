@@ -27,9 +27,7 @@ function getUserFromRequest(req) {
   if (req.get("Authorization") == null) return;
   const token = req.get("Authorization").split(" ")[1];
   if (token == null) return;
-  console.log(token);
   decoded = jwt.verify(token, JWT_SECRET);
-  console.log(decoded);
   const user = getUserById(decoded.id);
   return user;
 }
