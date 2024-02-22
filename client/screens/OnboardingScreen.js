@@ -64,8 +64,8 @@ export default function OnboardingScreen() {
                 ></LottieView>
               </View>
             ),
-            title: "Set Goals",
-            subtitle: "Keep yourself on track when things get busy, set some reminders and send yourself some motivation!",
+            title: "Set Goals & Check In",
+            subtitle: "Keep yourself on track when things get busy, check in on your goals and set some reminders with some motivation!",
           },
           {
             backgroundColor: "#F4A9A9",
@@ -78,8 +78,8 @@ export default function OnboardingScreen() {
                 ></LottieView>
               </View>
             ),
-            title: "Check In",
-            subtitle: "Complete a goal and check in! Daily progress will be tracked, as you grow, so will your plant!",
+            title: "Don't forget to B.Leaf in yourself!",
+            subtitle: "Daily progress will be tracked, as you grow, so will your plant!",
           },
         ]}
       />
