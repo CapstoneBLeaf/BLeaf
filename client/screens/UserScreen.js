@@ -62,7 +62,7 @@ export default function UserScreen() {
               resizeMode="contain"
             />
             <Text>{fetchPlantGrowth()}</Text>
-            {user.growth_level === 51 && (
+            {(user.growth_level === 51 || user.growth_level > 51) && (
               <ConfettiCannon count={200} origin={{ x: -10, y: 0 }} />
             )}
             <Button title="Logout" onPress={handleLogout} />
