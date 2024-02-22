@@ -123,11 +123,11 @@ export default function Notification() {
   };
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Enter Notification Title:</Text>
+      <Text>Set Your Reminder</Text>
       <TextInput
         value={title}
         onChangeText={setTitle}
-        placeholder="Enter title"
+        placeholder="Label Reminder"
         style={{ borderWidth: 1, padding: 10, margin: 10, width: 200 }}
       />
       <Button title="Select Time" onPress={() => setShowPicker(true)} />
@@ -142,7 +142,7 @@ export default function Notification() {
         />
       )}
       <Button
-        title="Schedule Notification"
+        title="Schedule Reminder"
         onPress={async () => {
           await scheduleNotification(expoPushToken);
         }}
