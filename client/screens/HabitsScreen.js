@@ -144,10 +144,7 @@ function HabitsScreen(props) {
             </View>
 
             <TextInput
-              style={[
-                styles.input,
-                { color: "#000", backgroundColor: "#ffffff" },
-              ]}
+              style={styles.input}
               placeholder="Enter Motivating Statement"
               placeholderTextColor="#999999"
               onChangeText={(text) => setStatement(text)}
@@ -232,13 +229,12 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   input: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
+    height: 45,
+    backgroundColor: "#f3f3f4",
     marginBottom: 20,
     paddingHorizontal: 10,
     width: "100%",
-    borderRadius: 5,
+    borderRadius: 10,
   },
   radioContainer: {
     flexDirection: "row",
