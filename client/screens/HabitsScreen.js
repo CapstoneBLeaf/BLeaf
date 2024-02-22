@@ -38,9 +38,7 @@ function HabitsScreen(props) {
 
   async function handleCheckIn(id) {
     try {
-      console.log(id, userId);
       const response = await checkInHabit({ id, userId });
-      console.log("responsech:", response.data);
     } catch (error) {
       console.error(error);
     }
@@ -61,7 +59,6 @@ function HabitsScreen(props) {
       }).unwrap();
       setFrequency("");
       setStatement("");
-      console.log("responsegg:", response);
       navigation.navigate("Goals");
       setModalVisible(false);
     } catch (error) {
@@ -152,7 +149,7 @@ function HabitsScreen(props) {
                 { color: "#000", backgroundColor: "#ffffff" },
               ]}
               placeholder="Enter Motivating Statement"
-              placeholderTextColor="#999999" 
+              placeholderTextColor="#999999"
               onChangeText={(text) => setStatement(text)}
             />
             <View style={styles.buttonRow}>

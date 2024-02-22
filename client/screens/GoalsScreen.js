@@ -22,7 +22,6 @@ const GoalsScreen = () => {
   const userId = user.id;
   const { data: goalData, isLoading: isLoading } = useGetGoalsByIdQuery(userId);
   const [deleteGoal] = useDeleteGoalMutation();
-  console.log("Goals", goalData);
   if (isLoading) {
     return <Text className="loading">Loading...</Text>;
   }
@@ -59,28 +58,34 @@ const GoalsScreen = () => {
           })
         ) : (
           <SafeAreaView>
-            <Text style={styles.error}>Goals Not Found</Text>
+            <Text style={styles.error}>
+              No goals set yet. Go to the habits page to get started!
+            </Text>
           </SafeAreaView>
         )}
-        <Button title="Set Reminder" onPress={handleReminder} />
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => setModalVisible(false)}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modal}>
-              <Pressable
-                style={styles.buttonClose}
-                onPress={() => setModalVisible(false)}
-              >
-                <Ionicons style={styles.close} name="close-outline" />
-              </Pressable>
-              <Notification />
-            </View>
-          </View>
-        </Modal>
+        {goalData.length > 0 && (
+          <>
+            <Button title="Set Reminder" onPress={handleReminder} />
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => setModalVisible(false)}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modal}>
+                  <Pressable
+                    style={styles.buttonClose}
+                    onPress={() => setModalVisible(false)}
+                  >
+                    <Ionicons style={styles.close} name="close-outline" />
+                  </Pressable>
+                  <Notification />
+                </View>
+              </View>
+            </Modal>
+          </>
+        )}
       </View>
     </ScrollView>
   );
@@ -105,7 +110,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     rowGap: 10,
-    borderRadius: 10, // Add borderRadius for square shape
+    borderRadius: 10,
   },
   container: {
     padding: 20,
@@ -119,9 +124,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   image: {
-    height: 80, // Adjusted height
-    width: 80, // Adjusted width
-    borderRadius: 5, // Add borderRadius to match the container
+    height: 80,
+    width: 80,
+    borderRadius: 5,
   },
   centeredView: {
     flex: 1,

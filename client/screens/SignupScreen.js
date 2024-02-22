@@ -54,7 +54,6 @@ const SignupScreen = () => {
         setLastname("");
         setEmail("");
         setPassword("");
-        console.log(result);
         navigation.navigate("Home");
       } catch (error) {
         console.error(error);

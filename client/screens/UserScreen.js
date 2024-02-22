@@ -25,8 +25,6 @@ export default function UserScreen() {
   const token = useSelector(selectCurrentToken);
   const user = useSelector(selectCurrentUser);
   const { data, isLoading } = useGetUsersByIdQuery(user.id, token);
-  console.log(token);
-  console.log(user);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   if (isLoading) {
@@ -39,12 +37,8 @@ export default function UserScreen() {
       return "Grow your flower by completing healthy habits!";
     }
   }
-  console.log("data");
-  console.log(JSON.stringify(data));
-
   const handleLogout = async (e) => {
     e.preventDefault();
-    console.log("logging out");
     dispatch(logOut());
     navigation.navigate("Welcome");
   };
