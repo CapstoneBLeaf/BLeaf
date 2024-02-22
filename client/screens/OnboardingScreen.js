@@ -36,8 +36,8 @@ export default function OnboardingScreen() {
                 ></LottieView>
               </View>
             ),
-            title: "Let's Get started",
-            subtitle: "Welcome to Bleaf",
+            title: "Welcome to B.Leaf",
+            subtitle: "Help your plant grow by tracking and maintaining healthy habits",
           },
           {
             backgroundColor: "#1F91A3",
@@ -50,8 +50,8 @@ export default function OnboardingScreen() {
                 ></LottieView>
               </View>
             ),
-            title: "Choose Habits",
-            subtitle: "Done with React Native Onboarding Swiper",
+            title: "Track Habits",
+            subtitle: "Habit tracking can help create new habits",
           },
           {
             backgroundColor: "#6C6CFF",
@@ -64,8 +64,8 @@ export default function OnboardingScreen() {
                 ></LottieView>
               </View>
             ),
-            title: "Set Goals with timer",
-            subtitle: "Done with React Native Onboarding Swiper",
+            title: "Set Goals",
+            subtitle: "Keep yourself on track when things get busy, set some reminders and send yourself some motivation!",
           },
           {
             backgroundColor: "#F4A9A9",
@@ -78,8 +78,8 @@ export default function OnboardingScreen() {
                 ></LottieView>
               </View>
             ),
-            title: "Make a journal",
-            subtitle: "Done with React Native Onboarding Swiper",
+            title: "Check In",
+            subtitle: "Complete a goal and check in! Daily progress will be tracked, as you grow, so will your plant!",
           },
         ]}
       />
