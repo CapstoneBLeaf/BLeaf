@@ -53,6 +53,41 @@ const LoginScreen = () => {
     }
   };
 
+  // // Configure Gmail login
+  // const [requestGmail, responseGmail, promptAsyncGmail] = useAuthRequest(
+  //   {
+  //     redirectUri: makeRedirectUri({ useProxy: true }),
+  //     responseType: "token",
+  //     clientId: "your-gmail-client-id",
+  //     scopes: ["email"],
+  //   },
+  //   { authorizationEndpoint: "https://accounts.google.com/o/oauth2/auth" } // Gmail OAuth endpoint
+  // );
+
+  // // Configure Facebook login
+  // const [requestFacebook, responseFacebook, promptAsyncFacebook] =
+  //   useAuthRequest(
+  //     {
+  //       redirectUri: makeRedirectUri({ useProxy: true }),
+  //       responseType: "token",
+  //       clientId: "your-facebook-app-id",
+  //       scopes: ["public_profile", "email"],
+  //     },
+  //     { authorizationEndpoint: "https://www.facebook.com/v12.0/dialog/oauth" } // Facebook OAuth endpoint
+  //   );
+
+  // // Handle login with Gmail
+  // const handleGmailLogin = async () => {
+  //   const result = await promptAsyncGmail();
+  //   // Handle the result accordingly
+  // };
+
+  // // Handle login with Facebook
+  // const handleFacebookLogin = async () => {
+  //   const result = await promptAsyncFacebook();
+  //   // Handle the result accordingly
+  // };
+
   return (
     <View style={styles.container}>
       <View style={styles.img}>
@@ -84,7 +119,7 @@ const LoginScreen = () => {
         <Text style={styles.errorText}>{errors.password}</Text>
       ) : null}
       {error && (
-        <Text>
+        <Text style={styles.errorText}>
           {console.log(`error displayed: ${error}`)}
           {error}
         </Text>
@@ -168,7 +203,8 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: "red",
-    marginTop: 10,
+    marginTop: 5,
+    marginBottom: 5,
     textAlign: "left",
   },
   register: {
