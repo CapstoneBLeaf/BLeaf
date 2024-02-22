@@ -130,7 +130,7 @@ const habits = [
     name: "Health",
     description:
       "Taking our medication on time is one fo the best things we can do for ourselves",
-    image: "https://cdn-icons-png.flaticon.com/512/3165/3165263.png",
+    image: "https://cdn.pixabay.com/photo/2017/09/23/16/33/pixel-heart-2779422_1280.png",
     checkIn: false,
   },
   {
@@ -170,7 +170,7 @@ const habits = [
     name: "Gratitude",
     description: "Say one thing you're grateful for before bed",
     image:
-      "https://cdn.pixabay.com/photo/2017/09/23/16/33/pixel-heart-2779422_1280.png",
+      "https://static.vecteezy.com/system/resources/thumbnails/028/149/414/small_2x/flower-pixel-art-png.png",
     checkIn: false,
   },
   {
@@ -184,7 +184,7 @@ const habits = [
     name: "Break",
     description:
       "Taking a step back might give you just want you need to keep moving forward.",
-    image: "https://p1.hiclipart.com/preview/643/355/589/pixel-pink-white-bunny-pixelated-illustration.jpg",
+    image: "https://i.pinimg.com/originals/98/d1/d6/98d1d629c079abd3c6443195d90f16d2.png",
     checkIn: false,
   },
   {
@@ -230,7 +230,7 @@ const habits = [
     name: "Motivate",
     description: "Fast or slow, we all grow! Do the best you can today bud!",
     image:
-      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/1e764174-f164-43e2-aa61-a6636998ba6d/d9no6ej-8eec8fba-c0b7-4cf8-929c-6c5222a3b226.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzFlNzY0MTc0LWYxNjQtNDNlMi1hYTYxLWE2NjM2OTk4YmE2ZFwvZDlubzZlai04ZWVjOGZiYS1jMGI3LTRjZjgtOTI5Yy02YzUyMjJhM2IyMjYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.98lucN22YatrDLtbDV0fnp6xFuBbqA1teLp3Lro9_Pc",
+      "https://cdn-icons-png.freepik.com/512/465/465269.png",
     checkIn: false,
   },
   {
