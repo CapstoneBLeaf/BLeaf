@@ -94,7 +94,7 @@ function HabitsScreen(props) {
             }}
             style={styles.check}
           >
-            <Text style={styles.title}>CheckIn</Text>
+            <Text style={styles.title}>Check-In</Text>
           </TouchableOpacity>
         </Text>
       </View>
@@ -154,7 +154,7 @@ function HabitsScreen(props) {
                 { color: "#000", backgroundColor: "#ffffff" },
               ]}
               placeholder="Enter Motivating Statement"
-              placeholderTextColor="#999999" // Set placeholder text color to gray
+              placeholderTextColor="#999999" 
               onChangeText={(text) => setStatement(text)}
             />
             <View style={styles.buttonRow}>
