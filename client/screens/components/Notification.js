@@ -1,5 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import { Text, View, Button, TextInput, Platform } from "react-native";
+import {
+  Text,
+  View,
+  Button,
+  TextInput,
+  Platform,
+  StyleSheet,
+} from "react-native";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import Constants from "expo-constants";
@@ -11,14 +18,6 @@ Notifications.setNotificationHandler({
     shouldPlaySound: true,
     shouldSetBadge: false,
   }),
-  // Should the initial notification be popped automatically
-  // default: true
-  // popInitialNotification: true,
-  /**
-   * (optional) default: true
-   * - Specified if permissions (ios) and token will requested or not,
-   * - if not, you must call PushNotificationsHandler.requestPermissions() later
-   */
   requestPermissions: true,
 });
 
@@ -122,31 +121,56 @@ export default function Notification() {
     setTime(currentDate);
   };
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Set Your Reminder</Text>
+    <>
+      <Text style={styles.title}>Set Your Reminder</Text>
       <TextInput
         value={title}
         onChangeText={setTitle}
         placeholder="Label Reminder"
-        style={{ borderWidth: 1, padding: 10, margin: 10, width: 200 }}
+        style={styles.input}
       />
-      <Button title="Select Time" onPress={() => setShowPicker(true)} />
-      {showPicker && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={time}
-          mode="time"
-          is24Hour={true}
-          display="default"
-          onChange={handleDateChange}
-        />
-      )}
+      <View style={styles.time}>
+        <Button title="Select Time" onPress={() => setShowPicker(true)} />
+        {showPicker && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={time}
+            mode="time"
+            is24Hour={true}
+            display="default"
+            onChange={handleDateChange}
+          />
+        )}
+      </View>
       <Button
         title="Schedule Reminder"
         onPress={async () => {
           await scheduleNotification(expoPushToken);
         }}
       />
-    </View>
+    </>
   );
 }
+
+const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  input: {
+    height: 45,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+    backgroundColor: "#f3f3f4",
+    borderRadius: 10,
+    width: 300,
+  },
+  title: {
+    marginBottom: 10,
+  },
+  time: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
