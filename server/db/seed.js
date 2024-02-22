@@ -41,7 +41,7 @@ const createTable = async () => {
       id SERIAL PRIMARY KEY,
       firstname varchar(50) NOT NULL,
       lastname varchar(50) NOT NULL,
-      username varchar(50) NOT NULL,
+      username varchar(50) UNIQUE NOT NULL,
       email varchar(50) NOT NULL,
       password varchar(255) NOT NULL,
       growth_level INT REFERENCES growth_levels(id) NOT NULL,

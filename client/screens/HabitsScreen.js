@@ -51,10 +51,6 @@ function HabitsScreen(props) {
     setModalVisible(true); // Show the modal when a habit is selected
   };
 
-  const clearSelectedHabits = () => {
-    setSelectedHabit(null);
-    setModalVisible(false); // Hide the modal when clearing selected habits
-  };
 
   async function handleAddGoals() {
     try {
@@ -112,12 +108,7 @@ function HabitsScreen(props) {
         renderItem={renderHabitItem}
         keyExtractor={(item, index) => index.toString()}
       />
-      <TouchableOpacity
-        onPress={clearSelectedHabits}
-        style={styles.buttonContainer}
-      >
-        <Text style={styles.title}>Clear</Text>
-      </TouchableOpacity>
+  
 
       <Modal
         animationType="slide"
