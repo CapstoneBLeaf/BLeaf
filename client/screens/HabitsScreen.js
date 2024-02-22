@@ -51,7 +51,6 @@ function HabitsScreen(props) {
     setModalVisible(true); // Show the modal when a habit is selected
   };
 
-
   async function handleAddGoals() {
     try {
       const response = await addGoals({
@@ -108,7 +107,6 @@ function HabitsScreen(props) {
         renderItem={renderHabitItem}
         keyExtractor={(item, index) => index.toString()}
       />
-  
 
       <Modal
         animationType="slide"
@@ -185,6 +183,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
     backgroundColor: "#ffffff",
+    borderRadius: 10,
   },
   habitDetails: {
     fontSize: 16,

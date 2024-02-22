@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
   Pressable,
+  Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { removeItem } from "../utils/asyncStorage";
@@ -20,11 +21,10 @@ export default function HomeScreen() {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <LottieView
-        style={styles.leaf}
-        source={require("../assets/animations/leaf.json")}
-        autoPlay
-      ></LottieView>
+      <Image
+        source={require("../assets/animations/logo.png")}
+        style={styles.logo}
+      />
       <Text style={styles.title}>Welcome To Bleaf</Text>
       <LottieView
         style={styles.welcome}
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     color: "#333",
     textAlign: "center",
   },
-  leaf: {
+  logo: {
     height: 100,
     width: 100,
   },
