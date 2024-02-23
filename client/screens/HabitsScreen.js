@@ -33,12 +33,14 @@ function HabitsScreen(props) {
   const navigation = useNavigation();
   const user = useSelector(selectCurrentUser);
   const userId = user.id;
+
   if (isLoading) return <Text>Loading...</Text>;
   if (error) return <Text>Error: {error.message}</Text>;
 
   async function handleCheckIn(id) {
     try {
       const response = await checkInHabit({ id, userId });
+      navigation.navigate("Acitivity");
     } catch (error) {
       console.error(error);
     }
