@@ -1,9 +1,7 @@
-# B.Leaf
+## bLeaf
 <p align="center">
- <img src="./client/assets/bLeaf.jpg" width="400" height="320">
+ <img src="./client/assets/bLeaf.jpg" width="300" height="280">
 </p>
-
-<h2 align="center">bLeaf</h2>
 
 
 # About
@@ -14,7 +12,7 @@ BLeaf makes self-care easy by giving users the support they need to meet their p
 <br/>
 <p align="center"><img src ='./client/assets/screenshot2.png'/></p>
 <br/>
-<p align="center"><img src ='./client/assets/screenshot3.png'/></p>
+<p align="center"><img src ='./client/assets/screenshot3.png'width="650" height="315"/></p>
 <br/>
 
 
@@ -27,7 +25,7 @@ git clone https://github.com/CapstoneBLeaf/BLeaf
 cd client
 ```
 
-2. Download ExpoGo on your iOS device
+2. Download ExpoGo on your mobile device
 
 3. Install dependencies:
    ```
@@ -38,10 +36,12 @@ cd client
    npx expo start
    ```
 5. Use device to scan QR Code
-   ```
+   
+<br/>
+<p align="left"><img src ='./client/assets/qrCode.png'width="150" height="150"/></p>
+<br/>
    
    
-   ```
 6. If there is an internet connectivity [ERROR] run: 
    ```
    1. npm i -g @expo/ngrok
