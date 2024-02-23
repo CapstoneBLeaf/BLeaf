@@ -1,6 +1,6 @@
 # B.Leaf
 <p align="center">
- <img src="./client/assets/bLeaf.png" width="400" height="320">
+ <img src="./client/assets/bLeaf.jpg" width="400" height="320">
 </p>
 
 <h2 align="center">bLeaf</h2>
