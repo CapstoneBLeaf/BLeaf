@@ -38,8 +38,8 @@ export default function UserScreen() {
     } else {
       setFlowerMessage("Grow your flower by completing healthy habits!");
     }
-    print(flowerMessage)
-    print(data.growth_level)
+    console.log(flowerMessage)
+    console.log(data.growth_level)
   }, [data])
 
   if (isLoading) {
