@@ -38,9 +38,7 @@ function HabitsScreen(props) {
 
   async function handleCheckIn(id) {
     try {
-      console.log(id, userId);
       const response = await checkInHabit({ id, userId });
-      console.log("responsech:", response.data);
     } catch (error) {
       console.error(error);
     }
@@ -50,7 +48,6 @@ function HabitsScreen(props) {
     setSelectedHabit(habit);
     setModalVisible(true); // Show the modal when a habit is selected
   };
-
 
   async function handleAddGoals() {
     try {
@@ -62,7 +59,6 @@ function HabitsScreen(props) {
       }).unwrap();
       setFrequency("");
       setStatement("");
-      console.log("responsegg:", response);
       navigation.navigate("Goals");
       setModalVisible(false);
     } catch (error) {
@@ -94,7 +90,7 @@ function HabitsScreen(props) {
             }}
             style={styles.check}
           >
-            <Text style={styles.title}>CheckIn</Text>
+            <Text style={styles.title}>Check-In</Text>
           </TouchableOpacity>
         </Text>
       </View>
@@ -108,7 +104,6 @@ function HabitsScreen(props) {
         renderItem={renderHabitItem}
         keyExtractor={(item, index) => index.toString()}
       />
-  
 
       <Modal
         animationType="slide"
@@ -149,12 +144,9 @@ function HabitsScreen(props) {
             </View>
 
             <TextInput
-              style={[
-                styles.input,
-                { color: "#000", backgroundColor: "#ffffff" },
-              ]}
+              style={styles.input}
               placeholder="Enter Motivating Statement"
-              placeholderTextColor="#999999" // Set placeholder text color to gray
+              placeholderTextColor="#999999"
               onChangeText={(text) => setStatement(text)}
             />
             <View style={styles.buttonRow}>
@@ -185,6 +177,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
     backgroundColor: "#ffffff",
+    borderRadius: 10,
   },
   habitDetails: {
     fontSize: 16,
@@ -236,13 +229,12 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   input: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
+    height: 45,
+    backgroundColor: "#f3f3f4",
     marginBottom: 20,
     paddingHorizontal: 10,
     width: "100%",
-    borderRadius: 5,
+    borderRadius: 10,
   },
   radioContainer: {
     flexDirection: "row",

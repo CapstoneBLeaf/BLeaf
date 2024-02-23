@@ -17,19 +17,25 @@ const createUsers = async ({
   username,
   email,
   password,
-  plant_birth_date,
-  growth_level,
 }) => {
   try {
     const {
       rows: [user],
     } = await client.query(
       `
-            INSERT INTO users(firstname,lastname,username,email,password, plant_birth_date, growth_level)
-            VALUES($1,$2,$3,$4,$5, $6, $7)
+            INSERT INTO users(firstname,lastname,username,email,password)
+            VALUES($1,$2,$3,$4,$5)
             RETURNING *;
             `,
-      [firstname, lastname, username, email, password, plant_birth_date, growth_level]
+      [
+        firstname,
+        lastname,
+        username,
+        email,
+        password,
+        plant_birth_date,
+        growth_level,
+      ]
     );
     return user;
   } catch (error) {
@@ -54,10 +60,7 @@ const getUsersById = async (id) => {
   const {
     rows: [users],
   } = await client.query(`
-    SELECT users.*, growth_levels.image AS plant_image FROM users 
-    JOIN growth_levels
-      ON users.growth_level = growth_levels.id
-    WHERE users.id = '${id}';
+    SELECT * FROM users WHERE users.id = '${id}';
     `);
   return users;
 };
@@ -65,9 +68,12 @@ const getUsersById = async (id) => {
 const getUsersByUsername = async (username) => {
   const {
     rows: [user],
-  } = await client.query(`
+  } = await client.query(
+    `
     SELECT * FROM users WHERE users.username = $1;
-    `, [username]);
+    `,
+    [username]
+  );
   return user;
 };
 
@@ -94,7 +100,6 @@ async function updateUser(userId, fields = {}) {
     .map((key, index) => `"${key}"=$${index + 1}`)
     .join(", ");
 
-  console.log(setString)
   if (setString.length === 0) {
     return;
   }
@@ -115,13 +120,11 @@ async function updateUser(userId, fields = {}) {
     return user;
   } catch (error) {
     throw error;
-    }
+  }
 }
 
-
-
 growth_states = `SELECT * from growth_states where id=0`;
-growth_states; // url1
+growth_states;
 
 module.exports = {
   getAllUsers,
@@ -130,5 +133,4 @@ module.exports = {
   deleteUser,
   loginUser,
   getUsersByUsername,
-  updateUser,
 };

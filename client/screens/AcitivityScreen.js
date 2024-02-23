@@ -39,59 +39,64 @@ export default function AcitivityScreen() {
 
   return (
     <ScrollView
-      key={styles.activityarea}
+      style={styles.activityarea}
       automaticallyAdjustKeyboardInsets={true}
     >
-      {habitData ? (
-        <>
-          <View style={styles.filterContainer}>
-            <Text style={styles.filterLabel}>Filter by Date:</Text>
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              is24Hour={false}
-              onChange={onChange}
-            />
-          </View>
-          {filteredData.length > 0 ? (
-            filteredData.map((checkin) => {
-              const isoStr = checkin.completed_at;
-              const date = new Date(isoStr);
-              var time = date.toLocaleTimeString("en-US", { hour12: true });
-              return (
-                <View key={checkin.activityId} style={styles.content}>
-                  <View style={styles.leftcontent}>
-                    <Image
-                      style={styles.image}
-                      source={{ uri: `${checkin.image}` }}
-                    />
-                    <Text style={styles.name}>{checkin.name}</Text>
+      <View style={styles.container}>
+        {habitData ? (
+          <>
+            <View style={styles.filterContainer}>
+              <Text style={styles.filterLabel}>Filter by Date:</Text>
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                is24Hour={false}
+                onChange={onChange}
+              />
+            </View>
+            {filteredData.length > 0 ? (
+              filteredData.map((checkin) => {
+                const isoStr = checkin.completed_at;
+                const date = new Date(isoStr);
+                var time = date.toLocaleTimeString("en-US", { hour12: true });
+                return (
+                  <View key={checkin.activityId} style={styles.content}>
+                    <View style={styles.leftcontent}>
+                      <Image
+                        style={styles.image}
+                        source={{ uri: `${checkin.image}` }}
+                      />
+                      <Text style={styles.name}>{checkin.name}</Text>
+                    </View>
+                    <Text style={styles.time}>{time}</Text>
                   </View>
-                  <Text style={styles.time}>{time}</Text>
-                </View>
-              );
-            })
-          ) : (
-            <SafeAreaView>
-              <Text style={styles.error}>
-                No habits found for selected date
-              </Text>
-            </SafeAreaView>
-          )}
-        </>
-      ) : (
-        <SafeAreaView>
-          <Text style={styles.error}>No habits found</Text>
-        </SafeAreaView>
-      )}
+                );
+              })
+            ) : (
+              <SafeAreaView>
+                <Text style={styles.error}>
+                  No checkin habits for selected date.Go to the habits page to
+                  get started!
+                </Text>
+              </SafeAreaView>
+            )}
+          </>
+        ) : (
+          <SafeAreaView>
+            <Text style={styles.error}>
+              No Habits checkin yet. Go to the habits page to get started!
+            </Text>
+          </SafeAreaView>
+        )}
+      </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   activityarea: {
-    paddingLeft: 10,
-    paddingRight: 10,
+    backgroundColor: "#fff",
+    flex: 1,
   },
   image: {
     height: 60,
@@ -133,5 +138,6 @@ const styles = StyleSheet.create({
   error: {
     color: "red",
     textAlign: "center",
+    paddingHorizontal: 20,
   },
 });

@@ -11,45 +11,36 @@ async function getAllGoals() {
   }
 }
 
-async function createGoals({ frequency, statement, habitId, userId }) {
+const createGoals = async ({ name, frequency, achivements, habitId }) => {
   try {
     const {
       rows: [goals],
     } = await client.query(
       `
-            INSERT INTO goals(frequency, statement, "habitId", "userId")
+            INSERT INTO goals(name, frequency, achivements, "habitId")
             VALUES($1,$2,$3,$4)
             RETURNING *;
             `,
-      [frequency, statement, habitId, userId]
+      [name, frequency, achivements, habitId]
     );
     return goals;
   } catch (error) {
     throw error;
   }
-}
+};
 
-async function getGoalsByUserId(userId) {
+const getGoalsById = async (goalId) => {
   try {
-    const returnList = [];
-    const { rows: goals } = await client.query(
-      `SELECT * FROM goals WHERE "userId"=${userId}`
-    );
-    const { rows: habits } = await client.query(`SELECT * FROM habits`, []);
-    for (const goal of goals) {
-      const habit = habits.find((it) => it.id === goal.habitId);
-      returnList.push({
-        goalId: goal.id,
-        frequency: goal.frequency,
-        statement: goal.statement,
-        ...habit,
-      });
-    }
-    return returnList;
+    const {
+      rows: [goals],
+    } = await client.query('DELETE FROM goals WHERE "id"=$1 RETURNING *', [
+      goalId,
+    ]);
+    return goals;
   } catch (error) {
     throw error;
   }
-}
+};
 
 async function updateGoal(goalId, fields = {}) {
   const setString = Object.keys(fields)
@@ -81,10 +72,12 @@ async function updateGoal(goalId, fields = {}) {
 
 async function deleteGoal(goalId) {
   try {
-    const { rows: goal } = await client.query(
+    const {
+      rows: [goal],
+    } = await client.query(
       `
     DELETE FROM goals
-    WHERE "id"=$1
+    WHERE id=$1
     RETURNING *;
   `,
       [goalId]
@@ -98,7 +91,7 @@ async function deleteGoal(goalId) {
 module.exports = {
   getAllGoals,
   createGoals,
-  getGoalsByUserId,
+  getGoalsById,
   deleteGoal,
   updateGoal,
 };

@@ -15,18 +15,19 @@ const createPlants = async ({
   name,
   color,
   growth_level,
-  birth_date
+  birth_date,
+  userId,
 }) => {
   try {
     const {
       rows: [plants],
     } = await client.query(
       `
-            INSERT INTO plants(name,color,growth_level,birth_date)
-            VALUES($1,$2,$3,$4)
+            INSERT INTO plants(name,color,growth_level,birth_date,"userId")
+            VALUES($1,$2,$3,$4,$5)
             RETURNING *;
             `,
-      [name, color, growth_level, birth_date]
+      [name, color, growth_level, birth_date, userId]
     );
     return plants;
   } catch (error) {
@@ -39,9 +40,7 @@ const getPlantsById = async (plantId) => {
     const {
       rows: [plants],
     } = await client.query(`
-  SELECT plants.*, growth_levels.image AS image FROM plants WHERE "id" = ${plantId} 
-  JOIN growth_levels
-    ON plants.growth_level = growth_levels.id;
+  SELECT * FROM plants WHERE "id" = ${plantId};
     `);
     return plants;
   } catch (error) {

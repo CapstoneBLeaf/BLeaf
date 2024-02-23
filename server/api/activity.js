@@ -8,10 +8,7 @@ const {
   getLatestActivityDatebyUserId,
 } = require("../db/sqlHelperFunctions/activity");
 
-const {
-  updateUser, getUsersById
-} = require("../db/sqlHelperFunctions/users");
-
+const { updateUser, getUsersById } = require("../db/sqlHelperFunctions/users");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -24,22 +21,17 @@ router.get("/", async (req, res, next) => {
 
 router.post("/:id/add", async (req, res, next) => {
   try {
-    const date = await getLatestActivityDatebyUserId(req.body.userId)
+    const date = await getLatestActivityDatebyUserId(req.body.userId);
     const activity = await addHabit(req.body.userId, req.params.id);
-    const today = new Date()
-    const user = await getUsersById(req.body.userId)
+    const today = new Date();
+    const user = await getUsersById(req.body.userId);
     if (user.growth_level > 50) {
-      console.log("reached maximum growth level")
-      res.send(activity) 
+      console.log("reached maximum growth level");
+      res.send(activity);
     } else {
-      const updatedUser = await updateUser(
-        req.body.userId, 
-        {
-          growth_level: user.growth_level + 1
-        }
-      );
-      console.log(updatedUser)
-      console.log(activity);  
+      const updatedUser = await updateUser(req.body.userId, {
+        growth_level: user.growth_level + 1,
+      });
       res.send(activity);
     }
   } catch (err) {

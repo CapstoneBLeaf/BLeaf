@@ -1,3 +1,4 @@
+
 const client = require("../client");
 
 async function getAllActivity() {
@@ -105,16 +106,13 @@ async function getLatestActivityDatebyUserId(userId) {
       `,
       [userId]
     );
-    console.log(JSON.stringify(activity))
     if (activity[0]) {
       return activity[0].most_recent;
     } else {
-      return null
+      return null;
     }
-
   } catch (error) {
-    console.log(error)
-    throw new Error("get latest activity failed")
+    throw new Error("get latest activity failed");
   }
 }
 
