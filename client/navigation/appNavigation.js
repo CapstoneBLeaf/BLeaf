@@ -91,6 +91,21 @@ export default function AppNavigation() {
             options={{ headerShown: false }}
             component={HomeScreen}
           />
+          <Stack.Screen
+            name="Signup"
+            options={{ headerShown: true }}
+            component={SignupScreen}
+          />
+          <Stack.Screen
+            name="Login"
+            options={{ headerShown: true }}
+            component={LoginScreen}
+          />
+          <Stack.Screen
+            name="Home"
+            options={{ headerShown: false }}
+            component={TabNavigator}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     );
