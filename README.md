@@ -14,6 +14,8 @@ BLeaf makes self-care easy by giving users the support they need to meet their p
 <br/>
 <p align="center"><img src ='./client/assets/screenshot3.png'width="650" height="315"/></p>
 <br/>
+<p align="center"><img src ='./client/assets/googlePlay.PNG'width="150" height="50"/></p>
+<br/>
 
 
 ## Getting Started
