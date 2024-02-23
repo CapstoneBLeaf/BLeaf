@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: "#f3f3f4",
     borderRadius: 10,
-    width: 300,
+    width: "100%",
   },
   title: {
     marginBottom: 10,
