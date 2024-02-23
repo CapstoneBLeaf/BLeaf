@@ -10,7 +10,7 @@ import {
   Image,
   Modal,
   TextInput,
-  Button,
+  Alert,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
@@ -40,7 +40,10 @@ function HabitsScreen(props) {
   async function handleCheckIn(id) {
     try {
       const response = await checkInHabit({ id, userId });
-      navigation.navigate("Acitivity");
+      Alert.alert(
+        "Success",
+        "Habit checked in successfully, Go to Activity tab!"
+      );
     } catch (error) {
       console.error(error);
     }
@@ -61,40 +64,43 @@ function HabitsScreen(props) {
       }).unwrap();
       setFrequency("");
       setStatement("");
-      navigation.navigate("Goals");
       setModalVisible(false);
+      Alert.alert("Success", "Goals added, Check goals tab from bottom!");
     } catch (error) {
       console.error(error);
     }
   }
 
   const renderHabitItem = ({ item }) => (
-    <TouchableOpacity onPress={() => toggleHabitSelection(item)}>
+    <TouchableOpacity>
       <View
         style={[
           styles.habitContainer,
           selectedHabit && selectedHabit.id === item.id && styles.selectedHabit,
         ]}
       >
-        <Text style={styles.habitDetails}>
+        <View style={styles.habitDetails}>
           <Text style={styles.habitName}>{item.name}</Text>
-          {"\n"}
-          {"\n"}
+
           <Text style={styles.habitDescription}>{item.description}</Text>
-          {"\n"}
-          {"\n"}
           <Image style={styles.image} source={{ uri: `${item.image}` }} />
-          {"\n"}
-          {"\n"}
-          <TouchableOpacity
-            onPress={() => {
-              handleCheckIn(item.id);
-            }}
-            style={styles.check}
-          >
-            <Text style={styles.title}>Check-In</Text>
-          </TouchableOpacity>
-        </Text>
+          <View style={styles.buttons}>
+            <TouchableOpacity
+              onPress={() => toggleHabitSelection(item)}
+              style={styles.goal}
+            >
+              <Text style={styles.title}>Add Goal</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                handleCheckIn(item.id);
+              }}
+              style={styles.check}
+            >
+              <Text style={styles.title}>Check-In</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -188,10 +194,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     textTransform: "capitalize",
-    marginBottom: 0,
+    marginBottom: 10,
   },
   habitDescription: {
     fontSize: 16,
+    marginBottom: 10,
   },
   selectedHabit: {
     backgroundColor: "#64b5f6",
@@ -215,6 +222,7 @@ const styles = StyleSheet.create({
   image: {
     height: 100,
     width: 100,
+    marginBottom: 10,
   },
   modalView: {
     margin: 20,
@@ -262,12 +270,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
+  buttons: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "flex-start",
+  },
   check: {
     backgroundColor: "#2c2cff",
     padding: 15,
-    width: "100%",
-    alignItems: "center",
     borderRadius: 10,
+  },
+  goal: {
+    backgroundColor: "#2c2cff",
+    padding: 15,
+    borderRadius: 10,
+    marginRight: 10,
   },
   title: {
     color: "white",
