@@ -42,8 +42,6 @@ router.post("/register", async (req, res, next) => {
       username: username.toLowerCase(),
       email,
       password: hashedPassword,
-      plant_birth_date: new Date(),
-      growth_level: 1,
     });
 
     delete user.password;
