@@ -44,11 +44,8 @@ const LoginScreen = () => {
         setUsername("");
         setPassword("");
         navigation.navigate("Home");
-        console.log("Username:", username);
-        console.log("Password:", password);
       } catch (rejected) {
         setError(rejected.data.error);
-        console.log(`error caught: ${error}`);
       }
     }
   };
@@ -83,12 +80,7 @@ const LoginScreen = () => {
       {errors.password ? (
         <Text style={styles.errorText}>{errors.password}</Text>
       ) : null}
-      {error && (
-        <Text style={styles.errorText}>
-          {console.log(`error displayed: ${error}`)}
-          {error}
-        </Text>
-      )}
+      {error && <Text style={styles.errorText}>{error}</Text>}
       <Button title="Login" onPress={handleLogin} />
       <View style={styles.register}>
         <Text style={{ fontSize: 16 }}>New to the app?</Text>

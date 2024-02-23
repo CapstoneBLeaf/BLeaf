@@ -27,7 +27,15 @@ const createUsers = async ({
             VALUES($1,$2,$3,$4,$5)
             RETURNING *;
             `,
-      [firstname, lastname, username, email, password]
+      [
+        firstname,
+        lastname,
+        username,
+        email,
+        password,
+        plant_birth_date,
+        growth_level,
+      ]
     );
     return user;
   } catch (error) {
@@ -60,9 +68,12 @@ const getUsersById = async (id) => {
 const getUsersByUsername = async (username) => {
   const {
     rows: [user],
-  } = await client.query(`
+  } = await client.query(
+    `
     SELECT * FROM users WHERE users.username = $1;
-    `, [username]);
+    `,
+    [username]
+  );
   return user;
 };
 
@@ -84,8 +95,36 @@ async function deleteUser(id) {
   }
 }
 
+async function updateUser(userId, fields = {}) {
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ");
+
+  if (setString.length === 0) {
+    return;
+  }
+
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+    UPDATE users
+    SET ${setString}
+    WHERE id=${userId}
+    RETURNING *;
+  `,
+      Object.values(fields)
+    );
+
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
 growth_states = `SELECT * from growth_states where id=0`;
-growth_states; // url1
+growth_states;
 
 module.exports = {
   getAllUsers,

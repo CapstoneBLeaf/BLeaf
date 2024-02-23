@@ -52,7 +52,6 @@ export default function UserScreen() {
 
   const handleLogout = async (e) => {
     e.preventDefault();
-    console.log("logging out");
     dispatch(logOut());
     navigation.navigate("Welcome");
   };
