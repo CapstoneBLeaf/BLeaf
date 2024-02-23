@@ -6,6 +6,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/core";
@@ -51,49 +52,54 @@ const LoginScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.img}>
-        <LottieView
-          style={styles.login}
-          source={require("../assets/animations/login.json")}
-          autoPlay
-        ></LottieView>
-      </View>
+    <ScrollView
+      style={styles.container}
+      automaticallyAdjustKeyboardInsets={true}
+    >
+      <View style={styles.inner}>
+        <View style={styles.img}>
+          <LottieView
+            style={styles.login}
+            source={require("../assets/animations/login.json")}
+            autoPlay
+          ></LottieView>
+        </View>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        autoCapitalize="none"
-        value={username}
-        onChangeText={(text) => setUsername(text)}
-      />
-      {errors.username ? (
-        <Text style={styles.errorText}>{errors.username}</Text>
-      ) : null}
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-      />
-      {errors.password ? (
-        <Text style={styles.errorText}>{errors.password}</Text>
-      ) : null}
-      {error && <Text style={styles.errorText}>{error}</Text>}
-      <Button title="Login" onPress={handleLogin} />
-      <View style={styles.register}>
-        <Text style={{ fontSize: 16 }}>New to the app?</Text>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Signup");
-          }}
-          style={styles.registerbtn}
-        >
-          <Text style={{ color: "blue", fontSize: 16 }}> Register</Text>
-        </TouchableOpacity>
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          autoCapitalize="none"
+          value={username}
+          onChangeText={(text) => setUsername(text)}
+        />
+        {errors.username ? (
+          <Text style={styles.errorText}>{errors.username}</Text>
+        ) : null}
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          secureTextEntry
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+        />
+        {errors.password ? (
+          <Text style={styles.errorText}>{errors.password}</Text>
+        ) : null}
+        {error && <Text style={styles.errorText}>{error}</Text>}
+        <Button title="Login" onPress={handleLogin} />
+        <View style={styles.register}>
+          <Text style={{ fontSize: 16 }}>New to the app?</Text>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Signup");
+            }}
+            style={styles.registerbtn}
+          >
+            <Text style={{ color: "blue", fontSize: 16 }}> Register</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -103,6 +109,9 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 20,
     backgroundColor: "#ffffff",
+  },
+  inner: {
+    flexDirection: "column",
     justifyContent: "center",
   },
   logo: {
