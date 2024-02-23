@@ -25,7 +25,7 @@ git clone https://github.com/CapstoneBLeaf/BLeaf
 cd client
 ```
 
-2. Download ExpoGo on your mobile device
+2. Download ExpoGo on mobile device.
 
 3. Install dependencies:
    ```
@@ -35,7 +35,7 @@ cd client
    ```
    npx expo start
    ```
-5. Use device to scan QR Code
+5. Use device to scan QR Code:
    
 <br/>
 <p align="left"><img src ='./client/assets/qrCode.png'width="150" height="150"/></p>
@@ -55,6 +55,7 @@ cd client
 <a href="https://expo.dev/" style="text-decoration:none" title="Expo">:iphone:</a> Expo  
 <a href="https://reactnative.dev/" title="ReactNative"><img src="https://github.com/get-icon/geticon/raw/master/icons/react.svg" alt="React Native" width="21px" height="21px"></a> React Native  
 <a href="https://www.npmjs.com/" title="npm"><img src="https://github.com/get-icon/geticon/raw/master/icons/npm.svg" alt="npm" width="21px" height="21px"></a> NPM
+
 
 ## Contributors
 
