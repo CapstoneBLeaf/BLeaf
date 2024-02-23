@@ -31,7 +31,6 @@ export default function Notification() {
   const responseListener = useRef();
 
   useEffect(() => {
-    // console.log("Registering for push notifications...");
     registerForPushNotificationsAsync().then((token) => {
       setExpoPushToken(token);
     });
@@ -71,7 +70,6 @@ export default function Notification() {
       token = await Notifications.getExpoPushTokenAsync({
         projectId: Constants.expoConfig.extra.eas.projectId,
       });
-      console.log(token);
     } else {
       alert("Must use physical device for Push Notifications");
     }
@@ -92,29 +90,6 @@ export default function Notification() {
     });
   }
 
-  //notification message
-  async function sendPushNotification(expoPushToken) {
-    console.log("Sending push notification...");
-    const message = {
-      to: expoPushToken,
-      sound: "default",
-      title: "My first push notification",
-      body: "This is my first notification made with expo rn app!",
-      data: { someData: "'goes here'" },
-    };
-
-    await fetch("https://exp.host/--/api/v2/push/send", {
-      method: "POST",
-      headers: {
-        host: "expo.host",
-        accept: "application/json",
-        "Accept-encoding": "gzip, deflate",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(message),
-    });
-    // .then(res=>res.text()).then(data=>console.log(data));
-  }
   const handleDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || time;
     setShowPicker(Platform.OS === "ios");

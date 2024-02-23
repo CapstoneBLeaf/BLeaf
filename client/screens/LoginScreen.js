@@ -44,49 +44,11 @@ const LoginScreen = () => {
         setUsername("");
         setPassword("");
         navigation.navigate("Home");
-        console.log("Username:", username);
-        console.log("Password:", password);
       } catch (rejected) {
         setError(rejected.data.error);
-        console.log(`error caught: ${error}`);
       }
     }
   };
-
-  // // Configure Gmail login
-  // const [requestGmail, responseGmail, promptAsyncGmail] = useAuthRequest(
-  //   {
-  //     redirectUri: makeRedirectUri({ useProxy: true }),
-  //     responseType: "token",
-  //     clientId: "your-gmail-client-id",
-  //     scopes: ["email"],
-  //   },
-  //   { authorizationEndpoint: "https://accounts.google.com/o/oauth2/auth" } // Gmail OAuth endpoint
-  // );
-
-  // // Configure Facebook login
-  // const [requestFacebook, responseFacebook, promptAsyncFacebook] =
-  //   useAuthRequest(
-  //     {
-  //       redirectUri: makeRedirectUri({ useProxy: true }),
-  //       responseType: "token",
-  //       clientId: "your-facebook-app-id",
-  //       scopes: ["public_profile", "email"],
-  //     },
-  //     { authorizationEndpoint: "https://www.facebook.com/v12.0/dialog/oauth" } // Facebook OAuth endpoint
-  //   );
-
-  // // Handle login with Gmail
-  // const handleGmailLogin = async () => {
-  //   const result = await promptAsyncGmail();
-  //   // Handle the result accordingly
-  // };
-
-  // // Handle login with Facebook
-  // const handleFacebookLogin = async () => {
-  //   const result = await promptAsyncFacebook();
-  //   // Handle the result accordingly
-  // };
 
   return (
     <View style={styles.container}>
@@ -118,12 +80,7 @@ const LoginScreen = () => {
       {errors.password ? (
         <Text style={styles.errorText}>{errors.password}</Text>
       ) : null}
-      {error && (
-        <Text style={styles.errorText}>
-          {console.log(`error displayed: ${error}`)}
-          {error}
-        </Text>
-      )}
+      {error && <Text style={styles.errorText}>{error}</Text>}
       <Button title="Login" onPress={handleLogin} />
       <View style={styles.register}>
         <Text style={{ fontSize: 16 }}>New to the app?</Text>

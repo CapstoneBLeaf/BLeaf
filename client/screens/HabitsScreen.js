@@ -38,9 +38,7 @@ function HabitsScreen(props) {
 
   async function handleCheckIn(id) {
     try {
-      console.log(id, userId);
       const response = await checkInHabit({ id, userId });
-      console.log("responsech:", response.data);
     } catch (error) {
       console.error(error);
     }
@@ -61,7 +59,6 @@ function HabitsScreen(props) {
       }).unwrap();
       setFrequency("");
       setStatement("");
-      console.log("responsegg:", response);
       navigation.navigate("Goals");
       setModalVisible(false);
     } catch (error) {
@@ -147,12 +144,9 @@ function HabitsScreen(props) {
             </View>
 
             <TextInput
-              style={[
-                styles.input,
-                { color: "#000", backgroundColor: "#ffffff" },
-              ]}
+              style={styles.input}
               placeholder="Enter Motivating Statement"
-              placeholderTextColor="#999999" 
+              placeholderTextColor="#999999"
               onChangeText={(text) => setStatement(text)}
             />
             <View style={styles.buttonRow}>
@@ -235,13 +229,12 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   input: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
+    height: 45,
+    backgroundColor: "#f3f3f4",
     marginBottom: 20,
     paddingHorizontal: 10,
     width: "100%",
-    borderRadius: 5,
+    borderRadius: 10,
   },
   radioContainer: {
     flexDirection: "row",
