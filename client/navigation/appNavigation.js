@@ -7,7 +7,7 @@ import SignupScreen from "../screens/SignupScreen.js";
 import LoginScreen from "../screens/LoginScreen.js";
 import UserScreen from "../screens/UserScreen";
 import GoalsScreen from "../screens/GoalsScreen";
-import AcitivityScreen from "../screens/AcitivityScreen";
+import ActivityScreen from "../screens/ActivityScreen";
 import HabitsScreen from "../screens/HabitsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -18,7 +18,7 @@ const Tab = createBottomTabNavigator();
 const accountName = "Account";
 const habitsName = "Habits";
 const goalName = "Goals";
-const activityName = "Acitivity";
+const activityName = "Activity";
 export default function AppNavigation() {
   const [showOnboarding, setShowOnboarding] = useState(null);
   useEffect(() => {
@@ -71,7 +71,7 @@ export default function AppNavigation() {
       >
         <Tab.Screen name={habitsName} component={HabitsScreen} />
         <Tab.Screen name={goalName} component={GoalsScreen} />
-        <Tab.Screen name={activityName} component={AcitivityScreen} />
+        <Tab.Screen name={activityName} component={ActivityScreen} />
         <Tab.Screen name={accountName} component={UserScreen} />
       </Tab.Navigator>
     );
