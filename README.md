@@ -1,6 +1,6 @@
 # B.Leaf
 <p align="center">
- <img src="./assets/bLeaf.png" width="400" height="320">
+ <img src="./client/assets/bLeaf.png" width="400" height="320">
 </p>
 
 <h2 align="center">bLeaf</h2>
@@ -10,11 +10,11 @@
 BLeaf makes self-care easy by giving users the support they need to meet their personal care goals. This app allows users to keep track of their personal care activities throughout the day and gives them the option to set up reminders, guilt and pressure free. While finding time to set goals and sticking to healthy habits can be difficult, it is extremely helpful to a person's well-being. Self-care can help manage stress, lower the risk of illness, increase energy, and elevate moods. This is why BLeaf rewards positive habits day-by-day rather ever promoting shame in a user for not always meeting their goals. A flower pot is provided to each user upon creating an account. In exchange for completing healthy habits, the user will see their flower grow. BLeaf celebrates even the small victories, aiming to help users bLeaf in themselves. 
 
 <br/>
-<p align="center"><img src ='./assets/screenshot1.png'/></p>
+<p align="center"><img src ='./client/assets/screenshot1.png'/></p>
 <br/>
-<p align="center"><img src ='./assets/screenshot2.png'/></p>
+<p align="center"><img src ='./client/assets/screenshot2.png'/></p>
 <br/>
-<p align="center"><img src ='./assets/screenshot3.png'/></p>
+<p align="center"><img src ='./client/assets/screenshot3.png'/></p>
 <br/>
 
 
@@ -40,6 +40,12 @@ cd client
 5. Use device to scan QR Code
    ```
    
+   
+   ```
+6. If there is an internet connectivity [ERROR] run: 
+   ```
+   1. npm i -g @expo/ngrok
+   2. npx expo start --tunnel 
    
    ```
 ## Built Using
