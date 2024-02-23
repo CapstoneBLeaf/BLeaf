@@ -8,11 +8,11 @@
 BLeaf makes self-care easy by giving users the support they need to meet their personal care goals. This app allows users to keep track of their personal care activities throughout the day and gives them the option to set up reminders, guilt and pressure free. While finding time to set goals and sticking to healthy habits can be difficult, it is extremely helpful to a person's well-being. Self-care can help manage stress, lower the risk of illness, increase energy, and elevate moods. This is why BLeaf rewards positive habits day-by-day rather ever promoting shame in a user for not always meeting their goals. A flower pot is provided to each user upon creating an account. In exchange for completing healthy habits, the user will see their flower grow. BLeaf celebrates even the small victories, aiming to help users bLeaf in themselves. 
 
 <br/>
-<p align="center"><img src ='./client/assets/screenshot1.png'/></p>
+<p align="center"><img src ='./client/assets/screenshotI.png'/></p>
 <br/>
-<p align="center"><img src ='./client/assets/screenshot2.png'/></p>
+<p align="center"><img src ='./client/assets/screenshotII.png'/></p>
 <br/>
-<p align="center"><img src ='./client/assets/screenshot3.png'width="650" height="315"/></p>
+<p align="center"><img src ='./client/assets/screenshotIII.png'width="750" height="300"/></p>
 <br/>
 <p align="center"><img src ='./client/assets/googlePlay.PNG'width="150" height="50"/></p>
 <br/>
