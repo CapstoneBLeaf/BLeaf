@@ -37,9 +37,9 @@ cd client
    ```
    npx expo start
    ```
-5. Use device to scan QR Code:
+5. Use device to scan QR Code
    ```
-   npx expo start
+   
    
    ```
 ## Built Using
