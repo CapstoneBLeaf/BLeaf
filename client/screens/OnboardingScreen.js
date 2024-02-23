@@ -37,7 +37,8 @@ export default function OnboardingScreen() {
               </View>
             ),
             title: "Welcome to bLeaf",
-            subtitle: "Help your plant grow by tracking and maintaining healthy habits",
+            subtitle:
+              "Help your plant grow by tracking and maintaining healthy habits",
           },
           {
             backgroundColor: "#1F91A3",
@@ -79,7 +80,8 @@ export default function OnboardingScreen() {
               </View>
             ),
             title: "Don't forget to bLeaf in yourself!",
-            subtitle: "Daily progress will be tracked, as you grow, so will your plant!",
+            subtitle:
+              "Daily progress will be tracked, as you grow, so will your plant!",
           },
         ]}
       />
