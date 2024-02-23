@@ -75,7 +75,7 @@ export default function ActivityScreen() {
             ) : (
               <SafeAreaView>
                 <Text style={styles.error}>
-                  No checkin habits for selected date.Go to the habits page to
+                  No checkin habits for selected date. Go to the habits page to
                   get started!
                 </Text>
               </SafeAreaView>
