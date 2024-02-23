@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   goalContainer: {
     backgroundColor: "#fff",
     padding: 15,
+    marginBottom: 15,
     flexDirection: "row",
     alignItems: "center",
     rowGap: 10,
