@@ -4,23 +4,24 @@ const {
   plants,
   habits,
   goals,
-  activity,
+  journals,
   growth_levels,
 } = require("./seedData");
 const { createUsers } = require("./sqlHelperFunctions/users");
 const { createPlants } = require("./sqlHelperFunctions/plants");
 const { createHabits } = require("./sqlHelperFunctions/habits");
 const { createGoals } = require("./sqlHelperFunctions/goals");
+const { createJournals } = require("./sqlHelperFunctions/journals");
 const dropTables = async () => {
   try {
     console.log("Starting to drop tables...");
     await client.query(`
-    DROP TABLE IF EXISTS activity CASCADE;
-    DROP TABLE IF EXISTS goals CASCADE;
-    DROP TABLE IF EXISTS habits CASCADE;
-    DROP TABLE IF EXISTS users CASCADE;
-    DROP TABLE IF EXISTS plants CASCADE;
-    DROP TABLE IF EXISTS growth_levels CASCADE;
+    DROP TABLE IF EXISTS plants;
+    DROP TABLE IF EXISTS journals;
+    DROP TABLE IF EXISTS goals;
+    DROP TABLE IF EXISTS habits;
+    DROP TABLE IF EXISTS users;
+    DROP TABLE IF EXISTS growth_levels;
     `);
     console.log("Table Dropped!");
   } catch (error) {
@@ -32,20 +33,18 @@ const createTable = async () => {
   try {
     console.log("building tables..");
     await client.query(`
-    CREATE TABLE growth_levels(
-      id SERIAL PRIMARY KEY,
-      image TEXT NOT NULL
-    );
-    
     CREATE TABLE users(
       id SERIAL PRIMARY KEY,
       firstname varchar(50) NOT NULL,
       lastname varchar(50) NOT NULL,
-      username varchar(50) UNIQUE NOT NULL,
+      username varchar(50) NOT NULL,
       email varchar(50) NOT NULL,
-      password varchar(255) NOT NULL,
-      growth_level INT REFERENCES growth_levels(id) NOT NULL,
-      plant_birth_date DATE NOT NULL
+      password varchar(255) NOT NULL
+    );
+
+    CREATE TABLE growth_levels(
+      id SERIAL PRIMARY KEY,
+      image TEXT NOT NULL
     );
 
     CREATE TABLE plants(
@@ -53,31 +52,31 @@ const createTable = async () => {
       name TEXT NOT NULL,
       color TEXT NOT NULL,
       growth_level INT REFERENCES growth_levels(id) NOT NULL,
-      birth_date DATE NOT NULL
+      birth_date DATE NOT NULL,
+      "userId" INTEGER REFERENCES users(id) NOT NULL
       
     );
     CREATE TABLE habits (
       id SERIAL PRIMARY KEY,
-      name TEXT NOT NULL,
       description TEXT NOT NULL,
       image TEXT NOT NULL,
       "checkIn" BOOLEAN
     );
     CREATE TABLE goals (
       id SERIAL PRIMARY KEY,
-      frequency TEXT NOT NULL,
-      statement TEXT NOT NULL,
-      "habitId" INTEGER REFERENCES habits(id) NOT NULL,
+      name TEXT NOT NULL,
+      frequency VARCHAR(50) NOT NULL,
+      achivements TEXT NOT NULL,
+      "habitId" INTEGER REFERENCES habits(id) NOT NULL
+  );
+  CREATE TABLE journals (
+      id SERIAL PRIMARY KEY,
+      entry TEXT NOT NULL,
+      date DATE,
       "userId" INTEGER REFERENCES users(id) NOT NULL
   );
-  CREATE TABLE activity (
-      id SERIAL PRIMARY KEY,
-      "habitId" INTEGER REFERENCES habits(id) NOT NULL,
-      "userId" INTEGER REFERENCES users(id) NOT NULL,
-      completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-  );
     `);
-    console.log("Tables Created!");
+    console.log("Table Created!");
   } catch (error) {
     console.error(error);
   }
@@ -125,6 +124,17 @@ const createInitialGoals = async () => {
   }
 };
 
+const createInitialJournals = async () => {
+  try {
+    for (const journal of journals) {
+      await createJournals(journal);
+    }
+    console.log("created journals");
+  } catch (error) {
+    throw error;
+  }
+};
+
 const createInitialGrowthLevels = async () => {
   try {
     await insertGrowthLevels();
@@ -154,10 +164,12 @@ const buildDb = async () => {
     client.connect();
     await dropTables();
     await createTable();
-    await createInitialGrowthLevels();
     await createInitialUsers();
+    await createInitialGrowthLevels();
+    await createInitialPlants();
     await createInitialHabits();
     await createInitialGoals();
+    await createInitialJournals();
   } catch (error) {
     console.error(error);
   } finally {

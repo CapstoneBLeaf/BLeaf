@@ -7,7 +7,7 @@ import {
   View,
   SafeAreaView,
 } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectCurrentToken,
@@ -25,20 +25,28 @@ export default function UserScreen() {
   const token = useSelector(selectCurrentToken);
   const user = useSelector(selectCurrentUser);
   const { data, isLoading } = useGetUsersByIdQuery(user.id, token);
+  const [flowerMessage, setFlowerMessage] = useState("")
   console.log(token);
   console.log(user);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  useEffect(() => {
+    if (data.growth_level == 51) {
+      setFlowerMessage("Hooray! You grew a flower!")
+
+    } else {
+      setFlowerMessage("Grow your flower by completing healthy habits!");
+    }
+    print(flowerMessage)
+    print(data.growth_level)
+  }, [data])
+
   if (isLoading) {
     return <Text>Loading</Text>;
   }
-  function fetchPlantGrowth() {
-    if (user.growth_level === 51) {
-      return "Hooray! You grew a flower!";
-    } else {
-      return "Grow your flower by completing healthy habits!";
-    }
-  }
+
+
   console.log("data");
   console.log(JSON.stringify(data));
 
@@ -57,12 +65,12 @@ export default function UserScreen() {
               Hello, {data.firstname} {data.lastname}
             </Text>
             <Image
-              source={img_arr[data.growth_level - 1]}
+              source={img_arr[data.growth_level - 1]}r
               style={styles.image}
               resizeMode="contain"
             />
-            <Text>{fetchPlantGrowth()}</Text>
-            {(user.growth_level === 51 || user.growth_level > 51) && (
+            <Text key={flowerMessage}>{flowerMessage}</Text>
+            {(data.growth_level === 51 || data.growth_level > 51) && (
               <ConfettiCannon count={200} origin={{ x: -10, y: 0 }} />
             )}
             <Button title="Logout" onPress={handleLogout} />
