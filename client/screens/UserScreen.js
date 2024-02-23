@@ -32,14 +32,15 @@ export default function UserScreen() {
   const navigation = useNavigation();
 
   useEffect(() => {
+    if (isLoading) {
+      return
+    }
     if (data.growth_level == 51) {
       setFlowerMessage("Hooray! You grew a flower!")
 
     } else {
       setFlowerMessage("Grow your flower by completing healthy habits!");
     }
-    console.log(flowerMessage)
-    console.log(data.growth_level)
   }, [data])
 
   if (isLoading) {
