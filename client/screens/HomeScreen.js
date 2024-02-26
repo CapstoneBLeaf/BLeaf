@@ -20,12 +20,16 @@ export default function HomeScreen() {
   };
   return (
     <SafeAreaView style={styles.container}>
-     
-      <Text style={styles.title}>Welcome To bleaf</Text>
       <Image
-        style={styles.welcome}
-        source={require("../assets/bLeaf.jpg")}
+        source={require("../assets/animations/logo.png")}
+        style={styles.logo}
       />
+      <Text style={styles.title}>Welcome To bLeaf</Text>
+      <LottieView
+        style={styles.welcome}
+        source={require("../assets/animations/welcome.json")}
+        autoPlay
+      ></LottieView>
       <TouchableOpacity onPress={handleReset} style={styles.resetButton}>
         <Text style={{ color: "#333" }}>Reset</Text>
       </TouchableOpacity>
@@ -58,7 +62,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
-    fontSize: 40,
+    fontSize: 36,
     fontWeight: 600,
     color: "rgb(85, 207, 200)",
     fontWeight: 700,
@@ -69,12 +73,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   logo: {
-    height: 100,
-    width: 100,
+    height: 180,
+    width: 180,
   },
   welcome: {
-    height: 350,
-    width: 350,
+    height: 280,
+    width: 280,
   },
   account: {
     flexDirection: "row",

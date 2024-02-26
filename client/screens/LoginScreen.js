@@ -55,49 +55,48 @@ const LoginScreen = () => {
     <ScrollView
       style={styles.container}
       automaticallyAdjustKeyboardInsets={true}
+      contentContainerStyle={styles.inner}
     >
-      <View style={styles.inner}>
-        <View style={styles.img}>
-          <LottieView
-            style={styles.login}
-            source={require("../assets/animations/login.json")}
-            autoPlay
-          ></LottieView>
-        </View>
+      <View style={styles.img}>
+        <LottieView
+          style={styles.login}
+          source={require("../assets/animations/login.json")}
+          autoPlay
+        ></LottieView>
+      </View>
 
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          autoCapitalize="none"
-          value={username}
-          onChangeText={(text) => setUsername(text)}
-        />
-        {errors.username ? (
-          <Text style={styles.errorText}>{errors.username}</Text>
-        ) : null}
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-        />
-        {errors.password ? (
-          <Text style={styles.errorText}>{errors.password}</Text>
-        ) : null}
-        {error && <Text style={styles.errorText}>{error}</Text>}
-        <Button title="Login" onPress={handleLogin} />
-        <View style={styles.register}>
-          <Text style={{ fontSize: 16 }}>New to the app?</Text>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("Signup");
-            }}
-            style={styles.registerbtn}
-          >
-            <Text style={{ color: "blue", fontSize: 16 }}> Register</Text>
-          </TouchableOpacity>
-        </View>
+      <TextInput
+        style={styles.input}
+        placeholder="Username"
+        autoCapitalize="none"
+        value={username}
+        onChangeText={(text) => setUsername(text)}
+      />
+      {errors.username ? (
+        <Text style={styles.errorText}>{errors.username}</Text>
+      ) : null}
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        secureTextEntry
+        value={password}
+        onChangeText={(text) => setPassword(text)}
+      />
+      {errors.password ? (
+        <Text style={styles.errorText}>{errors.password}</Text>
+      ) : null}
+      {error && <Text style={styles.errorText}>{error}</Text>}
+      <Button title="Login" onPress={handleLogin} />
+      <View style={styles.register}>
+        <Text style={{ fontSize: 16 }}>New to the app?</Text>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Signup");
+          }}
+          style={styles.registerbtn}
+        >
+          <Text style={{ color: "blue", fontSize: 16 }}> Register</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -106,25 +105,13 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingRight: 20,
-    paddingLeft: 20,
     backgroundColor: "#ffffff",
   },
   inner: {
-    flexDirection: "column",
+    flexGrow: 1, // Ensure inner takes up full height
     justifyContent: "center",
-  },
-  logo: {
-    width: 150,
-    height: 150,
-    resizeMode: "cover",
-    marginBottom: 20,
-    borderRadius: 75, // for a circular image, adjust as needed
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 20,
+    alignItems: "center",
+    paddingHorizontal: 20,
   },
   input: {
     height: 45,
@@ -132,40 +119,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: "#f3f3f4",
     borderRadius: 10,
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 18,
+    width: "100%",
   },
   img: {
     alignItems: "center",
     justifyContent: "center",
+    marginBottom: 20, // Adjust this value as needed
   },
   login: {
     width: 250,
     height: 250,
-  },
-  loginsub: {
-    marginBottom: 30,
-    marginTop: 30,
-    textAlign: "center",
-  },
-  tinyLogo: {
-    height: 24,
-    width: 24,
-  },
-  sociallogo: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginBottom: 30,
-  },
-  tinyLogom: {
-    borderColor: "#ddd",
-    borderWidth: 2,
-    paddingHorizontal: 30,
-    paddingVertical: 10,
-    borderRadius: 10,
-    marginRight: 10,
   },
   errorText: {
     color: "red",
