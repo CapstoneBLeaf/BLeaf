@@ -20,16 +20,12 @@ export default function HomeScreen() {
   };
   return (
     <SafeAreaView style={styles.container}>
+     
+      <Text style={styles.title}>Welcome To bleaf</Text>
       <Image
-        source={require("../assets/animations/logo.png")}
-        style={styles.logo}
-      />
-      <Text style={styles.title}>Welcome To Bleaf</Text>
-      <LottieView
         style={styles.welcome}
-        source={require("../assets/animations/welcome.json")}
-        autoPlay
-      ></LottieView>
+        source={require("../assets/bLeaf.jpg")}
+      />
       <TouchableOpacity onPress={handleReset} style={styles.resetButton}>
         <Text style={{ color: "#333" }}>Reset</Text>
       </TouchableOpacity>
