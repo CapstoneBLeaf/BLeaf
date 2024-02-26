@@ -56,7 +56,11 @@ cd client
 <a href="https://nodejs.org/" title="Node.js"><img src="https://github.com/get-icon/geticon/raw/master/icons/nodejs-icon.svg" alt="Node.js" width="21px" height="21px"></a> Node.js  
 <a href="https://expo.dev/" style="text-decoration:none" title="Expo">:iphone:</a> Expo  
 <a href="https://reactnative.dev/" title="ReactNative"><img src="https://github.com/get-icon/geticon/raw/master/icons/react.svg" alt="React Native" width="21px" height="21px"></a> React Native  
-<a href="https://www.npmjs.com/" title="npm"><img src="https://github.com/get-icon/geticon/raw/master/icons/npm.svg" alt="npm" width="21px" height="21px"></a> NPM
+<a href="https://www.npmjs.com/" title="npm"><img src="https://github.com/get-icon/geticon/raw/master/icons/npm.svg" alt="npm" width="21px" height="21px"></a> NPM 
+
+<a href="https://www.postgresql.org//" title="PostgreSQL"><img src="https://github.com/devicons/devicon/blob/master/icons/postgresql/postgresql-plain-wordmark.svg" alt="PostgreSQL" width="21px" height="21px"></a> PostgreSQL
+
+<a href="https://expressjs.com/" title="Express"><img src="https://github.com/devicons/devicon/blob/master/icons/express/express-original.svg" alt="Express.js" width="21px" height="21px"></a> Express.js  
 
 
 ## Contributors
