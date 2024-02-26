@@ -1,23 +1,17 @@
 const client = require("./client");
 const {
   users,
-  plants,
   habits,
   goals,
-  journals,
   growth_levels,
 } = require("./seedData");
 const { createUsers } = require("./sqlHelperFunctions/users");
-const { createPlants } = require("./sqlHelperFunctions/plants");
 const { createHabits } = require("./sqlHelperFunctions/habits");
 const { createGoals } = require("./sqlHelperFunctions/goals");
-const { createJournals } = require("./sqlHelperFunctions/journals");
 const dropTables = async () => {
   try {
     console.log("Starting to drop tables...");
     await client.query(`
-    DROP TABLE IF EXISTS plants;
-    DROP TABLE IF EXISTS journals;
     DROP TABLE IF EXISTS goals;
     DROP TABLE IF EXISTS habits;
     DROP TABLE IF EXISTS users;
@@ -47,15 +41,6 @@ const createTable = async () => {
       image TEXT NOT NULL
     );
 
-    CREATE TABLE plants(
-      id SERIAL PRIMARY KEY,
-      name TEXT NOT NULL,
-      color TEXT NOT NULL,
-      growth_level INT REFERENCES growth_levels(id) NOT NULL,
-      birth_date DATE NOT NULL,
-      "userId" INTEGER REFERENCES users(id) NOT NULL
-      
-    );
     CREATE TABLE habits (
       id SERIAL PRIMARY KEY,
       description TEXT NOT NULL,
@@ -69,12 +54,6 @@ const createTable = async () => {
       achivements TEXT NOT NULL,
       "habitId" INTEGER REFERENCES habits(id) NOT NULL
   );
-  CREATE TABLE journals (
-      id SERIAL PRIMARY KEY,
-      entry TEXT NOT NULL,
-      date DATE,
-      "userId" INTEGER REFERENCES users(id) NOT NULL
-  );
     `);
     console.log("Table Created!");
   } catch (error) {
@@ -87,16 +66,6 @@ const createInitialUsers = async () => {
       await createUsers(user);
     }
     console.log("created users");
-  } catch (error) {
-    throw error;
-  }
-};
-const createInitialPlants = async () => {
-  try {
-    for (const plant of plants) {
-      await createPlants(plant);
-    }
-    console.log("created plants");
   } catch (error) {
     throw error;
   }
@@ -119,17 +88,6 @@ const createInitialGoals = async () => {
       await createGoals(goal);
     }
     console.log("created goals");
-  } catch (error) {
-    throw error;
-  }
-};
-
-const createInitialJournals = async () => {
-  try {
-    for (const journal of journals) {
-      await createJournals(journal);
-    }
-    console.log("created journals");
   } catch (error) {
     throw error;
   }
@@ -166,10 +124,8 @@ const buildDb = async () => {
     await createTable();
     await createInitialUsers();
     await createInitialGrowthLevels();
-    await createInitialPlants();
     await createInitialHabits();
     await createInitialGoals();
-    await createInitialJournals();
   } catch (error) {
     console.error(error);
   } finally {
