@@ -29,37 +29,6 @@ const users = [
   },
 ];
 
-const plants = [
-  {
-    name: "bay",
-    color: "green",
-    growth_level: 1,
-    birth_date: "2023-12-06",
-    userId: 1,
-  },
-  {
-    name: "arfaj ",
-    color: "blue",
-    growth_level: 40,
-    birth_date: "2024-01-15",
-    userId: 2,
-  },
-  {
-    name: "cedar ",
-    color: "red",
-    growth_level: 23,
-    birth_date: "2024-02-01",
-    userId: 3,
-  },
-  {
-    name: "dindle",
-    color: "orange",
-    growth_level: 32,
-    birth_date: "2023-06-20",
-    userId: 4,
-  },
-];
-
 const growth_levels = [
   {growth_level: 1,
   plantImg: src="plants/plantImg1.png"},
@@ -322,22 +291,5 @@ const goals = [
   },
 ];
 
-const journals = [
-  {
-    entry: "Productive Work Day",
-    date: "2024/02/02",
-    userId: 1,
-  },
-  {
-    entry: "Family Reunion",
-    date: "2024/01/12",
-    userId: 2,
-  },
-  {
-    entry: "Learning a New Skill",
-    date: "2023/12/10",
-    userId: 1,
-  },
-];
 
-module.exports = { users, plants, habits, goals, journals, growth_levels };
+module.exports = { users, plants, habits, goals, growth_levels };
