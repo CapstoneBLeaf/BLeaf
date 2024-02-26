@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { authRequired } = require("./util");
 const {
   getAllGoals,
-  getGoalsById,
+  getGoalsByUserId,
   updateGoal,
   createGoals,
   deleteGoal,
@@ -18,16 +17,16 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get("/user/:id", async (req, res, next) => {
   try {
-    const goal = await getGoalsById(req.params.id);
+    const goal = await getGoalsByUserId(req.params.id);
     res.send(goal);
   } catch (error) {
     next(error);
   }
 });
 
-router.post("/", authRequired, async (req, res, next) => {
+router.post("/add", async (req, res, next) => {
   try {
     const goal = await createGoals(req.body);
     res.send(goal);
@@ -36,7 +35,7 @@ router.post("/", authRequired, async (req, res, next) => {
   }
 });
 
-router.delete("/:id", authRequired, async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const goal = await deleteGoal(req.params.id);
     res.send(goal);
@@ -45,7 +44,7 @@ router.delete("/:id", authRequired, async (req, res, next) => {
   }
 });
 
-router.put("/:id", authRequired, async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const goal = await updateGoal(req.params.id, req.body);
     res.send(goal);

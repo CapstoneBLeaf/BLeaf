@@ -1,10 +1,5 @@
 const client = require("./client");
-const {
-  users,
-  habits,
-  goals,
-  growth_levels,
-} = require("./seedData");
+const { users, habits, goals, growth_levels } = require("./seedData");
 const { createUsers } = require("./sqlHelperFunctions/users");
 const { createHabits } = require("./sqlHelperFunctions/habits");
 const { createGoals } = require("./sqlHelperFunctions/goals");
@@ -12,10 +7,11 @@ const dropTables = async () => {
   try {
     console.log("Starting to drop tables...");
     await client.query(`
-    DROP TABLE IF EXISTS goals;
-    DROP TABLE IF EXISTS habits;
-    DROP TABLE IF EXISTS users;
-    DROP TABLE IF EXISTS growth_levels;
+    DROP TABLE IF EXISTS activity CASCADE;
+    DROP TABLE IF EXISTS goals CASCADE;
+    DROP TABLE IF EXISTS habits CASCADE;
+    DROP TABLE IF EXISTS users CASCADE;
+    DROP TABLE IF EXISTS growth_levels CASCADE;
     `);
     console.log("Table Dropped!");
   } catch (error) {
@@ -27,35 +23,43 @@ const createTable = async () => {
   try {
     console.log("building tables..");
     await client.query(`
-    CREATE TABLE users(
-      id SERIAL PRIMARY KEY,
-      firstname varchar(50) NOT NULL,
-      lastname varchar(50) NOT NULL,
-      username varchar(50) NOT NULL,
-      email varchar(50) NOT NULL,
-      password varchar(255) NOT NULL
-    );
-
     CREATE TABLE growth_levels(
       id SERIAL PRIMARY KEY,
       image TEXT NOT NULL
     );
-
+    
+    CREATE TABLE users(
+      id SERIAL PRIMARY KEY,
+      firstname varchar(50) NOT NULL,
+      lastname varchar(50) NOT NULL,
+      username varchar(50) UNIQUE NOT NULL,
+      email varchar(50) NOT NULL,
+      password varchar(255) NOT NULL,
+      growth_level INT REFERENCES growth_levels(id) NOT NULL,
+      plant_birth_date DATE NOT NULL
+    );
     CREATE TABLE habits (
       id SERIAL PRIMARY KEY,
+      name TEXT NOT NULL,
       description TEXT NOT NULL,
       image TEXT NOT NULL,
       "checkIn" BOOLEAN
     );
     CREATE TABLE goals (
       id SERIAL PRIMARY KEY,
-      name TEXT NOT NULL,
-      frequency VARCHAR(50) NOT NULL,
-      achivements TEXT NOT NULL,
-      "habitId" INTEGER REFERENCES habits(id) NOT NULL
+      frequency TEXT NOT NULL,
+      statement TEXT NOT NULL,
+      "habitId" INTEGER REFERENCES habits(id) NOT NULL,
+      "userId" INTEGER REFERENCES users(id) NOT NULL
+  );
+  CREATE TABLE activity (
+      id SERIAL PRIMARY KEY,
+      "habitId" INTEGER REFERENCES habits(id) NOT NULL,
+      "userId" INTEGER REFERENCES users(id) NOT NULL,
+      completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   );
     `);
-    console.log("Table Created!");
+    console.log("Tables Created!");
   } catch (error) {
     console.error(error);
   }
@@ -122,8 +126,8 @@ const buildDb = async () => {
     client.connect();
     await dropTables();
     await createTable();
-    await createInitialUsers();
     await createInitialGrowthLevels();
+    await createInitialUsers();
     await createInitialHabits();
     await createInitialGoals();
   } catch (error) {

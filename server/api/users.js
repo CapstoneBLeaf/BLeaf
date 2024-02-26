@@ -42,6 +42,8 @@ router.post("/register", async (req, res, next) => {
       username: username.toLowerCase(),
       email,
       password: hashedPassword,
+      plant_birth_date: new Date(),
+      growth_level: 1,
     });
 
     delete user.password;
@@ -81,8 +83,7 @@ router.post("/login", async (req, res, next) => {
       delete user.password;
 
       res.send({ token, user });
-    }
-    else {
+    } else {
       res.status(401).send({ error: "Invalid username or password" });
     }
   } catch (error) {
@@ -100,20 +101,19 @@ router.delete("/:id", authRequired, async (req, res, next) => {
 });
 
 router.post("/logout", async (req, res, next) => {
-	try {
-		res.clearCookie("token", {
-			sameSite: "strict",
-			httpOnly: true,
-			signed: true,
-		});
-		res.send({
-			loggedIn: false,
-			message: "Logged Out",
-		});
-	} catch (error) {
-		next(error);
-	}
+  try {
+    res.clearCookie("token", {
+      sameSite: "strict",
+      httpOnly: true,
+      signed: true,
+    });
+    res.send({
+      loggedIn: false,
+      message: "Logged Out",
+    });
+  } catch (error) {
+    next(error);
+  }
 });
-
 
 module.exports = router;
