@@ -22,6 +22,7 @@ const SignupScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [userError, setUserError] = useState();
   const [register] = useRegisterMutation();
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -56,6 +57,7 @@ const SignupScreen = () => {
         setPassword("");
         navigation.navigate("Home");
       } catch (error) {
+        setUserError(error)
         console.error(error);
       }
     }
@@ -73,6 +75,7 @@ const SignupScreen = () => {
           autoPlay
         ></LottieView>
       </View>
+      {userError ? (<Text>userError.message</Text>) : null}
       <Text style={styles.label}>First Name:</Text>
       <TextInput
         style={styles.input}
@@ -126,7 +129,6 @@ const SignupScreen = () => {
       {errors.password ? (
         <Text style={styles.errorText}>{errors.password}</Text>
       ) : null}
-      {/* <Button title="Edit" onPress={handleEdit} /> */}
       <Button title="Register" onPress={handleSubmit} />
     </ScrollView>
   );

@@ -32,3 +32,10 @@ app.use('/api', require('./api'));
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
+
+app.use((err, req, res, next) => {
+    console.error(err.stack)
+    if (err.message == `duplicate key value violates unique constraint "users_username_key"`) {
+        res.status(400).send('Username already exists!')
+    }
+  })
