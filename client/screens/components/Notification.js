@@ -6,6 +6,7 @@ import {
   TextInput,
   Platform,
   StyleSheet,
+  Alert,
 } from "react-native";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
@@ -77,17 +78,25 @@ export default function Notification() {
   }
 
   async function scheduleNotification(expoPushToken) {
-    Notifications.scheduleNotificationAsync({
-      content: {
-        to: expoPushToken,
-        title: "Notification",
-        body: title,
-        sound: "default",
-      },
-      trigger: {
-        date: time,
-      },
-    });
+    try {
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          to: expoPushToken,
+          title: "Notification",
+          body: title,
+          sound: "default",
+        },
+        trigger: {
+          date: time,
+        },
+      });
+      // If scheduling succeeds, show success alert
+      Alert.alert("Notification scheduled successfully!");
+    } catch (error) {
+      // If scheduling fails, show error alert
+      Alert.alert("Failed to schedule notification. Please try again.");
+      console.error(error);
+    }
   }
 
   const handleDateChange = (event, selectedDate) => {
