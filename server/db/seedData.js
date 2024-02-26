@@ -291,5 +291,20 @@ const goals = [
   },
 ];
 
+const activity = [
+  {
+    userId: 1,
+    habitId: 1,
+  },
+  {
+    userId: 2,
+    habitId: 1,
+  },
+  {
+    userId: 1,
+    habitId: 3,
+  },
+];
 
-module.exports = { users, plants, habits, goals, growth_levels };
+
+module.exports = { users, habits, goals, growth_levels, activity };

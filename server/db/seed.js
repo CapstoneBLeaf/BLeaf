@@ -3,6 +3,7 @@ const {
   users,
   habits,
   goals,
+  activity,
   growth_levels,
 } = require("./seedData");
 const { createUsers } = require("./sqlHelperFunctions/users");
@@ -12,6 +13,7 @@ const dropTables = async () => {
   try {
     console.log("Starting to drop tables...");
     await client.query(`
+    DROP TABLE IF EXISTS activity CASCADE;
     DROP TABLE IF EXISTS goals;
     DROP TABLE IF EXISTS habits;
     DROP TABLE IF EXISTS users;
@@ -27,18 +29,20 @@ const createTable = async () => {
   try {
     console.log("building tables..");
     await client.query(`
+    CREATE TABLE growth_levels(
+      id SERIAL PRIMARY KEY,
+      image TEXT NOT NULL
+    );
+
     CREATE TABLE users(
       id SERIAL PRIMARY KEY,
       firstname varchar(50) NOT NULL,
       lastname varchar(50) NOT NULL,
-      username varchar(50) NOT NULL,
+      username varchar(50) UNIQUE NOT NULL,
       email varchar(50) NOT NULL,
-      password varchar(255) NOT NULL
-    );
-
-    CREATE TABLE growth_levels(
-      id SERIAL PRIMARY KEY,
-      image TEXT NOT NULL
+      password varchar(255) NOT NULL,
+      growth_level INT REFERENCES growth_levels(id) NOT NULL,
+      plant_birth_date DATE NOT NULL
     );
 
     CREATE TABLE habits (
@@ -54,6 +58,12 @@ const createTable = async () => {
       achivements TEXT NOT NULL,
       "habitId" INTEGER REFERENCES habits(id) NOT NULL
   );
+  CREATE TABLE activity (
+    id SERIAL PRIMARY KEY,
+    "habitId" INTEGER REFERENCES habits(id) NOT NULL,
+    "userId" INTEGER REFERENCES users(id) NOT NULL,
+    completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
     `);
     console.log("Table Created!");
   } catch (error) {

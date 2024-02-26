@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     height: 150,
     resizeMode: "cover",
     marginBottom: 20,
-    borderRadius: 75, // for a circular image, adjust as needed
+    borderRadius: 75, 
   },
   title: {
     fontSize: 20,
