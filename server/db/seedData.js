@@ -37,25 +37,6 @@ const users = [
   },
 ];
 
-const plants = [
-  {
-    name: "bay",
-    color: "green",
-  },
-  {
-    name: "arfaj ",
-    color: "blue",
-  },
-  {
-    name: "cedar ",
-    color: "red",
-  },
-  {
-    name: "dindle",
-    color: "orange",
-  },
-];
-
 const growth_levels = [
   { growth_level: 1, plantImg: (src = "../plants/plantImg1.png") },
   { growth_level: 2, plantImg: (src = "../plants/plantImg2.png") },
@@ -280,4 +261,4 @@ const activity = [
   },
 ];
 
-module.exports = { users, plants, habits, goals, activity, growth_levels };
+module.exports = { users, habits, goals, activity, growth_levels };
