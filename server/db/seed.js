@@ -11,7 +11,6 @@ const dropTables = async () => {
     DROP TABLE IF EXISTS goals CASCADE;
     DROP TABLE IF EXISTS habits CASCADE;
     DROP TABLE IF EXISTS users CASCADE;
-    DROP TABLE IF EXISTS plants CASCADE;
     DROP TABLE IF EXISTS growth_levels CASCADE;
     `);
     console.log("Table Dropped!");
