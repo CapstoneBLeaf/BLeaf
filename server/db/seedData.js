@@ -136,47 +136,45 @@ const growth_levels = [
 
 const habits = [
   {
-    name: "hydrate",
+    name: "Hydrate",
     description:
       "Similar to flowers and plants, water helps us grow. Have you watered yourself today?",
     image:
-      "https://t3.ftcdn.net/jpg/04/46/09/68/360_F_446096863_mbuNBq46AZQETaTY0V8nLH2DcpxNFW9M.jpg",
+      "https://opengameart.org/sites/default/files/water_bottle_32bit_img_preview.png",
     checkIn: false,
   },
   {
-    name: "breathe",
+    name: "Breathe",
     description: "Breathe in for 4.",
     image:
-      "https://t3.ftcdn.net/jpg/04/46/09/68/360_F_446096863_mbuNBq46AZQETaTY0V8nLH2DcpxNFW9M.jpg",
-    description: "Breathe in for 4.",
-    image: "https://t3.ftcdn.net/jpg/04/46/09/68/360_F_446096863_mbuNBq46AZQETaTY0V8nLH2DcpxNFW9M.jpg",
+      "https://art.pixilart.com/00df378d675e0f1.png",
     checkIn: false,
   },
   {
-    name: "health",
+    name: "Health",
     description:
       "Taking our medication on time is one fo the best things we can do for ourselves",
-    image: "https://p1.hiclipart.com/preview/206/764/836/pixel-png-clipart.jpg",
+    image: "https://cdn.pixabay.com/photo/2017/09/23/16/33/pixel-heart-2779422_1280.png",
     checkIn: false,
   },
   {
     name: "Make the bed",
     description: "Healthy soil beds grow healthy plants!",
     image:
-      "https://png.pngtree.com/png-clipart/20190617/original/pngtree-hand-painted-life-supplies-pink-pillow-png-image_3888310.jpg",
+      "https://64.media.tumblr.com/c72c5681278fb5cacacd58047007590a/tumblr_njxcsc0C7I1r7ueqyo1_400.pnj",
     checkIn: false,
   },
   {
     name: "Wash your face",
     description: "Wipe the old dirt away.",
     image:
-      "https://static.wikia.nocookie.net/minecraft_gamepedia/images/e/e3/Bubble_Column_JE1_BE1.png/revision/latest?cb=20190518115608",
+      "https://png.pngtree.com/png-clipart/20230112/original/pngtree-water-drop-pixels-png-image_8905892.png",
     checkIn: false,
   },
   {
     name: "Step outside of the house",
     description: "Photosynthesize!",
-    image: "https://image.pngaaa.com/658/2101658-middle.png",
+    image: "https://i.pinimg.com/originals/61/ff/a4/61ffa46d6942d7cca6165b63e9a18f95.png",
     checkIn: false,
   },
   {
@@ -189,35 +187,35 @@ const habits = [
     name: "Exercise",
     description: "Getting some movement in can boost the mood!",
     image:
-      "https://w7.pngwing.com/pngs/167/230/png-transparent-dumbbell-bodybuilding-weightlifting-fitness-exercise-workout-icon-pixel-pixel-art-8-bit-thumbnail.png",
+      "https://png.pngtree.com/png-clipart/20220918/original/pngtree-tennis-ball-icon-in-pixel-style-png-image_8622907.png",
     checkIn: false,
   },
   {
     name: "Gratitude",
     description: "Say one thing you're grateful for before bed",
     image:
-      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b0b7f079-2f3a-4895-8dda-4f6bdb7a6659/daz6ils-83d9e001-46cc-462e-bfeb-114409e0e8b4.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2IwYjdmMDc5LTJmM2EtNDg5NS04ZGRhLTRmNmJkYjdhNjY1OVwvZGF6Nmlscy04M2Q5ZTAwMS00NmNjLTQ2MmUtYmZlYi0xMTQ0MDllMGU4YjQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.YhSoLbcK-KRu66nTUQ3B9PB-YmBZLIKl4RsCV8gG9Jk",
+      "https://static.vecteezy.com/system/resources/thumbnails/028/149/414/small_2x/flower-pixel-art-png.png",
     checkIn: false,
   },
   {
     name: "Survive the day",
     description: "You can do it. We all have those days.",
     image:
-      "https://t3.ftcdn.net/jpg/04/46/09/68/360_F_446096863_mbuNBq46AZQETaTY0V8nLH2DcpxNFW9M.jpg",
+      "https://png.pngtree.com/png-clipart/20230407/ourmid/pngtree-plant-in-pot-pixel-art-png-image_6681713.png",
     checkIn: false,
   },
   {
     name: "Break",
     description:
       "Taking a step back might give you just want you need to keep moving forward.",
-    image: "https://image.pngaaa.com/471/132471-middle.png",
+    image: "https://i.pinimg.com/originals/98/d1/d6/98d1d629c079abd3c6443195d90f16d2.png",
     checkIn: false,
   },
   {
     name: "Rest",
     description: "A good night's sleep can be a serious game changer.",
     image:
-      "https://as2.ftcdn.net/v2/jpg/02/96/46/51/1000_F_296465161_Rhwin3BrGI7QquCbWV3TOdnSuqT6NVUf.jpg",
+      "https://static.vecteezy.com/system/resources/previews/027/190/648/original/pixel-art-sleeping-persain-cat-png.png",
     checkIn: false,
   },
   {
@@ -225,7 +223,7 @@ const habits = [
     description:
       "Eating fruits and veggies is a simple way to stay hydrated and stabilize energy throughout the day.",
     image:
-      "https://png.pngtree.com/png-clipart/20210530/ourmid/pngtree-pixel-food-fruit-vegetable-apple-png-image_3373213.jpg",
+      "https://static.vecteezy.com/system/resources/thumbnails/013/743/158/small_2x/apple-pixel-art-png.png",
     checkIn: false,
   },
   {
@@ -233,15 +231,15 @@ const habits = [
     description:
       "Cold showers are beneficial for relieving stress, and warm promotes the relaxation of our muscles.",
     image:
-      "https://png.pngtree.com/png-clipart/20190118/ourmid/pngtree-hand-drawn-bathtub-bath-bathtub-cartoon-bathtub-png-image_456369.jpg",
+      "https://static.vecteezy.com/system/resources/previews/028/651/787/original/pixel-art-rubber-duck-icon-png.png",
     checkIn: false,
   },
   {
     name: "People",
     description:
-      "Fill your day with kindness. Whether it's forgiving yourself, or helping someone else. Do your bed, bud!",
+      "Fill your day with kindness. Whether it's forgiving yourself, or helping someone else. Do your best, bud!",
     image:
-      "https://png.pngtree.com/png-clipart/20210216/ourmid/pngtree-heart-8-bit-pixel-png-image_2896183.jpg",
+      "https://images.vexels.com/media/users/3/246281/isolated/preview/44a75eec57302fb40f8458fb56ec2b7f-phone-pixel-art.png",
     checkIn: false,
   },
   {
@@ -249,14 +247,14 @@ const habits = [
     description:
       "Whether it's a novel, poetry, fan-fic or your favorite blog, reading is an adventure that never ends.",
     image:
-      "https://png.pngtree.com/png-clipart/20210623/ourmid/pngtree-pixel-art-game-supplies-cute-books-png-image_3429895.jpg",
+      "https://static.vecteezy.com/system/resources/previews/027/205/877/non_2x/isolated-simple-microscope-for-laboratory-in-pixel-art-free-png.png",
     checkIn: false,
   },
   {
     name: "Motivate",
     description: "Fast or slow, we all grow! Do the best you can today bud!",
     image:
-      "https://png.pngtree.com/png-clipart/20220714/original/pngtree-trophy-cup-winner-pixel-illustration-png-image_8357870.png",
+      "https://cdn-icons-png.freepik.com/512/465/465269.png",
     checkIn: false,
   },
   {
