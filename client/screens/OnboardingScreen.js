@@ -36,8 +36,9 @@ export default function OnboardingScreen() {
                 ></LottieView>
               </View>
             ),
-            title: "Welcome to B.Leaf",
-            subtitle: "Help your plant grow by tracking and maintaining healthy habits",
+            title: "Welcome to bLeaf",
+            subtitle:
+              "Help your plant grow by tracking and maintaining healthy habits",
           },
           {
             backgroundColor: "#1F91A3",
@@ -65,7 +66,7 @@ export default function OnboardingScreen() {
               </View>
             ),
             title: "Set Goals & Check In",
-            subtitle: "Keep yourself on track when things get busy, check in on your goals and set some reminders with some motivation!",
+            subtitle: "Setting goals and reminders is a great way to start!",
           },
           {
             backgroundColor: "#F4A9A9",
@@ -78,8 +79,9 @@ export default function OnboardingScreen() {
                 ></LottieView>
               </View>
             ),
-            title: "Don't forget to B.Leaf in yourself!",
-            subtitle: "Daily progress will be tracked, as you grow, so will your plant!",
+            title: "Don't forget to bLeaf in yourself!",
+            subtitle:
+              "Daily progress will be tracked, as you grow, so will your plant!",
           },
         ]}
       />

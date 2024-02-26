@@ -12,7 +12,7 @@ import { useListCheckInQuery } from "../api/bleafApi";
 import { selectCurrentUser } from "../actions/tokenSlice";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-export default function AcitivityScreen() {
+export default function ActivityScreen() {
   const user = useSelector(selectCurrentUser);
   const userId = user.id;
   const { data: habitData, isLoading: isLoading } = useListCheckInQuery(userId);
@@ -75,7 +75,7 @@ export default function AcitivityScreen() {
             ) : (
               <SafeAreaView>
                 <Text style={styles.error}>
-                  No checkin habits for selected date.Go to the habits page to
+                  No checkin habits for selected date. Go to the habits page to
                   get started!
                 </Text>
               </SafeAreaView>
