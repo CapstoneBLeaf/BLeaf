@@ -57,8 +57,7 @@ const SignupScreen = () => {
         setPassword("");
         navigation.navigate("Home");
       } catch (error) {
-        setUserError(error.data.error)
-        console.error(error);
+        setUserError(error.data.error);
       }
     }
   };
@@ -75,7 +74,7 @@ const SignupScreen = () => {
           autoPlay
         ></LottieView>
       </View>
-      {userError && <Text style={styles.errorText}>{userError}</Text> }
+      {userError && <Text style={styles.errorText}>{userError}</Text>}
       <Text style={styles.label}>First Name:</Text>
       <TextInput
         style={styles.input}

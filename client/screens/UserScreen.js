@@ -6,6 +6,7 @@ import {
   Dimensions,
   View,
   SafeAreaView,
+  Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -52,6 +53,7 @@ export default function UserScreen() {
   const handleLogout = async (e) => {
     e.preventDefault();
     dispatch(logOut());
+    Alert.alert("Logged Out", "You have been successfully logged out.");
     navigation.navigate("Welcome");
   };
   if (token) {
