@@ -36,7 +36,7 @@ router.post("/register", async (req, res, next) => {
   try {
     const { firstname, lastname, username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
-    const user = await j({
+    const user = await createUsers({
       firstname,
       lastname,
       username: username.toLowerCase(),
@@ -81,7 +81,7 @@ router.post("/login", async (req, res, next) => {
       });
 
       delete user.password;
-
+ 
       res.send({ token, user });
     } else {
       res.status(401).send({ error: "Invalid username or password" });
