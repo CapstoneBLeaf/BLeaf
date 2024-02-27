@@ -22,7 +22,7 @@ import {
 } from "../api/bleafApi";
 import { selectCurrentUser } from "../actions/tokenSlice";
 
-function HabitsScreen(props) {
+function HabitsScreen() {
   const { data: habits, error, isLoading } = useGetAllHabitsQuery();
   const [selectedHabit, setSelectedHabit] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
