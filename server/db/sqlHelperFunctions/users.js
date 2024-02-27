@@ -17,6 +17,8 @@ const createUsers = async ({
   username,
   email,
   password,
+  plant_birth_date,
+  growth_level
 }) => {
   try {
     const {
