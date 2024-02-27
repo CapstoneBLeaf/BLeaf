@@ -36,6 +36,6 @@ app.listen(PORT, () => {
 app.use((err, req, res, next) => {
     console.error(err.stack)
     if (err.message == `duplicate key value violates unique constraint "users_username_key"`) {
-        res.status(400).send('Username already exists!')
+        res.status(400).send({ error: 'Username already exists!'})
     }
   })

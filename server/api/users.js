@@ -36,7 +36,7 @@ router.post("/register", async (req, res, next) => {
   try {
     const { firstname, lastname, username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
-    const user = await createUsers({
+    const user = await j({
       firstname,
       lastname,
       username: username.toLowerCase(),

@@ -57,7 +57,7 @@ const SignupScreen = () => {
         setPassword("");
         navigation.navigate("Home");
       } catch (error) {
-        setUserError(error)
+        setUserError(error.data)
         console.error(error);
       }
     }
