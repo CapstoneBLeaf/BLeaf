@@ -58,7 +58,6 @@ const SignupScreen = () => {
         navigation.navigate("Home");
       } catch (error) {
         setUserError(error.data.error);
-        console.error(error);
       }
     }
   };
@@ -75,7 +74,7 @@ const SignupScreen = () => {
           autoPlay
         ></LottieView>
       </View>
-      {userError && <Text>{userError}</Text>}
+      {userError && <Text style={styles.errorText}>{userError}</Text>}
       <Text style={styles.label}>First Name:</Text>
       <TextInput
         style={styles.input}
