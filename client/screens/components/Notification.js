@@ -95,7 +95,6 @@ export default function Notification() {
     } catch (error) {
       // If scheduling fails, show error alert
       Alert.alert("Failed to schedule notification. Please try again.");
-      console.error(error);
     }
   }
 
