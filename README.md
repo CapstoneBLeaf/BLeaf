@@ -13,7 +13,7 @@ Compatible with IOS mobile devices.
 <br/>
 <p align="center"><img src ='./client/assets/design2.png'/></p>
 <br/>
-<p align="center"><img src ='./client/assets/design3.png'width="750" height="300"/></p>
+<p align="center"><img src ='./client/assets/design3.png'/></p>
 <br/>
 <p align="center"><img src ='./client/assets/googlePlay.PNG'width="150" height="50"/></p>
 <br/>
