@@ -80,10 +80,14 @@ function HabitsScreen() {
         ]}
       >
         <View style={styles.habitDetails}>
-          <Text style={styles.habitName}>{item.name}</Text>
+          <View style={styles.details}>
+            <Image style={styles.image} source={{ uri: `${item.image}` }} />
+            <View style={styles.content}>
+              <Text style={styles.habitName}>{item.name}</Text>
+              <Text style={styles.habitDescription}>{item.description}</Text>
+            </View>
+          </View>
 
-          <Text style={styles.habitDescription}>{item.description}</Text>
-          <Image style={styles.image} source={{ uri: `${item.image}` }} />
           <View style={styles.buttons}>
             <TouchableOpacity
               onPress={() => toggleHabitSelection(item)}
@@ -181,27 +185,32 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   habitContainer: {
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    padding: 10,
+    marginVertical: 5,
+    marginHorizontal: 15,
     backgroundColor: "#ffffff",
     borderRadius: 10,
   },
   habitDetails: {
-    fontSize: 16,
+    fontSize: 14,
   },
   habitName: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
     textTransform: "capitalize",
-    marginBottom: 10,
+    marginBottom: 5,
   },
   habitDescription: {
-    fontSize: 16,
-    marginBottom: 10,
+    fontSize: 14,
   },
   selectedHabit: {
     backgroundColor: "#64b5f6",
+  },
+  details: {
+    flexDirection: "row",
+    display: "flex",
+    alignItems: "center",
+    marginBottom: 8,
   },
   buttonContainer: {
     flexDirection: "row",
@@ -220,9 +229,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    height: 100,
-    width: 100,
-    marginBottom: 10,
+    height: 55,
+    width: 55,
+  },
+  content: {
+    flexDirection: "column",
+    justifyContent: "center",
+    display: "flex",
+    flex: "1 1 auto",
+    marginLeft: 5,
   },
   modalView: {
     margin: 20,
@@ -277,17 +292,18 @@ const styles = StyleSheet.create({
   },
   check: {
     backgroundColor: "#2c2cff",
-    padding: 15,
+    padding: 10,
     borderRadius: 10,
   },
   goal: {
     backgroundColor: "#2c2cff",
-    padding: 15,
+    padding: 10,
     borderRadius: 10,
     marginRight: 10,
   },
   title: {
     color: "white",
+    fontSize: 12,
   },
   btn: {
     backgroundColor: "#2c2cff",
