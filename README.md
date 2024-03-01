@@ -11,7 +11,7 @@ Compatible with IOS mobile devices.
 <br/>
 <p align="center"><img src ='./client/assets/design1.png'/></p>
 <br/>
-<p align="center"><img src ='./client/assets/design2.png'/></p>
+<p align="center"><img src ='./client/assets/design2.0.png'/></p>
 <br/>
 <p align="center"><img src ='./client/assets/design3.1.png'/></p>
 <br/>
