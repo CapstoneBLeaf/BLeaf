@@ -5,14 +5,15 @@
 
 
 # About
-BLeaf makes self-care easy by giving users the support they need to meet their personal care goals. This app allows users to keep track of their personal care activities throughout the day and gives them the option to set up reminders, guilt and pressure free. While finding time to set goals and sticking to healthy habits can be difficult, it is extremely helpful to a person's well-being. Self-care can help manage stress, lower the risk of illness, increase energy, and elevate moods. This is why BLeaf rewards positive habits day-by-day rather ever promoting shame in a user for not always meeting their goals. A flower pot is provided to each user upon creating an account. In exchange for completing healthy habits, the user will see their flower grow. BLeaf celebrates even the small victories, aiming to help users bLeaf in themselves. 
+BLeaf makes self-care easy by giving users the support they need to meet their personal care goals. This app allows users to keep track of their personal care activities throughout the day and gives them the option to set up reminders, guilt and pressure free. While finding time to set goals and sticking to healthy habits can be difficult, it is extremely helpful to a person’s well-being. Self-care can help manage stress, lower the risk of illness, increase energy, and elevate moods. This is why bLeaf rewards positive habits day-by-day rather than promoting shame in a user for not always meeting their goals. A flower pot is provided to each user upon creating an account. In exchange for completing healthy habits, the user will see their flower grow. BLeaf celebrates even the small victories, aiming to help users bLeaf in themselves.
+Compatible with IOS mobile devices.
 
 <br/>
-<p align="center"><img src ='./client/assets/screenshotI.png'/></p>
+<p align="center"><img src ='./client/assets/design1.png'/></p>
 <br/>
-<p align="center"><img src ='./client/assets/screenshotII.png'/></p>
+<p align="center"><img src ='./client/assets/design2.png'/></p>
 <br/>
-<p align="center"><img src ='./client/assets/screenshotIII.png'width="750" height="300"/></p>
+<p align="center"><img src ='./client/assets/design3.png'/></p>
 <br/>
 <p align="center"><img src ='./client/assets/googlePlay.PNG'width="150" height="50"/></p>
 <br/>
@@ -23,33 +24,39 @@ BLeaf makes self-care easy by giving users the support they need to meet their p
 1. Clone the repository:
 
 ```
-git clone https://github.com/CapstoneBLeaf/BLeaf
-cd client
+   git clone https://github.com/CapstoneBLeaf/BLeaf
+   cd client
 ```
 
 2. Download ExpoGo on mobile device.
 
 3. Install dependencies:
-   ```
+
+```
    npm install
-   ```
-4. Start expo to run simulator:
-   ```
+```
+   
+5. Start expo to run simulator:
+
+```
    npx expo start
-   ```
-5. Use device to scan QR Code:
+```
    
-<br/>
-<p align="left"><img src ='./client/assets/qrCode.png'width="150" height="150"/></p>
-<br/>
+7. Use device to scan QR Code:
+
+   
+   <br/>
+   <p align="left"><img src ='./client/assets/qrCode.png'width="150" height="150"/></p>
+   <br/>
    
    
-6. If there is an internet connectivity [ERROR] run: 
-   ```
+9. If there is an internet connectivity [ERROR] run: 
+
+```
    1. npm i -g @expo/ngrok
    2. npx expo start --tunnel 
+```
    
-   ```
 ## Built Using
 
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" title="JavaScript"><img src="https://github.com/get-icon/geticon/raw/master/icons/javascript.svg" alt="JavaScript" width="21px" height="21px"></a> Javascript  
@@ -57,10 +64,17 @@ cd client
 <a href="https://expo.dev/" style="text-decoration:none" title="Expo">:iphone:</a> Expo  
 <a href="https://reactnative.dev/" title="ReactNative"><img src="https://github.com/get-icon/geticon/raw/master/icons/react.svg" alt="React Native" width="21px" height="21px"></a> React Native  
 <a href="https://www.npmjs.com/" title="npm"><img src="https://github.com/get-icon/geticon/raw/master/icons/npm.svg" alt="npm" width="21px" height="21px"></a> NPM 
-
-<a href="https://www.postgresql.org//" title="PostgreSQL"><img src="https://github.com/devicons/devicon/blob/master/icons/postgresql/postgresql-plain-wordmark.svg" alt="PostgreSQL" width="21px" height="21px"></a> PostgreSQL
-
-<a href="https://expressjs.com/" title="Express"><img src="https://github.com/devicons/devicon/blob/master/icons/express/express-original.svg" alt="Express.js" width="21px" height="21px"></a> Express.js  
+</br>
+<a href="https://www.postgresql.org//" title="PostgreSQL"><img src="https://github.com/devicons/devicon/blob/master/icons/postgresql/postgresql-plain-wordmark.svg" alt="PostgreSQL" width="21px" height="21px"></a> PostgreSQL 
+</br>
+<a href="https://expressjs.com/" title="Express"><img src="https://adware-technologies.s3.amazonaws.com/uploads/technology/thumbnail/20/express-js.png" alt="Express.js" width="21px" height="21px"></a> Express.js  
+<a href="https://www.figma.com" title="Figma"><img src="https://github.com/devicons/devicon/blob/master/icons/figma/figma-original.svg" alt="Figma" width="21px" height="21px"></a> Figma
+</br>
+<a href="https://developer.apple.com/xcode/" title="Xcode"><img src="https://github.com/devicons/devicon/blob/master/icons/xcode/xcode-original.svg" alt="Xcode" width="21px" height="21px"></a> Xcode
+</br>
+<a href="https://balsamiq.com/" title="Balsamiq"><img src="https://www.saashub.com/images/app/service_logos/6/f0aa8b9d7df3/large.png?1526907354" width="21px" height="21px"></a> Balsamiq
+</br>
+<a href="https://www.spriters-resource.com/" title="tSR"><img src="https://wiki.vg-resource.com/images/5/58/TSR-Logo.png" width="60px" height="21px"></a> The Spriters Resource
 
 
 ## Contributors
