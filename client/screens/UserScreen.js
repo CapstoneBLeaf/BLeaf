@@ -6,6 +6,7 @@ import {
   Dimensions,
   View,
   SafeAreaView,
+  TouchableOpacity,
   Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
@@ -76,6 +77,17 @@ export default function UserScreen() {
             <Button title="Logout" onPress={handleLogout} />
           </View>
         </SafeAreaView>
+        <View style={styles.deleteAccount}>
+        <Text style={{ fontSize: 16 }}>Need a break?</Text>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Login");
+          }}
+          style={styles.registerbtn}
+        >
+          <Text style={{ color: "blue", fontSize: 16 }}>Delete Account</Text>
+        </TouchableOpacity>
+      </View>
       </ScrollView>
     );
   }
@@ -101,5 +113,10 @@ const styles = StyleSheet.create({
   image: {
     height: windowHeight * 0.6,
     width: windowWidth * 0.8,
+  },
+  deleteAccount: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 15,
   },
 });
