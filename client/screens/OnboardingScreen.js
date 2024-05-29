@@ -44,11 +44,11 @@ export default function OnboardingScreen() {
             backgroundColor: "#1F91A3",
             image: (
               <View style={styles.img}>
-                {/* <LottieView
+                <LottieView
                   style={styles.meditation}
                   source={require("../assets/animations/meditation.json")}
                   autoPlay
-                ></LottieView> */}
+                ></LottieView>
               </View>
             ),
             title: "Track Habits",
