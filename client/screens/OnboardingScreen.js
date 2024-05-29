@@ -29,11 +29,11 @@ export default function OnboardingScreen() {
             backgroundColor: "#32CB7E",
             image: (
               <View style={styles.img}>
-                {/* <LottieView
+                <LottieView
                   style={styles.meditation}
                   source={require("../assets/animations/meditation.json")}
                   autoPlay
-                ></LottieView> */}
+                ></LottieView>
               </View>
             ),
             title: "Welcome to bLeaf",
