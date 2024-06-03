@@ -18,7 +18,7 @@ const createUsers = async ({
   email,
   password,
   plant_birth_date,
-  growth_level
+  growth_level,
 }) => {
   try {
     const {
@@ -81,24 +81,17 @@ const getUsersByUsername = async (username) => {
   );
   return user;
 };
-
-async function deleteUser(id) {
+const deleteUser = async (userId) => {
   try {
-    const {
-      rows: [user],
-    } = await client.query(
-      `
-    DELETE FROM users
-    WHERE id=$1
-    RETURNING *;
-  `,
-      [id]
+    const { users } = await client.query(
+      'DELETE FROM users WHERE "id"=$1 RETURNING *',
+      [userId]
     );
-    return user;
-  } catch (error) {
-    throw error;
+    return users;
+  } catch (err) {
+    throw err;
   }
-}
+};
 
 async function updateUser(userId, fields = {}) {
   const setString = Object.keys(fields)

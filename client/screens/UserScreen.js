@@ -16,7 +16,7 @@ import {
   selectCurrentUser,
 } from "../actions/tokenSlice";
 import { useNavigation } from "@react-navigation/core";
-import { useGetUsersByIdQuery } from "../api/bleafApi";
+import { useGetUsersByIdQuery, useDeleteUserMutation } from "../api/bleafApi";
 import Button from "./components/Button";
 import img_arr from "../plants/plants";
 import ConfettiCannon from "react-native-confetti-cannon";
@@ -31,7 +31,7 @@ export default function UserScreen() {
   console.log(user);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-
+  const [deleteUserMutation] = useDeleteUserMutation();
   useEffect(() => {
     if (isLoading) {
       return;
@@ -56,6 +56,36 @@ export default function UserScreen() {
     Alert.alert("Logged Out", "You have been successfully logged out.");
     navigation.navigate("Welcome");
   };
+  const handleDeleteAccount = async () => {
+    Alert.alert(
+      "Confirm Deletion",
+      "Are you sure you want to delete your account? This action cannot be undone.",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          onPress: async () => {
+            try {
+              await deleteUserMutation({ id: user.id });
+              console.log(user.id);
+              Alert.alert("Account Deleted", "Your account has been deleted.");
+              navigation.navigate("Welcome");
+            } catch (error) {
+              console.error("Error deleting account:", error);
+              Alert.alert(
+                "Error",
+                "Failed to delete account. Please try again."
+              );
+            }
+          },
+          style: "destructive",
+        },
+      ]
+    );
+  };
   if (token) {
     return (
       <ScrollView automaticallyAdjustKeyboardInsets={true}>
@@ -74,6 +104,7 @@ export default function UserScreen() {
               <ConfettiCannon count={200} origin={{ x: -10, y: 0 }} />
             )}
             <Button title="Logout" onPress={handleLogout} />
+            <Button title="Delete Account" onPress={handleDeleteAccount} />
           </View>
         </SafeAreaView>
       </ScrollView>

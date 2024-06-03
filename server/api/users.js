@@ -81,7 +81,7 @@ router.post("/login", async (req, res, next) => {
       });
 
       delete user.password;
- 
+
       res.send({ token, user });
     } else {
       res.status(401).send({ error: "Invalid username or password" });
