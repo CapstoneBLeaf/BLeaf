@@ -17,7 +17,7 @@ import {
   selectCurrentUser,
 } from "../actions/tokenSlice";
 import { useNavigation } from "@react-navigation/core";
-import { useGetUsersByIdQuery } from "../api/bleafApi";
+import { useGetUsersByIdQuery, useDeleteUserMutation } from "../api/bleafApi";
 import Button from "./components/Button";
 import img_arr from "../plants/plants";
 import ConfettiCannon from "react-native-confetti-cannon";
@@ -32,6 +32,7 @@ export default function UserScreen() {
   console.log(user);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const [deleteUser] = useDeleteUserMutation();
 
   useEffect(() => {
     if (isLoading) {
@@ -57,6 +58,18 @@ export default function UserScreen() {
     Alert.alert("Logged Out", "You have been successfully logged out.");
     navigation.navigate("Welcome");
   };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    Alert.alert("You have been successfully deleted your account.");
+    const result = await deleteUser(
+      {id: user.id, 
+      token: token
+      }
+    ).unwrap();
+    navigation.navigate("Welcome");
+  };
+
   if (token) {
     return (
       <ScrollView automaticallyAdjustKeyboardInsets={true}>
@@ -80,12 +93,10 @@ export default function UserScreen() {
         <View style={styles.deleteAccount}>
         <Text style={{ fontSize: 16 }}>Need a break?</Text>
         <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("Login");
-          }}
+          onPress={handleDelete}
           style={styles.registerbtn}
         >
-          <Text style={{ color: "blue", fontSize: 16 }}>Delete Account</Text>
+          <Text style={{ color: "blue", fontSize: 16 }}> Delete Account</Text>
         </TouchableOpacity>
       </View>
       </ScrollView>
