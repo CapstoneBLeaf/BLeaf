@@ -6,6 +6,7 @@ import {
   Dimensions,
   View,
   SafeAreaView,
+  TouchableOpacity,
   Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
@@ -31,7 +32,8 @@ export default function UserScreen() {
   console.log(user);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const [deleteUserMutation] = useDeleteUserMutation();
+  const [deleteUser] = useDeleteUserMutation();
+
   useEffect(() => {
     if (isLoading) {
       return;
@@ -56,36 +58,18 @@ export default function UserScreen() {
     Alert.alert("Logged Out", "You have been successfully logged out.");
     navigation.navigate("Welcome");
   };
-  const handleDeleteAccount = async () => {
-    Alert.alert(
-      "Confirm Deletion",
-      "Are you sure you want to delete your account? This action cannot be undone.",
-      [
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
-        {
-          text: "Delete",
-          onPress: async () => {
-            try {
-              await deleteUserMutation({ id: user.id });
-              console.log(user.id);
-              Alert.alert("Account Deleted", "Your account has been deleted.");
-              navigation.navigate("Welcome");
-            } catch (error) {
-              console.error("Error deleting account:", error);
-              Alert.alert(
-                "Error",
-                "Failed to delete account. Please try again."
-              );
-            }
-          },
-          style: "destructive",
-        },
-      ]
-    );
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    Alert.alert("You have been successfully deleted your account.");
+    const result = await deleteUser(
+      {id: user.id, 
+      token: token
+      }
+    ).unwrap();
+    navigation.navigate("Welcome");
   };
+
   if (token) {
     return (
       <ScrollView automaticallyAdjustKeyboardInsets={true}>
@@ -107,6 +91,15 @@ export default function UserScreen() {
             <Button title="Delete Account" onPress={handleDeleteAccount} />
           </View>
         </SafeAreaView>
+        <View style={styles.deleteAccount}>
+        <Text style={{ fontSize: 16 }}>Need a break?</Text>
+        <TouchableOpacity
+          onPress={handleDelete}
+          style={styles.registerbtn}
+        >
+          <Text style={{ color: "blue", fontSize: 16 }}> Delete Account</Text>
+        </TouchableOpacity>
+      </View>
       </ScrollView>
     );
   }
@@ -132,5 +125,10 @@ const styles = StyleSheet.create({
   image: {
     height: windowHeight * 0.6,
     width: windowWidth * 0.8,
+  },
+  deleteAccount: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 15,
   },
 });
