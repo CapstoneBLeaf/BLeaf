@@ -88,7 +88,6 @@ export default function UserScreen() {
               <ConfettiCannon count={200} origin={{ x: -10, y: 0 }} />
             )}
             <Button title="Logout" onPress={handleLogout} />
-            <Button title="Delete Account" onPress={handleDeleteAccount} />
           </View>
         </SafeAreaView>
         <View style={styles.deleteAccount}>

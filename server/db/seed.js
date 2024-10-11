@@ -50,12 +50,12 @@ const createTable = async () => {
       frequency TEXT NOT NULL,
       statement TEXT NOT NULL,
       "habitId" INTEGER REFERENCES habits(id) NOT NULL,
-      "userId" INTEGER REFERENCES users(id) NOT NULL
+      "userId" INTEGER REFERENCES users(id) NOT NULL ON DELETE CASCADE
   );
   CREATE TABLE activity (
       id SERIAL PRIMARY KEY,
       "habitId" INTEGER REFERENCES habits(id) NOT NULL,
-      "userId" INTEGER REFERENCES users(id) NOT NULL,
+      "userId" INTEGER REFERENCES users(id) NOT NULL ON DELETE CASCADE,
       completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   );
     `);
