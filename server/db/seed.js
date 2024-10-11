@@ -22,7 +22,7 @@ const dropTables = async () => {
 const createTable = async () => {
   try {
     console.log("building tables..");
-    await client.query(`
+    await client.query(`  
     CREATE TABLE growth_levels(
       id SERIAL PRIMARY KEY,
       image TEXT NOT NULL
@@ -49,14 +49,16 @@ const createTable = async () => {
       id SERIAL PRIMARY KEY,
       frequency TEXT NOT NULL,
       statement TEXT NOT NULL,
+      "userId" INTEGER NOT NULL,
       "habitId" INTEGER REFERENCES habits(id) NOT NULL,
-      "userId" INTEGER REFERENCES users(id) NOT NULL ON DELETE CASCADE
+      FOREIGN KEY("userId") REFERENCES users(id) ON DELETE CASCADE
   );
   CREATE TABLE activity (
       id SERIAL PRIMARY KEY,
       "habitId" INTEGER REFERENCES habits(id) NOT NULL,
-      "userId" INTEGER REFERENCES users(id) NOT NULL ON DELETE CASCADE,
-      completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      "userId" INTEGER NOT NULL,
+      completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY("userId") REFERENCES users(id) ON DELETE CASCADE
   );
     `);
     console.log("Tables Created!");
